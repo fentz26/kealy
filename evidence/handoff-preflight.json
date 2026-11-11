@@ -1,0 +1,35 @@
+{
+  "status": "local_preflight_passed_hardware_unverified",
+  "host": {
+    "system": "Darwin",
+    "architecture": "arm64",
+    "model": "Mac15,3",
+    "board": "J504AP",
+    "macos": "27.2.1"
+  },
+  "payload": {
+    "path": "/Volumes/Fentz_SSD_A/Coding/arch-m3/artifacts/minimal-evaluation-r2/os/arch-m3-minimal.zip",
+    "sha256": "dcefe5d03631ed013da73d942f7f1ab3f9844a3619da993541891b7c7760dfb2",
+    "root_bytes": 3719299072
+  },
+  "metadata": {
+    "path": "/Volumes/Fentz_SSD_A/Coding/arch-m3/artifacts/minimal-evaluation-r2/installer_data.json",
+    "sha256": "5ef7c7e638ddfeab729e149945d529f4fe8fe5ecbf75e4660f7d237b955dcdce",
+    "relative_payload": "os/arch-m3-minimal.zip",
+    "required_firmware": "14.8.3",
+    "root_bytes": 3719299072,
+    "efi_bytes": 524288000
+  },
+  "installer": {
+    "path": "/Volumes/Fentz_SSD_A/Coding/arch-m3/upstream/arch-m3-alarm-published-installer.tar.gz",
+    "version": "v0.9.2",
+    "sha256": "b35fdd7e5e700003bf4f43d2a484eca618ad971dd4266207315cbfa6fe826fad",
+    "symlinks": 37,
+    "staging_requires_posix_filesystem": true
+  },
+  "physical_boot_verified": false,
+  "installation_started": false,
+  "installer_main_invoked": false,
+  "encrypted": false,
+  "next_boundary": "Separate authorization required before real installation or boot-policy changes"
+}

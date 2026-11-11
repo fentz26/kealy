@@ -1,0 +1,23 @@
+{
+  "published_engine_version": "v0.9.2",
+  "engine_sources_sha256": {
+    "osinstall.py": "2d6d682d11d9ff5636a4146c5b11d720ce10990acfaee212139b497d3a1dde63",
+    "m1n1.py": "7aacc62b348f1f66cc3aad6aa698443c37efdc0f3ed8271adb70387fa4b3a4af",
+    "urlcache.py": "7aec48e366a8b0dee74d44c2720e9567895daa3ec094e4f83d7384a5908f5c1e",
+    "util.py": "38ed1430a14497c6e8731a1beb470bdf53f45bb4f35bb34e02ddc5cecb2a23aa"
+  },
+  "local_payload_opened": true,
+  "source_metadata_accepted": true,
+  "min_os_bytes": 4243587072,
+  "recommended_os_bytes": 8487174144,
+  "root_image_bytes": 3719299072,
+  "firmware_copy_required": true,
+  "efi_extraction_sha256": {
+    "EFI/BOOT/BOOTAA64.EFI": "17fb5f45a3eb340a8918bd3fdee92ebd3ec2c91d6ad186da427d59d7e1c6176a",
+    "m1n1/boot.bin": "a5f30fd7b8e5726fd0ca3bf0cef8750bd6de1669930d6164b837075f82c32b63"
+  },
+  "disk_operations_invoked": false,
+  "network_used": false,
+  "installer_main_invoked": false,
+  "scope": "published loader, sizing and disposable EFI extraction; no real disk writes"
+}

@@ -1,0 +1,8 @@
+bin
+early_cpio
+lib
+sbin
+usr/
+usr/sbin
+var/
+var/run

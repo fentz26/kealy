@@ -1,0 +1,8 @@
+Traceback (most recent call last):
+  File "/Volumes/Fentz_SSD_A/Coding/arch-m3/tests/integration_vm.py", line 105, in <module>
+    run(sys.argv[1], sys.argv[2])
+    ~~~^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/Volumes/Fentz_SSD_A/Coding/arch-m3/tests/integration_vm.py", line 81, in run
+    assert 'completed' in sent, 'VM did not complete authenticated startup checks; inspect sanitized console log'
+           ^^^^^^^^^^^^^^^^^^^
+AssertionError: VM did not complete authenticated startup checks; inspect sanitized console log

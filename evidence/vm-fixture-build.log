@@ -1,0 +1,20 @@
+debugfs 1.47.2 (1-Jan-2025)
+debugfs: rm /etc/fstab
+
+debugfs: write /vm/fstab /etc/fstab
+Allocated inode: 1117
+debugfs: rm /etc/systemd/system/arch-m3-root-password.service
+
+debugfs: write /vm/password.service /etc/systemd/system/arch-m3-root-password.service
+Allocated inode: 20614
+debugfs: mkdir /etc/systemd/system/serial-getty@hvc0.service.d
+debugfs: write /vm/hvc0.conf /etc/systemd/system/serial-getty@hvc0.service.d/10-root-password.conf
+Allocated inode: 20620
+debugfs: symlink /etc/systemd/system/getty@tty1.service /dev/null
+e2fsck 1.47.2 (1-Jan-2025)
+Pass 1: Checking inodes, blocks, and sizes
+Pass 2: Checking directory structure
+Pass 3: Checking directory connectivity
+Pass 4: Checking reference counts
+Pass 5: Checking group summary information
+asahi-root: 65562/227136 files (0.1% non-contiguous), 781095/908032 blocks

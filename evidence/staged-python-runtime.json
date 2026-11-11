@@ -1,0 +1,6 @@
+{
+  "returncode": 0,
+  "stdout": "3.13.9\nOpenSSL 3.0.18 30 Sep 2025\n",
+  "stderr": "",
+  "installer_main_invoked": false
+}

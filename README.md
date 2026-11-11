@@ -62,7 +62,7 @@ No loop device, mount, privileged container or host disk is required for this bu
 
 ## Verification results
 
-23 portable tests pass. The strict derivative audit, e2fsck checks and signed hardware-file comparisons pass. The actual image's password helper, skip/retry behavior, repeat invocation, systemd units and pacman dependency database were tested successfully in a disposable chroot. This is userspace validation, not a full VM or physical Mac boot.
+34 portable tests pass. The strict derivative audit, e2fsck checks and signed hardware-file comparisons pass. The actual image's password helper, skip/retry behavior, repeat invocation, systemd units and pacman dependency database were tested successfully in a disposable chroot. This is userspace validation, not a full VM or physical Mac boot.
 
 The integration command is `python3 tests/integration_firstboot.py <ZIP>` inside the audit container with `--network none --cap-drop ALL --cap-add SYS_CHROOT --cap-add MKNOD` and the project mounted read-only. It temporarily extracts a root in the container, runs its binaries, then deletes that disposable root.
 
@@ -73,3 +73,7 @@ This project intentionally has no automatic installation command. Relative packa
 Before any actual install, separately review backup, free space, firmware choice, root size, encryption needs and recovery. Local files and unit/chroot checks cannot prove the Apple boot chain or peripherals work on the physical J504AP.
 
 After a separately authorized, successful boot, the intended workflow is ordinary console setup: set hostname/timezone, create your user, configure sudo, connect networking, update the full system, then install your own tools and desktop. There is no Omarchy update framework to undo those choices.
+
+## Installer handoff continuation
+
+A fail-closed, non-installing preflight and POSIX runtime staging are now available. The published engine accepted the actual local ZIP and metadata, calculated sizes and extracted EFI into disposable storage. Its bundled Python also passed this contract test on the owner's Mac. Read [the handoff report](docs/handoff.md). A bounded same-kernel QEMU test did not reach login and is explicitly not counted as a boot pass.

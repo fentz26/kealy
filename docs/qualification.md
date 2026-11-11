@@ -38,3 +38,13 @@ All checks passed: skipping a password failed closed without a completion marker
 - A packaged, model-guarded macOS downstream installer. The output follows the engine's relative payload layout but is not a replacement for a signed official Omarchy catalog. No launch wrapper has been enabled for this evaluation artifact.
 
 The image is usable as a concrete build/review artifact. Physical installation requires a separate decision and validation session; do not interpret successful source or userspace tests as hardware qualification.
+
+## Installer handoff continuation
+
+Read-only host preflight passed on the exact native target. The published engine's loader, sizing and EFI extraction passed with subprocess, network and device operations forbidden. These checks also passed under the staged installer's bundled Python 3.13.9. Staging preserved all framework symlinks on APFS and rehashed the payload copy. See docs/handoff.md and evidence/engine-contract-native-runtime.json.
+
+34 portable tests now pass. A further review found that initially accepted metadata could add unreviewed downloads, expand EFI or format root; the validator now rejects those operational changes, with failing-then-passing regression tests. The existing descriptor and ZIP needed no changes.
+
+A bounded QEMU test attempted a virtio-console boot with the original kernel/initramfs and disposable disk snapshots. It produced no usable console/login, so no VM boot success is claimed. Inspection found the necessary modular MMIO transport absent from the stock initramfs. This refines the earlier PL011 limitation: a virtio console exists, but its stock initramfs path was not sufficient in this experiment.
+
+The follow-up virtual-hardware fixture also failed: tests/integration_vm.py timed out before authenticated console startup (sanitized console output was empty). Its altered transport/console/fstab fixture is not the delivered image. This integration experiment is explicitly failing; the 34 passing tests are the portable unit suite, not a claim that all boot tests pass. Kernel-memory fragments demonstrate progress to /init but do not establish a reliable exact failure cause. Do not promote the artifact to install-ready based on these results.

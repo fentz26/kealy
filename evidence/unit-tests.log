@@ -21,8 +21,19 @@ test_metadata_uses_real_image_size_and_retains_firmware_contract (test_build.Bui
 test_overlay_commands_mask_ssh_and_set_console_target (test_build.BuildPolicyTests.test_overlay_commands_mask_ssh_and_set_console_target) ... ok
 test_overlay_rejects_absolute_destination_and_symlink_sources (test_build.BuildPolicyTests.test_overlay_rejects_absolute_destination_and_symlink_sources) ... ok
 test_rejects_empty_overlay_before_locking_accounts (test_build.BuildPolicyTests.test_rejects_empty_overlay_before_locking_accounts) ... ok
+test_allows_internal_framework_symlink (test_handoff.ArchivePathTests.test_allows_internal_framework_symlink) ... ok
+test_rejects_archive_or_link_escape (test_handoff.ArchivePathTests.test_rejects_archive_or_link_escape) ... ok
+test_accepts_expected_local_payload (test_handoff.DescriptorTests.test_accepts_expected_local_payload) ... ok
+test_rejects_missing_firmware_copy_or_wrong_boot_object (test_handoff.DescriptorTests.test_rejects_missing_firmware_copy_or_wrong_boot_object) ... ok
+test_rejects_network_and_traversal_payloads (test_handoff.DescriptorTests.test_rejects_network_and_traversal_payloads) ... ok
+test_rejects_root_size_mismatch (test_handoff.DescriptorTests.test_rejects_root_size_mismatch) ... ok
+test_rejects_unreviewed_operational_fields (test_handoff.DescriptorTests.test_rejects_unreviewed_operational_fields) ... ok
+test_accepts_only_native_target (test_handoff.HostTests.test_accepts_only_native_target) ... ok
+test_rejects_old_or_malformed_macos (test_handoff.HostTests.test_rejects_old_or_malformed_macos) ... ok
+test_rejects_wrong_model_board_architecture_and_os (test_handoff.HostTests.test_rejects_wrong_model_board_architecture_and_os) ... ok
+test_posix_staging_probe_leaves_no_files (test_handoff.StagingTests.test_posix_staging_probe_leaves_no_files) ... ok
 
 ----------------------------------------------------------------------
-Ran 23 tests in 0.012s
+Ran 34 tests in 0.017s
 
 OK
