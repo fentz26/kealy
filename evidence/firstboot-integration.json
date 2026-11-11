@@ -1,0 +1,9 @@
+{
+  "skip_password_fails_closed": true,
+  "private_password_setup": true,
+  "completion_marker_mode": "0600",
+  "repeat_preserves_password": true,
+  "systemd_unit_verify": true,
+  "pacman_database_check": true,
+  "scope": "disposable userspace chroot, not Mac hardware boot"
+}

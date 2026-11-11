@@ -1,0 +1,38 @@
+{
+  "archive": {
+    "sha256": "61153885581ca93bf7fbc05147146503b0b2de15355f207f0c04e56a78f03954",
+    "root_bytes": 3719299072,
+    "filesystem": "ext4",
+    "members": [
+      {
+        "path": "esp/",
+        "bytes": 0
+      },
+      {
+        "path": "esp/EFI/",
+        "bytes": 0
+      },
+      {
+        "path": "esp/EFI/BOOT/",
+        "bytes": 0
+      },
+      {
+        "path": "esp/EFI/BOOT/BOOTAA64.EFI",
+        "bytes": 221184
+      },
+      {
+        "path": "esp/m1n1/",
+        "bytes": 0
+      },
+      {
+        "path": "esp/m1n1/boot.bin",
+        "bytes": 9253012
+      },
+      {
+        "path": "root.img",
+        "bytes": 3719299072
+      }
+    ],
+    "trust": "local digest; not an upstream signature"
+  }
+}

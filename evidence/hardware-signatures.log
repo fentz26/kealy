@@ -1,0 +1,36 @@
+[GNUPG:] NEWSIG
+gpg: Signature made Wed Oct 28 12:06:52 2026 MDT
+gpg:                using EDDSA key 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] KEY_CONSIDERED 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB 0
+[GNUPG:] SIG_ID cz+fGt1AjqypnyN5SBWUMp8q9ss 2026-10-28 1793210812
+[GNUPG:] GOODSIG F576553597FB8FEB Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>
+gpg: Good signature from "Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>" [unknown]
+[GNUPG:] VALIDSIG 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB 2026-10-28 1793210812 0 4 0 22 10 00 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+      12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] NEWSIG
+gpg: Signature made Wed Oct 21 00:18:43 2026 MDT
+gpg:                using EDDSA key 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] KEY_CONSIDERED 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB 0
+[GNUPG:] SIG_ID UbR1SCqFaij3ZjF4PRuAoEHiOWM 2026-10-21 1792563523
+[GNUPG:] GOODSIG F576553597FB8FEB Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>
+gpg: Good signature from "Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>" [unknown]
+[GNUPG:] VALIDSIG 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB 2026-10-21 1792563523 0 4 0 22 10 00 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+      12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] NEWSIG
+gpg: Signature made Wed Sep  9 04:00:21 2026 MDT
+gpg:                using EDDSA key 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] KEY_CONSIDERED 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB 0
+[GNUPG:] SIG_ID wQnAE9XuWDSdTWLwddVPcXgE2Lc 2026-09-09 1788948021
+[GNUPG:] GOODSIG F576553597FB8FEB Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>
+gpg: Good signature from "Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>" [unknown]
+[GNUPG:] VALIDSIG 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB 2026-09-09 1788948021 0 4 0 22 10 00 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+[GNUPG:] TRUST_UNDEFINED 0 pgp
+gpg: WARNING: This key is not certified with a trusted signature!
+gpg:          There is no indication that the signature belongs to the owner.
+      12CE6799A94A3F1B5DDFFE88F576553597FB8FEB

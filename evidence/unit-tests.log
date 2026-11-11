@@ -1,0 +1,28 @@
+test_accepts_console_payload_structure (test_audit.ArchiveTests.test_accepts_console_payload_structure) ... ok
+test_rejects_archive_traversal (test_audit.ArchiveTests.test_rejects_archive_traversal) ... ok
+test_rejects_missing_boot_chain (test_audit.ArchiveTests.test_rejects_missing_boot_chain) ... ok
+test_rejects_symlink_members (test_audit.ArchiveTests.test_rejects_symlink_members) ... ok
+test_rejects_wrong_expected_digest (test_audit.ArchiveTests.test_rejects_wrong_expected_digest) ... ok
+test_active_grub_and_fstab_must_match_actual_uuid (test_audit.BootConfigTests.test_active_grub_and_fstab_must_match_actual_uuid) ... ok
+test_comment_uuid_does_not_establish_valid_boot (test_audit.BootConfigTests.test_comment_uuid_does_not_establish_valid_boot) ... ok
+test_inode_mode_and_owner_are_parsed (test_audit.BootConfigTests.test_inode_mode_and_owner_are_parsed) ... ok
+test_accepts_console_system_without_claiming_hardware_boot (test_audit.SystemTests.test_accepts_console_system_without_claiming_hardware_boot) ... ok
+test_derivative_requires_closed_network_login_and_executable_helper (test_audit.SystemTests.test_derivative_requires_closed_network_login_and_executable_helper) ... ok
+test_enabled_ssh_is_reported (test_audit.SystemTests.test_enabled_ssh_is_reported) ... ok
+test_rejects_desktop_or_omarchy_runtime (test_audit.SystemTests.test_rejects_desktop_or_omarchy_runtime) ... ok
+test_rejects_missing_board_dtb (test_audit.SystemTests.test_rejects_missing_board_dtb) ... ok
+test_rejects_missing_network_package (test_audit.SystemTests.test_rejects_missing_network_package) ... ok
+test_reports_unlocked_root_as_a_security_finding (test_audit.SystemTests.test_reports_unlocked_root_as_a_security_finding) ... ok
+test_ignores_macos_appledouble_metadata (test_build.BuildPolicyTests.test_ignores_macos_appledouble_metadata) ... ok
+test_lock_root_preserves_other_accounts (test_build.BuildPolicyTests.test_lock_root_preserves_other_accounts) ... ok
+test_lock_root_rejects_missing_or_duplicate_root (test_build.BuildPolicyTests.test_lock_root_rejects_missing_or_duplicate_root) ... ok
+test_locks_other_preexisting_passwords_too (test_build.BuildPolicyTests.test_locks_other_preexisting_passwords_too) ... ok
+test_metadata_uses_real_image_size_and_retains_firmware_contract (test_build.BuildPolicyTests.test_metadata_uses_real_image_size_and_retains_firmware_contract) ... ok
+test_overlay_commands_mask_ssh_and_set_console_target (test_build.BuildPolicyTests.test_overlay_commands_mask_ssh_and_set_console_target) ... ok
+test_overlay_rejects_absolute_destination_and_symlink_sources (test_build.BuildPolicyTests.test_overlay_rejects_absolute_destination_and_symlink_sources) ... ok
+test_rejects_empty_overlay_before_locking_accounts (test_build.BuildPolicyTests.test_rejects_empty_overlay_before_locking_accounts) ... ok
+
+----------------------------------------------------------------------
+Ran 23 tests in 0.012s
+
+OK

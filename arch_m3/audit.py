@@ -8,6 +8,7 @@ import stat
 import subprocess
 import tempfile
 import zipfile
+import uuid
 from pathlib import Path, PurePosixPath
 
 
@@ -50,10 +51,11 @@ def inspect_archive(path, expected_sha256=None):
         if header[1080:1082] != b'\x53\xef':
             raise AuditError('This auditor requires an ext4 root image')
     return {'sha256': sha, 'root_bytes': root_size, 'filesystem': 'ext4',
+            'root_uuid': str(uuid.UUID(bytes=header[1128:1144])),
             'members': members, 'trust': 'local digest; not an upstream signature'}
 
 
-def evaluate_system(system):
+def evaluate_system(system, derivative=False):
     failures = []
     warnings = []
     packages = system['packages']
@@ -69,9 +71,52 @@ def evaluate_system(system):
             failures.append('Missing or invalid: ' + key)
     if system.get('default_target') != 'multi-user.target':
         failures.append('Default boot target is not multi-user.target')
+    if system.get('sshd_enabled'):
+        warnings.append('SSH is enabled in the initial image')
     if not system.get('root_password_locked'):
         warnings.append('Root password is not locked; set private credentials before network use')
+    if derivative:
+        for key in ('root_password_locked', 'all_passwords_locked'):
+            if not system.get(key):
+                failures.append('Derivative credential policy failed: ' + key)
+        if system.get('sshd_enabled') or any(system.get('ssh_masks', {}).get(unit) != '/dev/null'
+                for unit in ('sshd.service', 'sshd.socket', 'sshd@.service')):
+            failures.append('Derivative SSH must be disabled and masked')
+        if system.get('provisioning_marker_present', True):
+            failures.append('Derivative already has a provisioning marker')
+        for key, mode in (('provisioning_helper', 0o755), ('shadow_inode', 0o600)):
+            info = system.get(key) or {}
+            if (info.get('mode'), info.get('uid'), info.get('gid')) != (mode, 0, 0) or not info.get('size', 0):
+                failures.append('Derivative file permissions invalid: ' + key)
     return {'failures': failures, 'warnings': warnings, 'hardware_boot_verified': False}
+
+
+def parse_inode(text):
+    mode = re.search(r'Mode:\s+([0-7]+)', text)
+    owner = re.search(r'User:\s+(\d+)\s+Group:\s+(\d+)', text)
+    size = re.search(r'Size:\s+(\d+)', text)
+    if not mode or not owner or not size:
+        return None
+    return dict(mode=int(mode[1], 8), uid=int(owner[1]), gid=int(owner[2]), size=int(size[1]))
+
+
+def validate_boot_config(root_uuid, fstab, grub):
+    root_entries = [line.split() for line in fstab.splitlines()
+                    if line.strip() and not line.lstrip().startswith('#')]
+    fstab_matches = any(len(e) >= 2 and e[0] == 'UUID=' + root_uuid and e[1] == '/'
+                        for e in root_entries)
+    kernels, initramfs, roots = [], [], []
+    for line in grub.splitlines():
+        line = line.strip()
+        if line.startswith(('linux ', 'linux\t')):
+            parts = line.split()
+            if len(parts) > 1:
+                kernels.append(parts[1])
+                roots.append(next((p[10:] for p in parts[2:] if p.startswith('root=UUID=')), None))
+        elif line.startswith(('initrd ', 'initrd\t')):
+            initramfs.extend(line.split()[1:])
+    return dict(root_matches=fstab_matches and bool(roots) and all(r == root_uuid for r in roots),
+                kernel_paths=sorted(set(kernels)), initramfs_paths=sorted(set(initramfs)))
 
 
 class Ext4Reader:
@@ -95,6 +140,9 @@ class Ext4Reader:
                 if line.startswith('/') and len(line.split('/')) > 5
                 and line.split('/')[5] not in ('.', '..')]
 
+    def inode(self, path):
+        return parse_inode(self.run('stat ' + path))
+
     def link(self, path):
         output = self.run('stat ' + path)
         match = re.search(r'Fast link dest: "([^"]+)"', output)
@@ -113,7 +161,7 @@ def fields(text):
     return result
 
 
-def inspect_system(archive_path):
+def inspect_system(archive_path, derivative=False):
     with tempfile.TemporaryDirectory(prefix='arch-m3-audit-') as directory:
         image = Path(directory) / 'root.img'
         with zipfile.ZipFile(archive_path) as archive:
@@ -143,22 +191,37 @@ def inspect_system(archive_path):
         shadow = fs.read('/etc/shadow')
         root_entry = next((line.split(':')[1] for line in shadow.splitlines()
                            if line.startswith('root:')), None)
-        boot_files = fs.ls('/boot')
+        with image.open('rb') as source:
+            source.seek(1128)
+            root_uuid = str(uuid.UUID(bytes=source.read(16)))
+        boot_config = validate_boot_config(root_uuid, fstab, grub)
+        kernel_data = {p: fs.read(p, binary=True) for p in boot_config['kernel_paths']}
+        initramfs_data = {p: fs.read(p, binary=True) for p in boot_config['initramfs_paths']}
+        kernel_ok = bool(kernel_data) and all(len(b) > 4096 and b[56:60] == b'ARMd' for b in kernel_data.values())
+        ramfs_magic = (b'\x1f\x8b', b'\x28\xb5\x2f\xfd', b'070701', b'070702', b'\x04\x22\x4d\x18')
+        initramfs_ok = bool(initramfs_data) and all(len(b) > 1024 and b.startswith(ramfs_magic) for b in initramfs_data.values())
         system = {
             'packages': dict(sorted(packages.items())), 'kernel_versions': kernels,
             'board': 'apple,j504', 'board_dtb_paths': dtb_paths,
             'board_dtb': bool(board_dtbs),
             'board_dtb_in_boot_bundle': bool(board_dtbs) and all(d in boot for d in board_dtbs),
-            'kernel': any(name.startswith('vmlinuz-') for name in boot_files),
-            'initramfs': any(name.startswith('initramfs-') for name in boot_files),
-            'grub_root_uuid': '725346d2-f127-47bc-b464-9dd46155e8d6' in grub,
+            'kernel': kernel_ok, 'initramfs': initramfs_ok,
+            'root_uuid': root_uuid, 'boot_references': boot_config,
+            'kernel_sha256': {p: hashlib.sha256(b).hexdigest() for p, b in kernel_data.items()},
+            'board_dtb_sha256': [hashlib.sha256(b).hexdigest() for b in board_dtbs],
+            'grub_root_uuid': boot_config['root_matches'],
             'default_target': Path(fs.link('/etc/systemd/system/default.target')).name,
+            'all_passwords_locked': all(len(line.split(':')) == 9 and line.split(':')[1].startswith(('!', '*')) for line in shadow.splitlines()),
+            'ssh_masks': {u: fs.link('/etc/systemd/system/' + u) for u in ('sshd.service', 'sshd.socket', 'sshd@.service')},
+            'provisioning_helper': fs.inode('/usr/local/lib/arch-m3/set-root-password'),
+            'provisioning_marker_present': fs.inode('/etc/arch-m3-root-password-set') is not None,
+            'shadow_inode': fs.inode('/etc/shadow'),
             'root_password_locked': root_entry is not None and root_entry.startswith(('!', '*')),
             'fstab': fstab, 'grub_config': grub,
             'sshd_enabled': 'sshd.service' in fs.ls('/etc/systemd/system/multi-user.target.wants'),
             'networkmanager_enabled': 'NetworkManager.service' in fs.ls('/etc/systemd/system/multi-user.target.wants'),
         }
-        return {**system, **evaluate_system(system)}
+        return {**system, **evaluate_system(system, derivative=derivative)}
 
 
 def main():
@@ -166,11 +229,14 @@ def main():
     parser.add_argument('archive', type=Path)
     parser.add_argument('--sha256', help='Expected artifact identity (not a signature)')
     parser.add_argument('--system', action='store_true', help='Inspect ext4 with Linux debugfs')
+    parser.add_argument('--derivative', action='store_true', help='Require locked credentials, masked SSH and executable provisioning')
     args = parser.parse_args()
+    if args.derivative and not args.system:
+        parser.error('--derivative requires --system')
     try:
         report = {'archive': inspect_archive(args.archive, args.sha256)}
         if args.system:
-            report['system'] = inspect_system(args.archive)
+            report['system'] = inspect_system(args.archive, derivative=args.derivative)
         print(json.dumps(report, indent=2))
         return int(bool(report.get('system', {}).get('failures')))
     except (AuditError, zipfile.BadZipFile, OSError, subprocess.SubprocessError) as error:

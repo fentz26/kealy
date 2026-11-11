@@ -1,0 +1,25 @@
+[
+  {
+    "package": "linux-asahi",
+    "member": "usr/lib/modules/7.2.12-3-1-ARCH/dtbs/t8122-j504.dtb",
+    "sha256": "622073860f2bd6e9db1a6eef2e9d20fe3e7e4670fda4333cda0468db8d64ef8e",
+    "matches_boot_bundle_bytes": true
+  },
+  {
+    "package": "linux-asahi",
+    "member": "usr/lib/modules/7.2.12-3-1-ARCH/vmlinuz",
+    "sha256": "abc4287188dfd280ecb7698ae3ebb94991e65f2a1c0b5f5878ef7f43881e912d"
+  },
+  {
+    "package": "m1n1",
+    "member": "usr/lib/asahi-boot/m1n1.bin",
+    "sha256": "79b63f72d49025bb8175ead471b148bfc52ead65890c3ff91d7165f1af54772f",
+    "matches_boot_bundle_bytes": true
+  },
+  {
+    "package": "uboot-asahi",
+    "member": "usr/lib/asahi-boot/u-boot-nodtb.bin",
+    "sha256": "b8d52d16a56f4bc9640e6c210a1414f94f06d1aa0e1fa9845b69979b006c52b1",
+    "matches_boot_bundle_gzip": true
+  }
+]

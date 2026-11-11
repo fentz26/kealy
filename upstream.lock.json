@@ -1,0 +1,33 @@
+{
+  "board": "J504AP",
+  "model": "Mac15,3",
+  "chip": "T8122",
+  "architecture": "aarch64",
+  "sources": {
+    "alarm-builder": "58cc158c7fda3ef6aeae36606f84a63b4b0867e7",
+    "alarm-installer": "3cfef52bc372a7b84b59823027c75327e129d6ec",
+    "omarchy-installer": "c07e54c2134a8ec1415e7e2b917589ae1d3d7dc9",
+    "omarchy-packages": "7046eaf2f528828c35b85e26f155662f9040618b"
+  },
+  "upstream_payload": {
+    "url": "https://asahi-alarm.org/asahi-base.zip",
+    "sha256": "61153885581ca93bf7fbc05147146503b0b2de15355f207f0c04e56a78f03954",
+    "bytes": 1355729315,
+    "signature": "No independent upstream payload signature verified"
+  },
+  "published_installer": {
+    "url": "https://asahi-alarm.org/installer-v0.9.2.tar.gz",
+    "sha256": "b35fdd7e5e700003bf4f43d2a484eca618ad971dd4266207315cbfa6fe826fad",
+    "version": "v0.9.2"
+  },
+  "hardware_package_signer": "12CE6799A94A3F1B5DDFFE88F576553597FB8FEB",
+  "result": {
+    "source_sha256": "61153885581ca93bf7fbc05147146503b0b2de15355f207f0c04e56a78f03954",
+    "output_sha256": "dcefe5d03631ed013da73d942f7f1ab3f9844a3619da993541891b7c7760dfb2",
+    "root_bytes": 3719299072,
+    "boot_chain": "unchanged from source",
+    "status": "evaluation artifact; not hardware boot qualified",
+    "encrypted": false,
+    "desktop_preinstalled": false
+  }
+}

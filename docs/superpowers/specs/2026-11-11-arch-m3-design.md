@@ -1,6 +1,6 @@
 # Minimal Arch Linux ARM for an M3 Mac
 
-Status: superseded in direction by the user clarification and docs/repository-comparison.md. Prefer validating an existing normal minimal install before building a custom image. No implementation approved or started.
+Status: superseded in direction by the user clarification and docs/repository-comparison.md. Prefer validating an existing normal minimal install before building a custom image. The user subsequently directed substantive work to proceed; the selected implementation is the small stock-image derivative described in docs/qualification.md, rather than a new kernel/distribution build.
 
 ## Intent
 

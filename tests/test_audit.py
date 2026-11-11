@@ -5,7 +5,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from arch_m3.audit import AuditError, inspect_archive, evaluate_system
+from arch_m3.audit import AuditError, inspect_archive, evaluate_system, validate_boot_config, parse_inode
 
 
 def payload(path, extra=()):
@@ -64,6 +64,25 @@ class ArchiveTests(unittest.TestCase):
                 inspect_archive(p, expected_sha256='0' * 64)
 
 
+class BootConfigTests(unittest.TestCase):
+    def test_active_grub_and_fstab_must_match_actual_uuid(self):
+        valid = validate_boot_config('abc-123', 'UUID=abc-123 / ext4 defaults 0 1',
+                                     'linux /boot/vmlinuz root=UUID=abc-123 rw\ninitrd /boot/initramfs.img')
+        self.assertTrue(valid['root_matches'])
+        self.assertEqual(valid['kernel_paths'], ['/boot/vmlinuz'])
+        self.assertFalse(validate_boot_config('different', 'UUID=abc-123 / ext4 defaults 0 1',
+                         'linux /boot/vmlinuz root=UUID=abc-123 rw')['root_matches'])
+
+    def test_comment_uuid_does_not_establish_valid_boot(self):
+        self.assertFalse(validate_boot_config('abc', 'UUID=abc / ext4 defaults 0 1',
+                                             '# root=UUID=abc')['root_matches'])
+
+    def test_inode_mode_and_owner_are_parsed(self):
+        info = parse_inode('Inode: 3 Type: regular Mode: 0755 Flags: 0\nUser: 0 Group: 0 Size: 123')
+        self.assertEqual(info, {'mode': 0o755, 'uid': 0, 'gid': 0, 'size': 123})
+        self.assertIsNone(parse_inode(''))
+
+
 class SystemTests(unittest.TestCase):
     def system(self):
         return dict(packages={'base': '1', 'pacman': '7', 'linux-asahi': '7.2',
@@ -92,6 +111,24 @@ class SystemTests(unittest.TestCase):
     def test_reports_unlocked_root_as_a_security_finding(self):
         s = self.system()
         s['root_password_locked'] = False
+        self.assertTrue(evaluate_system(s)['warnings'])
+
+    def test_derivative_requires_closed_network_login_and_executable_helper(self):
+        s = self.system()
+        s.update(ssh_masks={u: '/dev/null' for u in ('sshd.service', 'sshd.socket', 'sshd@.service')},
+                 all_passwords_locked=True, provisioning_marker_present=False,
+                 provisioning_helper=dict(mode=0o755, uid=0, gid=0, size=20),
+                 shadow_inode=dict(mode=0o600, uid=0, gid=0, size=100))
+        self.assertEqual(evaluate_system(s, derivative=True)['failures'], [])
+        s['provisioning_helper']['mode'] = 0o644
+        self.assertTrue(evaluate_system(s, derivative=True)['failures'])
+        s['provisioning_helper']['mode'] = 0o755
+        s['ssh_masks']['sshd.socket'] = ''
+        self.assertTrue(evaluate_system(s, derivative=True)['failures'])
+
+    def test_enabled_ssh_is_reported(self):
+        s = self.system()
+        s['sshd_enabled'] = True
         self.assertTrue(evaluate_system(s)['warnings'])
 
     def test_rejects_missing_network_package(self):

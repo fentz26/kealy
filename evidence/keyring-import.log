@@ -1,0 +1,6 @@
+gpg: keybox '/Volumes/Fentz_SSD_A/Coding/arch-m3/work/gnupg/pubring.kbx' created
+gpg: /Volumes/Fentz_SSD_A/Coding/arch-m3/work/gnupg/trustdb.gpg: trustdb created
+gpg: key F576553597FB8FEB: public key "Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>" imported
+gpg: can't connect to the gpg-agent: IPC connect call failed
+gpg: Total number processed: 1
+gpg:               imported: 1

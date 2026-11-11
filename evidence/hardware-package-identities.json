@@ -1,0 +1,17 @@
+[
+  {
+    "name": "linux-asahi",
+    "file": "linux-asahi-7.2.12.asahi3-1-aarch64.pkg.tar.xz",
+    "sha256": "df9cc674dac586310c8eccb50ae289d31a292faad8d7ba59a4ca68a34da8e92f"
+  },
+  {
+    "name": "m1n1",
+    "file": "m1n1-1.9.9-1-aarch64.pkg.tar.xz",
+    "sha256": "e803b6e685ceef88888bafa29889469d969418804463edb2891e53216a00d71e"
+  },
+  {
+    "name": "uboot-asahi",
+    "file": "uboot-asahi-2026.07.asahi2-1-aarch64.pkg.tar.xz",
+    "sha256": "7cd3040cda63f0c6ef6703fd2d0de1b8016f8b3c2c1f3dbe362ecf1e371e44ed"
+  }
+]

@@ -35,3 +35,9 @@ First validate Asahi Alarm Minimal's actual published engine and payload for J50
 - Asahi Alarm image builder: 58cc158c7fda3ef6aeae36606f84a63b4b0867e7
 - Asahi Alarm installer: 3cfef52bc372a7b84b59823027c75327e129d6ec
 - Omarchy package recipes: 7046eaf2f528828c35b85e26f155662f9040618b
+
+## Completed artifact inspection
+
+The published v0.9.2 installer, not just repository HEAD, admits J504AP. The downloaded Minimal image includes linux-asahi 7.2.12.asahi3-1 and the matching J504 DTB in its actual boot bundle. Signed package comparisons also match m1n1 and U-Boot. Console image construction therefore did not need an Aurora kernel substitution.
+
+The local derivative preserves all packages and EFI boot bytes, replaces shared initial passwords with a local password prompt, masks SSH, selects the console target and corrects the undersized root-image metadata. See docs/qualification.md and artifacts/minimal-evaluation-r2/. No physical boot or accelerated graphics claim follows from these checks.

@@ -1,0 +1,9 @@
+{
+  "source_sha256": "61153885581ca93bf7fbc05147146503b0b2de15355f207f0c04e56a78f03954",
+  "output_sha256": "dcefe5d03631ed013da73d942f7f1ab3f9844a3619da993541891b7c7760dfb2",
+  "root_bytes": 3719299072,
+  "boot_chain": "unchanged from source",
+  "status": "evaluation artifact; not hardware boot qualified",
+  "encrypted": false,
+  "desktop_preinstalled": false
+}

@@ -1,0 +1,24 @@
+Traceback (most recent call last):
+  File "<frozen runpy>", line 198, in _run_module_as_main
+  File "<frozen runpy>", line 88, in _run_code
+  File "/project/arch_m3/build.py", line 164, in <module>
+    main()
+  File "/project/arch_m3/build.py", line 160, in main
+    print(json.dumps(build(args.source, args.metadata, args.overlay, args.output, args.sha256), indent=2))
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/arch_m3/build.py", line 112, in build
+    commands.write_text('\n'.join(make_overlay_commands(overlay, shadow)) + '\n')
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/project/arch_m3/build.py", line 55, in make_overlay_commands
+    if source.is_symlink() or not (source.is_file() or source.is_dir()):
+       ^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 914, in is_symlink
+    return S_ISLNK(self.lstat().st_mode)
+                   ^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 847, in lstat
+    return self.stat(follow_symlinks=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/pathlib.py", line 840, in stat
+    return os.stat(self, follow_symlinks=follow_symlinks)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+PermissionError: [Errno 1] Operation not permitted: '/project/overlay/._etc'
