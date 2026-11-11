@@ -39,6 +39,14 @@ class DisplayCheck(unittest.TestCase):
     def test_wired_tree_passes(self):
         self.assertEqual(check_display(GOOD), [])
 
+    def test_older_dtc_string_list_format_passes(self):
+        old = GOOD.replace('"apple,j504", "apple,t8122", "apple,arm-platform"',
+                           '"apple,j504\\0apple,t8122\\0apple,arm-platform"')
+        old = old.replace('"apple,t8122-display-crossbar", "apple,t6020-display-crossbar"',
+                          '"apple,t8122-display-crossbar\\0apple,t6020-display-crossbar"')
+        self.assertIn('j504\\0apple', old)
+        self.assertEqual(check_display(old), [])
+
     def test_child_properties_are_not_the_nodes_own(self):
         props = own_properties(node_body(GOOD, 'dcp@31ac00000'))
         self.assertEqual(props['status'], '"okay"')

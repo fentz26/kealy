@@ -56,7 +56,8 @@ def own_properties(body):
 
 def check_display(dts):
     failures = []
-    if 'compatible = "apple,j504"' not in dts:
+    # dtc prints string lists as "a", "b" or as "a\0b" depending on its version.
+    if not re.search(r'compatible = "apple,j504["\\]', dts):
         failures.append('Not a J504 device tree')
     for name in REQUIRED_OKAY:
         body = node_body(dts, name)
