@@ -32,3 +32,16 @@ VM result: bounded same-kernel QEMU/HVF attempt did not reach console/login. Sto
 Ruling: leave the stock artifact unchanged rather than alter its initramfs for generic virtual hardware. Cost: no full VM boot evidence; physical qualification remains a separate stage. Staging is preparation only and does not authorize installation.
 
 Final continuation verification: 34 portable tests PASS; published engine contract PASS under host and bundled Python; model/artifact preflight PASS; APFS runtime staging and native SSL/ctypes load PASS. Known failing integration: tests/integration_vm.py timed out before authenticated console even with explicit test-only virtio transport, hvc0 service mapping and no Apple EFI mount. Empty console log; no claimed VM boot. Full hardware/boot readiness remains unproved. Keep the stock delivered ZIP unchanged and preserve the failure evidence rather than imply a pass.
+
+
+## VM diagnosis continuation — authoritative current result
+
+User requested further work. Systematic debugging isolated the empty-console result: original gzip initramfs length 13,442,791 is 3 modulo 4; fixture appended raw newc without ALGN(4). Tests first failed, then padding fix passed and actual VM boot/login succeeded. HVF/TCG failures before this fix were not evidence of a backend or delivered-image fault. The initramfs shell/library closure independently executed correctly in a chroot.
+
+The aligned static probe and then normal fixture both reached authenticated login. Missing EFI explained the failed upstream first-boot unit (set -e at findmnt /boot/efi). Adding a disposable FAT EFI disk exposed device-order assumptions; UUID-based root selection fixed the test. With EFI and a UTC clock fixture, upstream first boot, UUID randomization, regenerated fstab/GRUB syntax, keyring population and an actual signed package verification all pass. The guest reports running with zero failed units.
+
+Fresh preparation is tests/prepare_vm_inputs.py -> /private/tmp/arch-m3-vm-attested. It records source ZIP/root hashes, original EFI file hashes, package identities and exact fixture modifications. Runner verifies prepared inputs and signed kernel before boot; delivered ZIP and raw backing files were verified unchanged after VM shutdown. Guest writes stay in disposable snapshots. Authoritative evidence: evidence/vm-attested/.
+
+Review fixes: missing/empty/invalid UUID markers now fail closed; named status markers prevent generic 'active' or echoed commands from passing; duplicate markers fail; stale success is removed before even invalid-argument reruns. All added failures were reproduced and fixed with regression tests. Full portable suite: 43 PASS. Attested VM test: PASS. Physical Mac boot and GRUB/Apple-chain reboot are still unverified; no install/disk/boot-policy action performed.
+
+Ruling: keep virtual transport, console mapping, clock and EFI adaptations exclusively in test fixtures. Delivered ZIP unchanged. Cost: VM proves this kernel/userspace startup and first-boot behavior under adapted virtual hardware, not physical Apple compatibility. GRUB evidence is syntax only; no GRUB reboot success claim.

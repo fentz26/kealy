@@ -1,0 +1,10 @@
+{
+  "root.img": {
+    "sha256": "ba566b9155fdc77c12f1c5c39992015493c5d60451012ca2e7d1d0ca06bcd92f",
+    "unchanged_after_vm": true
+  },
+  "efi.img": {
+    "sha256": "bd4dfd10d6437ca1f9b3818471c827aca6da9727f8e4872e68a894c46744ddf3",
+    "unchanged_after_vm": true
+  }
+}

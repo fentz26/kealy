@@ -32,9 +32,22 @@ The original engine reports 4,243,587,072 bytes minimum and 8,487,174,144 bytes 
 
 The bundled Python starts successfully and loads SSL/ctypes on this Mac. This proves runtime loading, not per-device firmware extraction, Recovery authorization or installation.
 
-## VM attempt
+## VM startup verification
 
-A bounded QEMU/HVF test used the same signed kernel, existing initramfs and a snapshot of a disposable root copy, with no network or host disks. It did not reach a usable console or login. The kernel has a built-in virtio console, but its required MMIO transport is modular and absent from the stock initramfs. A second bounded fixture test added the signed transport module, remapped the console units to hvc0 and omitted the Apple-only EFI mount. It also timed out without an authenticated console. `tests/integration_vm.py` therefore remains a failed integration experiment, not a passing test. There is no successful same-kernel VM boot claim. This result neither proves nor disproves physical J504 boot; no root/kernel changes were made to make a generic VM pass.
+The adapted QEMU/HVF test now passes with the same signed kernel and root derived from the pinned ZIP. It reaches authenticated login, completes upstream first boot, reports zero failed units and verifies a signed package with the guest's populated keyring. Mount and regenerated GRUB syntax checks also pass.
+
+Earlier failures were traced to missing four-byte CPIO padding in the test fixture. A fixture without EFI also failed the upstream first-boot prerequisite; a second disk required UUID-based root selection. These were harness defects/omissions, not changes needed in the delivered ZIP. Historical logs remain, and evidence/vm-attested is the current result.
+
+Reproduction uses fresh disposable POSIX storage:
+
+```sh
+docker build -f - -t arch-m3-fs-tools:local . < tools/Dockerfile.vm
+python3 tests/prepare_vm_inputs.py /private/tmp/arch-m3-vm-NEW .
+mkdir -p evidence/vm-NEW
+python3 tests/integration_vm.py /private/tmp/arch-m3-vm-NEW evidence/vm-NEW hvf --with-efi
+```
+
+Preparation records and hashes the source ZIP/root and exact fixture changes. The runner verifies these before boot. It uses file-backed snapshots and no network or host disk devices. The fixture adds virtio transport, remaps the console and supplies a disposable EFI filesystem and UTC clock. It does not modify the delivered ZIP. Direct kernel boot and grub-script-check do not prove a GRUB/Apple boot-chain reboot. See docs/qualification.md for the precise boundary.
 
 ## Remaining boundary
 

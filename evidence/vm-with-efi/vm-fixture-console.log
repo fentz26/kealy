@@ -1,0 +1,19 @@
+:: running early hook [asahi]
+:: Asahi: Missing asahi,efi-system-partition variable, firmware will not be loaded!
+:: running early hook [udev]
+Starting systemd-udevd version 262.1-1-arch
+:: running hook [udev]
+:: Triggering uevents...
+:: running hook [keymap]
+:: Loading keymap...kbd_mode: KDSKBMODE: Inappropriate ioctl for device
+%@done.
+:: performing fsck on '/dev/vda'
+fsck: fsck.vfat not found; ignore /dev/vda
+:: mounting '/dev/vda' on real root
+:: running late hook [asahi]
+:: running cleanup hook [udev]
+ERROR: Root device mounted successfully, but /sbin/init does not exist.
+Bailing out, you are on your own. Good luck.
+
+sh: can't access tty; job control turned off
+[rootfs ~]# 

@@ -32,8 +32,17 @@ test_accepts_only_native_target (test_handoff.HostTests.test_accepts_only_native
 test_rejects_old_or_malformed_macos (test_handoff.HostTests.test_rejects_old_or_malformed_macos) ... ok
 test_rejects_wrong_model_board_architecture_and_os (test_handoff.HostTests.test_rejects_wrong_model_board_architecture_and_os) ... ok
 test_posix_staging_probe_leaves_no_files (test_handoff.StagingTests.test_posix_staging_probe_leaves_no_files) ... ok
+test_already_aligned_archive_is_not_shifted (test_vm_archive.InitramfsFixtureTests.test_already_aligned_archive_is_not_shifted) ... ok
+test_appended_cpio_starts_at_global_four_byte_boundary (test_vm_archive.InitramfsFixtureTests.test_appended_cpio_starts_at_global_four_byte_boundary) ... ok
+test_newc_file_data_and_next_entry_are_aligned (test_vm_archive.InitramfsFixtureTests.test_newc_file_data_and_next_entry_are_aligned) ... ok
+test_duplicate_markers_fail_closed (test_vm_checks.VmResultTests.test_duplicate_markers_fail_closed) ... ok
+test_invalid_rerun_clears_previous_success_before_validation (test_vm_checks.VmResultTests.test_invalid_rerun_clears_previous_success_before_validation) ... ok
+test_missing_or_invalid_uuid_markers_fail (test_vm_checks.VmResultTests.test_missing_or_invalid_uuid_markers_fail) ... ok
+test_requires_named_target_and_successful_firstboot_with_efi (test_vm_checks.VmResultTests.test_requires_named_target_and_successful_firstboot_with_efi) ... ok
+test_stale_success_is_removed_without_touching_other_evidence (test_vm_checks.VmResultTests.test_stale_success_is_removed_without_touching_other_evidence) ... ok
+test_unlabelled_active_and_echoed_commands_cannot_pass (test_vm_checks.VmResultTests.test_unlabelled_active_and_echoed_commands_cannot_pass) ... ok
 
 ----------------------------------------------------------------------
-Ran 34 tests in 0.017s
+Ran 43 tests in 0.016s
 
 OK

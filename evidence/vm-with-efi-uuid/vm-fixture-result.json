@@ -1,0 +1,17 @@
+{
+  "authenticated_console_login": true,
+  "private_root_password_setup": true,
+  "multi_user_target_active": true,
+  "pacman_database_check": true,
+  "kernel_unchanged": true,
+  "delivered_zip_unchanged": true,
+  "fixture_changes": [
+    "add signed virtio_mmio module to test initramfs",
+    "map password/getty units to hvc0",
+    "attach disposable FAT EFI disk"
+  ],
+  "physical_mac_boot_verified": false,
+  "accelerator": "hvf",
+  "efi_attached": true,
+  "scope": "QEMU virtual-hardware fixture; not the unmodified release or Apple boot chain"
+}

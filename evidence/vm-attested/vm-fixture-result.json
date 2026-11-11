@@ -1,0 +1,63 @@
+{
+  "authenticated_console_login": true,
+  "private_root_password_setup": true,
+  "multi_user_target_active": true,
+  "pacman_database_check": true,
+  "kernel_unchanged": true,
+  "kernel_sha256": "abc4287188dfd280ecb7698ae3ebb94991e65f2a1c0b5f5878ef7f43881e912d",
+  "delivered_zip_unchanged": true,
+  "delivered_zip_sha256": "dcefe5d03631ed013da73d942f7f1ab3f9844a3619da993541891b7c7760dfb2",
+  "guest_checks": {
+    "KERNEL": "7.2.12-3-1-ARCH",
+    "MULTI": "active",
+    "FIRSTBOOT": "active",
+    "SYSTEM": "running",
+    "FAILED_COUNT": "0",
+    "PACMAN_RC": "0",
+    "SIGNATURE_RC": "0",
+    "ROOT_UUID": "72f5ea8a-8602-4203-a8db-b79d319a9568",
+    "EFI_UUID": "226E-D70A",
+    "FSTAB_RC": "0",
+    "GRUB_RC": "0"
+  },
+  "fixture_changes": [
+    "add signed virtio_mmio module to test initramfs",
+    "map password/getty units to hvc0",
+    "initialize virtual clock from UTC host time",
+    "attach disposable FAT EFI disk"
+  ],
+  "preparation_manifest": {
+    "source_zip_sha256": "dcefe5d03631ed013da73d942f7f1ab3f9844a3619da993541891b7c7760dfb2",
+    "source_root_sha256": "1d2e920631a3d3391e12dd5355c1581edc00bd4ff6b0afc3d2c71f745f906500",
+    "signed_package_sha256": {
+      "linux-asahi": "df9cc674dac586310c8eccb50ae289d31a292faad8d7ba59a4ca68a34da8e92f",
+      "m1n1": "e803b6e685ceef88888bafa29889469d969418804463edb2891e53216a00d71e"
+    },
+    "original_efi_sha256": {
+      "esp/EFI/BOOT/BOOTAA64.EFI": "17fb5f45a3eb340a8918bd3fdee92ebd3ec2c91d6ad186da427d59d7e1c6176a",
+      "esp/m1n1/boot.bin": "a5f30fd7b8e5726fd0ca3bf0cef8750bd6de1669930d6164b837075f82c32b63"
+    },
+    "fixture_files_sha256": {
+      "root.img": "ba566b9155fdc77c12f1c5c39992015493c5d60451012ca2e7d1d0ca06bcd92f",
+      "efi.img": "bd4dfd10d6437ca1f9b3818471c827aca6da9727f8e4872e68a894c46744ddf3",
+      "Image": "abc4287188dfd280ecb7698ae3ebb94991e65f2a1c0b5f5878ef7f43881e912d",
+      "initramfs-virtio-test.img": "017452c965d5dc14073de9bb615bb1e8387c2a9a9301b7fc373ba0e005c3f476",
+      "fixture.commands": "dc977b1cbe1a4690654c3eebc9347127eb8433233338941294bf92d3ea97adff",
+      "fstab": "7e64abac2c07f61a3c4f420c381e5b1ed719dd72654dfb98ed5598eaab208675",
+      "password.service": "c0dc96516a15ba69ed96a035b72447d7dcb1cd6bcd708406dcbf090691cb8e28",
+      "hvc0.conf": "be9501f88a376c53e9dfb5e1542741851b3c2383e27e67b827ab795ec9de63ce"
+    },
+    "adaptations": [
+      "signed virtio MMIO module in aligned initramfs overlay",
+      "hvc0 password/getty mapping and tty1 getty mask",
+      "host UTC clock fixture",
+      "disposable EFI disk with upstream files and signature test input"
+    ],
+    "physical_disk_modified": false,
+    "delivered_zip_modified": false
+  },
+  "physical_mac_boot_verified": false,
+  "accelerator": "hvf",
+  "efi_attached": true,
+  "scope": "QEMU virtual-hardware fixture; not the unmodified release or Apple boot chain"
+}

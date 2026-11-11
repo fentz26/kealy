@@ -1,0 +1,20 @@
+{
+  "authenticated_console_login": true,
+  "private_root_password_setup": true,
+  "multi_user_target_active": true,
+  "pacman_database_check": true,
+  "kernel_unchanged": true,
+  "delivered_zip_unchanged": true,
+  "fixture_changes": [
+    "static diagnostic init loads transport, attaches hvc0 and execs stock init",
+    "add signed virtio_mmio module to test initramfs",
+    "map password/getty units to hvc0",
+    "omit Apple EFI mount in test fstab"
+  ],
+  "physical_mac_boot_verified": false,
+  "accelerator": "hvf",
+  "scope": "QEMU virtual-hardware fixture; not the unmodified release or Apple boot chain",
+  "known_failed_units": [
+    "first-boot.service (cause not yet established)"
+  ]
+}

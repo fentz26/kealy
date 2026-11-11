@@ -2,7 +2,7 @@
 
 A console-only evaluation image for **Mac15,3 / J504AP / T8122**. It preserves the stock Asahi Alarm kernel and Apple boot stack. You install your own user tools, desktop and rice later with pacman.
 
-**This is built and statically inspected, not physically boot-qualified on the Mac. No installation has been performed.**
+**Static, userspace and adapted VM startup checks pass. Physical Mac boot remains unverified; no installation has been performed.**
 
 ## What was built
 
@@ -62,7 +62,7 @@ No loop device, mount, privileged container or host disk is required for this bu
 
 ## Verification results
 
-34 portable tests pass. The strict derivative audit, e2fsck checks and signed hardware-file comparisons pass. The actual image's password helper, skip/retry behavior, repeat invocation, systemd units and pacman dependency database were tested successfully in a disposable chroot. This is userspace validation, not a full VM or physical Mac boot.
+43 portable tests pass. The strict derivative audit, e2fsck checks and signed hardware-file comparisons pass. The actual image's password helper, skip/retry behavior, repeat invocation, systemd units and pacman dependency database were tested successfully in a disposable chroot. These chroot results are separate from the adapted VM startup check below; neither is physical Mac qualification.
 
 The integration command is `python3 tests/integration_firstboot.py <ZIP>` inside the audit container with `--network none --cap-drop ALL --cap-add SYS_CHROOT --cap-add MKNOD` and the project mounted read-only. It temporarily extracts a root in the container, runs its binaries, then deletes that disposable root.
 
@@ -76,4 +76,4 @@ After a separately authorized, successful boot, the intended workflow is ordinar
 
 ## Installer handoff continuation
 
-A fail-closed, non-installing preflight and POSIX runtime staging are now available. The published engine accepted the actual local ZIP and metadata, calculated sizes and extracted EFI into disposable storage. Its bundled Python also passed this contract test on the owner's Mac. Read [the handoff report](docs/handoff.md). A bounded same-kernel QEMU test did not reach login and is explicitly not counted as a boot pass.
+A fail-closed, non-installing preflight and POSIX runtime staging are now available. The published engine accepted the actual local ZIP and metadata, calculated sizes and extracted EFI into disposable storage. Its bundled Python also passed this contract test on the owner's Mac. Read [the handoff report](docs/handoff.md). The corrected, attested same-kernel QEMU fixture now reaches login with healthy first boot, zero failed units and successful in-guest package signature verification. Virtual-hardware adaptations are explicit; the delivered ZIP is unchanged. Apple hardware and boot-chain qualification remain outstanding.

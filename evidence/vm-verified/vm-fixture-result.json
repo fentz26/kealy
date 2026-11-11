@@ -1,0 +1,33 @@
+{
+  "authenticated_console_login": true,
+  "private_root_password_setup": true,
+  "multi_user_target_active": true,
+  "pacman_database_check": true,
+  "kernel_unchanged": true,
+  "kernel_sha256": "abc4287188dfd280ecb7698ae3ebb94991e65f2a1c0b5f5878ef7f43881e912d",
+  "delivered_zip_unchanged": true,
+  "delivered_zip_sha256": "dcefe5d03631ed013da73d942f7f1ab3f9844a3619da993541891b7c7760dfb2",
+  "guest_checks": {
+    "KERNEL": "7.2.12-3-1-ARCH",
+    "MULTI": "active",
+    "FIRSTBOOT": "active",
+    "SYSTEM": "running",
+    "FAILED_COUNT": "0",
+    "PACMAN_RC": "0",
+    "SIGNATURE_RC": "0",
+    "ROOT_UUID": "cebcecda-3de8-40d8-957e-4957efc0915b",
+    "EFI_UUID": "799B-7FAC",
+    "FSTAB_RC": "0",
+    "GRUB_RC": "0"
+  },
+  "fixture_changes": [
+    "add signed virtio_mmio module to test initramfs",
+    "map password/getty units to hvc0",
+    "initialize virtual clock from UTC host time",
+    "attach disposable FAT EFI disk"
+  ],
+  "physical_mac_boot_verified": false,
+  "accelerator": "hvf",
+  "efi_attached": true,
+  "scope": "QEMU virtual-hardware fixture; not the unmodified release or Apple boot chain"
+}

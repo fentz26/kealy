@@ -1,0 +1,2 @@
+FROM arch-m3-audit:local
+RUN apk add --no-cache dosfstools mtools

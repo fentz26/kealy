@@ -1,0 +1,1 @@
+qemu-system-aarch64: -chardev socket,id=console,path=/tmp/arch-m3-vm/virtio-test.sock,server=on,wait=on: info: QEMU waiting for connection on: disconnected:unix:/tmp/arch-m3-vm/virtio-test.sock,server=on

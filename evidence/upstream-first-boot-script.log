@@ -1,0 +1,68 @@
+debugfs 1.47.2 (1-Jan-2025)
+#!/bin/sh
+# SPDX-License-Identifier: MIT
+
+set -e
+
+root_dev=$(findmnt -n -o SOURCE / | sed 's/\[.*\]$//')
+efi_dev=$(findmnt -n -o SOURCE /boot/efi)
+root_fstype=$(findmnt -n -o FSTYPE /)
+
+if [ -e "$root_dev" ]; then
+    echo "Randomizing root filesystem UUID..."
+    case "$root_fstype" in
+    ext4)
+        tune2fs -U random "$root_dev"
+        ;;
+    btrfs)
+        echo "Warning: btrfs UUID randomization not supported while mounted, skipping"
+        ;;
+    *)
+        echo "Warning: unsupported filesystem type '$root_fstype', skipping UUID randomization"
+        ;;
+    esac
+
+    root_uuid="$(blkid -c /dev/null "$root_dev" -o export | grep '^UUID=')"
+    echo "Root filesystem: $root_uuid"
+    echo
+fi
+
+if [ -e "$efi_dev" ] &&
+    blkid "$efi_dev" | grep -q 'TYPE="vfat"'; then
+
+    echo "Randomizing EFI system partition UUID..."
+    # Ugly... why isn't there a command to do this?
+    ssize="$(blockdev --getss "$efi_dev")"
+    dd bs=1 seek=67 count=4 conv=notrunc if=/dev/urandom of="$efi_dev"
+    dd bs=1 skip=67 seek=$((67 + 6 * ssize)) count=4 conv=notrunc if="$efi_dev" of="$efi_dev"
+
+    efi_uuid="$(blkid -c /dev/null "$efi_dev" -o export | grep '^UUID=')"
+    echo "EFI partition: $efi_uuid"
+    echo
+fi
+
+if [ ! -z "$root_uuid" ] && [ ! -z "$efi_uuid" ]; then
+    # Regenerate fstab with current UUIDs (root may be unchanged for btrfs)
+    echo "Regenerating /etc/fstab..."
+    if [ "$root_fstype" = "btrfs" ]; then
+        tee /etc/fstab <<EOF
+$root_uuid / btrfs rw,relatime,x-systemd.growfs,compress=zstd:1,subvol=@ 0 0
+$root_uuid /home btrfs rw,relatime,x-systemd.growfs,compress=zstd:1,subvol=@home 0 0
+$efi_uuid /boot/efi vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro    0 2
+EOF
+    else
+        tee /etc/fstab <<EOF
+$root_uuid / ext4 rw,relatime,x-systemd.growfs 0 1
+$efi_uuid /boot/efi vfat rw,relatime,fmask=0022,dmask=0022,codepage=437,iocharset=iso8859-1,shortname=mixed,errors=remount-ro    0 2
+EOF
+    fi
+    echo
+fi
+
+update-grub
+
+echo
+echo "Initializing Pacman keyring..."
+pacman-key --init
+pacman-key --populate archlinuxarm asahi-alarm
+echo
