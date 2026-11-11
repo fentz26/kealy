@@ -1,4 +1,6 @@
-# Minimal Arch Linux ARM for a base M3 MacBook Pro
+# Kealy
+
+Minimal Arch Linux ARM for a base M3 MacBook Pro, built on Asahi Linux and Asahi Alarm. "Kealy" is the name of this build only: upstream package, kernel and file names (`linux-asahi`, `m1n1`, `uboot-asahi`, `arch-m3-minimal.zip`) are kept as they are, because the boot chain, pacman and the installer depend on them, and upstream licence and copyright notices stay intact.
 
 A console-only evaluation image for **Mac15,3 / J504AP / T8122**. It preserves the stock Asahi Alarm kernel and Apple boot stack. You install your own user tools, desktop and rice later with pacman.
 

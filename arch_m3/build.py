@@ -39,7 +39,7 @@ def corrected_metadata(original, root_bytes):
     if len(roots) != 1 or not roots[0].get('expand'):
         raise ValueError('Unexpected upstream root partition contract')
     roots[0]['size'] = str(root_bytes) + 'B'
-    product['name'] = product['default_os_name'] = 'Minimal Arch ARM J504 (local evaluation build)'
+    product['name'] = product['default_os_name'] = 'Kealy'
     product['package'] = 'arch-m3-minimal.zip'
     return {'os_list': [product]}
 
