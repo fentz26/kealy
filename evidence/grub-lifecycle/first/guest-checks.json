@@ -1,0 +1,21 @@
+{
+  "markers": {
+    "KERNEL": "7.2.12-3-1-ARCH",
+    "MULTI": "active",
+    "FIRSTBOOT": "active",
+    "SYSTEM": "running",
+    "FAILED_COUNT": "0",
+    "PACMAN_RC": "0",
+    "SIGNATURE_RC": "0",
+    "ROOT_UUID": "3bb5fd09-7901-410a-8144-273aa763e94e",
+    "EFI_UUID": "A477-EFB7",
+    "FSTAB_RC": "0",
+    "GRUB_RC": "0",
+    "UEFI": "1",
+    "BOOT_ID": "b87c6964-be4e-4873-8f7c-e44b529ad12c",
+    "SHADOW_SHA": "d4f14eba9cb65243fd06e40271ef01692da2bb3a6ecf6bed66e6e0ebac61e597",
+    "PERSIST": "44722291347ae94bfd9a19551f019e6ddc83cd1331e7271c",
+    "setup_prompt_seen": true
+  },
+  "failures": []
+}

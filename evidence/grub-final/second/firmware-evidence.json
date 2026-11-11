@@ -1,0 +1,9 @@
+{
+  "verified": true,
+  "markers": {
+    "grub_banner": true,
+    "arch_entry": true,
+    "kernel_load": true,
+    "initramfs_load": true
+  }
+}

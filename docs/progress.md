@@ -45,3 +45,14 @@ Fresh preparation is tests/prepare_vm_inputs.py -> /private/tmp/arch-m3-vm-attes
 Review fixes: missing/empty/invalid UUID markers now fail closed; named status markers prevent generic 'active' or echoed commands from passing; duplicate markers fail; stale success is removed before even invalid-argument reruns. All added failures were reproduced and fixed with regression tests. Full portable suite: 43 PASS. Attested VM test: PASS. Physical Mac boot and GRUB/Apple-chain reboot are still unverified; no install/disk/boot-policy action performed.
 
 Ruling: keep virtual transport, console mapping, clock and EFI adaptations exclusively in test fixtures. Delivered ZIP unchanged. Cost: VM proves this kernel/userspace startup and first-boot behavior under adapted virtual hardware, not physical Apple compatibility. GRUB evidence is syntax only; no GRUB reboot success claim.
+
+
+## GRUB/reboot continuation — authoritative current result
+
+User requested further work. Plan: docs/superpowers/plans/2026-11-11-grub-reboot-validation.md. New private APFS clones of the attested fixtures hold a VM initramfs at the normal /boot path and hvc0 GRUB kernel arguments. QEMU uses hashed EDK2 code, a private variable store and persistent qcow2 overlays; no direct kernel/initrd/append, host disk or network arguments.
+
+Initial lifecycle test PASS through actual artifact-derived GRUB on both cold boots. Review independently confirmed firmware/GRUB logs and stable identity across reboot; no blocker. Evidence improvements were then tested: automatic GRUB banner/entry/kernel/initramfs assertions, phase-specific skipped firstboot expectations and explicit clean shutdown records. Regression failures were reproduced before fixes. Final full portable suite: 50 PASS.
+
+Final immutable-fixture qualification: evidence/grub-final/lifecycle-result.json PASS. Both phases report firmware route verified and QEMU exit0; new boot IDs; stable root/EFI UUIDs, credential checksum and a first-boot-only persistence marker; same test password authenticates twice with no second setup prompt. Both system states running, failed unit count0, package DB/signature, mount and GRUB checks pass. Raw backing image and delivered ZIP hashes unchanged. No source kernel, delivered image, Mac partition or boot-policy changes.
+
+Ruling: QEMU EDK2 substitutes for Apple firmware only in the test. These results cover GRUB loading and repeat cold boot, not physical m1n1/U-Boot/Recovery, proprietary firmware extraction, peripherals or accelerated graphics. Test-only state remains in private disposable overlays; no publication or installation performed.

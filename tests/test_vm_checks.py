@@ -49,6 +49,11 @@ class VmResultTests(unittest.TestCase):
                 run(p / 'unused', p, 'invalid')
             self.assertFalse((p / 'vm-fixture-result.json').exists())
 
+    def test_second_boot_requires_skipped_firstboot_not_reinitialization(self):
+        second = self.report().replace('M3_FIRSTBOOT=active', 'M3_FIRSTBOOT=inactive')
+        self.assertEqual(evaluate_guest_checks(second, True, firstboot_state='inactive')['failures'], [])
+        self.assertTrue(evaluate_guest_checks(second, True)['failures'])
+
     def test_duplicate_markers_fail_closed(self):
         text = self.report() + 'M3_PACMAN_RC=1\n'
         self.assertTrue(evaluate_guest_checks(text, True)['failures'])

@@ -4,7 +4,9 @@ import uuid
 from pathlib import Path
 
 
-def evaluate_guest_checks(text, require_efi=False):
+def evaluate_guest_checks(text, require_efi=False, firstboot_state="active"):
+    if firstboot_state not in ("active", "inactive"):
+        raise ValueError("Unsupported first-boot expectation")
     markers = {}
     failures = []
     for name, value in re.findall(r'^M3_([A-Z_]+)=([^\r\n]*)\r?$', text, re.M):
@@ -13,7 +15,7 @@ def evaluate_guest_checks(text, require_efi=False):
         markers[name] = value
     required = {'KERNEL': '7.2.12-3-1-ARCH', 'MULTI': 'active', 'PACMAN_RC': '0'}
     if require_efi:
-        required.update(FIRSTBOOT='active', SYSTEM='running', FAILED_COUNT='0', SIGNATURE_RC='0', FSTAB_RC='0', GRUB_RC='0')
+        required.update(FIRSTBOOT=firstboot_state, SYSTEM='running', FAILED_COUNT='0', SIGNATURE_RC='0', FSTAB_RC='0', GRUB_RC='0')
     for name, expected in required.items():
         if markers.get(name) != expected:
             failures.append('Guest check failed: ' + name)

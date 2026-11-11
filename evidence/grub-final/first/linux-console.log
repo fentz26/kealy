@@ -1,0 +1,64 @@
+[2J[01;01H[=3h[2J[01;01H[2J[01;01H[=3h[2J[01;01HBdsDxe: loading Boot0001 "UEFI Non-Block Boot Device" from VenHw(837DCA9E-E874-4D82-B29A-23FE0E23D1E2,003C000A00000000)
+BdsDxe: starting Boot0001 "UEFI Non-Block Boot Device" from VenHw(837DCA9E-E874-4D82-B29A-23FE0E23D1E2,003C000A00000000)
+error: commands/loadenv.c:read_envblk_file:113:invalid environment block.
+error: video/video.c:grub_video_set_mode:782:no suitable video mode found.
+[0m[30m[40m[2J[01;01H[0m[37m[40m[02;28HGNU GRUB  version 2:2.16-3
+
+[04;02H/----------------------------------------------------------------------------\[05;02H|[05;79H|[06;02H|[06;79H|[07;02H|[07;79H|[08;02H|[08;79H|[09;02H|[09;79H|[10;02H|[10;79H|[11;02H|[11;79H|[12;02H|[12;79H|[13;02H|[13;79H|[14;02H|[14;79H|[15;02H|[15;79H|[16;02H|[16;79H|[17;02H|[17;79H|[18;02H|[18;79H|[19;02H|[19;79H|[20;02H|[20;79H|[21;02H|[21;79H|[22;02H|[22;79H|[23;02H|[23;79H|[24;02H|[24;79H|[25;02H|[25;79H|[26;02H|[26;79H|[27;02H|[27;79H|[28;02H|[28;79H|[29;02H|[29;79H|[30;02H|[30;79H|[31;02H|[31;79H|[32;02H|[32;79H|[33;02H|[33;79H|[34;02H|[34;79H|[35;02H|[35;79H|[36;02H|[36;79H|[37;02H|[37;79H|[38;02H|[38;79H|[39;02H|[39;79H|[40;02H|[40;79H|[41;02H|[41;79H|[42;02H|[42;79H|[43;02H\----------------------------------------------------------------------------/[44;02H[45;02H     Use the ^ and v keys to select which entry is highlighted.          
+      Press enter to boot the selected OS, `e' to edit the commands       
+      before booting or `c' for a command-line.                           [05;80H [0m[30m[47m[05;03H*Arch Linux                                                                 [0m[37m[40m[05;78H[06;03H Advanced options for Arch Linux                                            [06;78H[07;03H                                                                            [07;78H[08;03H                                                                            [08;78H[09;03H                                                                            [09;78H[10;03H                                                                            [10;78H[11;03H                                                                            [11;78H[12;03H                                                                            [12;78H[13;03H                                                                            [13;78H[14;03H                                                                            [14;78H[15;03H                                                                            [15;78H[16;03H                                                                            [16;78H[17;03H                                                                            [17;78H[18;03H                                                                            [18;78H[19;03H                                                                            [19;78H[20;03H                                                                            [20;78H[21;03H                                                                            [21;78H[22;03H                                                                            [22;78H[23;03H                                                                            [23;78H[24;03H                                                                            [24;78H[25;03H                                                                            [25;78H[26;03H                                                                            [26;78H[27;03H                                                                            [27;78H[28;03H                                                                            [28;78H[29;03H                                                                            [29;78H[30;03H                                                                            [30;78H[31;03H                                                                            [31;78H[32;03H                                                                            [32;78H[33;03H                                                                            [33;78H[34;03H                                                                            [34;78H[35;03H                                                                            [35;78H[36;03H                                                                            [36;78H[37;03H                                                                            [37;78H[38;03H                                                                            [38;78H[39;03H                                                                            [39;78H[40;03H                                                                            [40;78H[41;03H                                                                            [41;78H[42;03H                                                                            [42;78H[42;80H [05;78H[48;01H   The highlighted entry will be executed automatically in 5s.                 [05;78H[48;01H   The highlighted entry will be executed automatically in 4s.                 [05;78H[48;01H   The highlighted entry will be executed automatically in 3s.                 [05;78H[48;01H   The highlighted entry will be executed automatically in 2s.                 [05;78H[48;01H   The highlighted entry will be executed automatically in 1s.                 [05;78H[48;01H   The highlighted entry will be executed automatically in 0s.                 [05;78H[0m[30m[40m[2J[01;01H[0m[37m[40m  Booting `Arch Linux'
+
+Loading Linux linux-asahi ...
+Loading initial ramdisk ...
+kbd_mode: KDSKBMODE: Inappropriate ioctl for device
+%@asahi-root: clean, 65562/227136 files, 781102/908032 blocks
+P+q6E616D65\[18t7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J]3008;start=84f00f11d9024dc6bd37c05a593c46b9;user=root;hostname=alarm;machineid=dfaf664253be46f693973bf30822595a;bootid=ca357e765b594d38b5dc21bb9f265496;pid=1;pidfdid=1;comm=systemd;type=boot\[    2.460548] systemd[1]: Failed to preset all unit: Unit /etc/systemd/system/getty@tty1.service is masked
+[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;start=bfdf0b63e46b447a881b4ab72f292eb2;user=root;hostname=alarm;machineid=dfaf664253be46f693973bf30822595a;bootid=ca357e765b594d38b5dc21bb9f265496;pid=335;pidfdid=4267;comm=(temd-firstboot);servicename=systemd-firstboot.service;invocationid=8f0501e4ce944e70a78b196b54d2b224;type=service\[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;start=420afb5a71da43bcb1ab67e4bca932f7;user=root;hostname=alarm;machineid=dfaf664253be46f693973bf30822595a;bootid=ca357e765b594d38b5dc21bb9f265496;pid=350;pidfdid=4277;comm=(-root-password);servicename=arch-m3-root-password.service;invocationid=4591b1011065426faa084acbc1715f6d;type=service\P+q6E616D65\[!p]104\[0m[?7h[1G[0J[H[2J[1;1H[0;44;1;37m[K
+[0;44;1;37m     Initial Setup[K
+[0;44;1;37m[K
+[0m[K[21;1H[0m[K
+[0;44;1;37m[K
+[0;44;1;37m    [0;38;2;23;147;209m Arch Linux ARM [0;44;1;37m - See ]8;;https://archlinuxarm.org/wiki\documentation]8;;\ for more information.[K
+[0;44;1;37m[K[0m[5;20r[5;1H[0;1;39mWelcome to [0m[38;2;23;147;209mArch Linux ARM[0;1;39m![0m
+
+Please configure the system!
+
+[0;1;39mPlease enter the new root password (empty to skip): [0;38:5:245m(press TAB for no echo) [0m                        ********************************
+[0;1;38:5:185mPassword quality check is not supported, proceeding anyway.[0m
+[0;1;39mPlease enter the new root password again: [0;38:5:245m(press TAB for no echo) [0m                        ********************************
+/etc/passwd written.
+/etc/shadow written.
+[6n
+[0;38:5:245mExiting first boot settings tool.[0m
+
+[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;start=ae372e7e009847a0bb003190fa5699ee;user=root;hostname=alarm;machineid=dfaf664253be46f693973bf30822595a;bootid=ca357e765b594d38b5dc21bb9f265496;pid=865;pidfdid=4538;comm=(agetty);servicename=serial-getty@hvc0.service;invocationid=82c3eaad734c487b872ea05fe56dbe0d;type=service\P+q6E616D65\
+Arch Linux ARM 7.2.12-3-1-ARCH (hvc0)
+
+alarm login: root
+Password: 
+]3008;start=747d59c38896454c9702e93da22f5cf2;user=root;hostname=alarm;machineid=dfaf664253be46f693973bf30822595a;bootid=ca357e765b594d38b5dc21bb9f265496;pid=865;pidfdid=4538;comm=login;targetuser=root;sessionid=1;type=session\]3008;start=b6556bca-4b65-4fa6-9fd2-68725ea7930a;type=shell;machineid=dfaf664253be46f693973bf30822595a;user=root;hostname=alarm;bootid=ca357e76-5b59-4d38-b5dc-21bb9f265496;pid=882;cwd=/root\[?2004h[root@alarm ~]# export SYSTEMD_COLORS=0 SYSTEMD_PAGER=cat; printf '%s\n' 'd66c40ee7c10477013ac2f5ef3bc74ff2e2505a6166b239f1' > /root/arch-m3-lifecycle-proof; prinntf '\n%s\n' 'M3_REBOOT_d8e7d52a1c41ef3b'; printf 'M3_KERNEL='; uname -r; printf  'M3_MULTI='; systemctl is-active multi-user.target; printf 'M3_FIRSTBOOT='; systtemctl is-active first-boot.service; printf 'M3_SYSTEM='; systemctl is-system-runnning; printf 'M3_FAILED_COUNT='; systemctl --failed --no-legend --plain | wc -l;; systemctl --failed --no-legend --plain; pacman -Dk; printf 'M3_PACMAN_RC=%s\n'  $?; pacman-key --verify /boot/efi/validation/m1n1.pkg.tar.xz.sig; printf 'M3_SIGGNATURE_RC=%s\n' $?; printf 'M3_ROOT_UUID='; findmnt -no UUID /; printf 'M3_EFI_UUUID='; findmnt -no UUID /boot/efi; findmnt --verify >/dev/null 2>&1; printf 'M3__FSTAB_RC=%s\n' $?; grub-script-check /boot/grub/grub.cfg; printf 'M3_GRUB_RC=%s\\n' $?; printf 'M3_UEFI='; if test -d /sys/firmware/efi; then echo 1; else echo 00; fi; printf 'M3_BOOT_ID='; cat /proc/sys/kernel/random/boot_id; printf 'M3_SHADDOW_SHA='; sha256sum /etc/shadow | cut -d' ' -f1; printf 'M3_PERSIST='; cat /roott/arch-m3-lifecycle-proof; printf '%s\n' 'M3_REBOOT_d8e7d52a1c41ef3b_DONE'; systeemctl poweroff
+[?2004l]3008;start=022a1720-71a2-4a3c-a2a7-10a7f8c698b1;type=command;machineid=dfaf664253be46f693973bf30822595a;user=root;hostname=alarm;bootid=ca357e76-5b59-4d38-b5dc-21bb9f265496;pid=882;cwd=/root\
+M3_REBOOT_d8e7d52a1c41ef3b
+M3_KERNEL=7.2.12-3-1-ARCH
+M3_MULTI=active
+M3_FIRSTBOOT=active
+M3_SYSTEM=running
+M3_FAILED_COUNT=0
+[?25lNo database errors have been found!
+[?25hM3_PACMAN_RC=0
+[1m[32m==>[0m[1m Checking /boot/efi/validation/m1n1.pkg.tar.xz.sig... (detached)[0m
+gpg: Signature made Wed Oct 21 06:18:43 2026 UTC
+gpg:                using EDDSA key 12CE6799A94A3F1B5DDFFE88F576553597FB8FEB
+gpg: Good signature from "Asahi Alarm Linux Keyring Keychain Master Key <asahi-alarm-keyring@localhost>" [full]
+M3_SIGNATURE_RC=0
+M3_ROOT_UUID=5018fabb-ac77-4c47-97f5-a963ade83eb3
+M3_EFI_UUID=FAD1-35C4
+M3_FSTAB_RC=0
+M3_GRUB_RC=0
+M3_UEFI=1
+M3_BOOT_ID=ca357e76-5b59-4d38-b5dc-21bb9f265496
+M3_SHADOW_SHA=e192f2839ed4cda31b9ab16712ce502d016d31f9b9683902f5e5037512389988
+M3_PERSIST=d66c40e7c10477013ac2f5ef3bc74ff2e2505a6166b239f1
+M3_REBOOT_d8e7d52a1c41ef3b_DONE
+]3008;end=022a1720-71a2-4a3c-a2a7-10a7f8c698b1;exit=success\]3008;start=b6556bca-4b65-4fa6-9fd2-68725ea7930a;type=shell;machineid=dfaf664253be46f693973bf30822595a;user=root;hostname=alarm;bootid=ca357e76-5b59-4d38-b5dc-21bb9f265496;pid=882;cwd=/root\[?2004h[root@alarm ~]# [?2004l[?2004h[?2004l
+[?2004h]3008;end=747d59c38896454c9702e93da22f5cf2\[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;end=ae372e7e009847a0bb003190fa5699ee\[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;end=420afb5a71da43bcb1ab67e4bca932f7\[!p]104\[0m[?7h[1G[0J7[32766;32766H[6n8]3008;end=bfdf0b63e46b447a881b4ab72f292eb2\]3008;end=84f00f11d9024dc6bd37c05a593c46b9\[18t7[32766;32766H[6n8[!p]104\[0m[?7h[1G[0J

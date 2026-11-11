@@ -1,0 +1,22 @@
+{
+  "markers": {
+    "KERNEL": "7.2.12-3-1-ARCH",
+    "MULTI": "active",
+    "FIRSTBOOT": "inactive",
+    "SYSTEM": "running",
+    "FAILED_COUNT": "0",
+    "PACMAN_RC": "0",
+    "SIGNATURE_RC": "0",
+    "ROOT_UUID": "5018fabb-ac77-4c47-97f5-a963ade83eb3",
+    "EFI_UUID": "FAD1-35C4",
+    "FSTAB_RC": "0",
+    "GRUB_RC": "0",
+    "UEFI": "1",
+    "BOOT_ID": "353fb279-eb09-46e0-b4fb-902a9e2c5403",
+    "SHADOW_SHA": "e192f2839ed4cda31b9ab16712ce502d016d31f9b9683902f5e5037512389988",
+    "PERSIST": "d66c40e7c10477013ac2f5ef3bc74ff2e2505a6166b239f1",
+    "setup_prompt_seen": false,
+    "firmware_grub_verified": true
+  },
+  "failures": []
+}

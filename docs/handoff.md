@@ -47,7 +47,22 @@ mkdir -p evidence/vm-NEW
 python3 tests/integration_vm.py /private/tmp/arch-m3-vm-NEW evidence/vm-NEW hvf --with-efi
 ```
 
-Preparation records and hashes the source ZIP/root and exact fixture changes. The runner verifies these before boot. It uses file-backed snapshots and no network or host disk devices. The fixture adds virtio transport, remaps the console and supplies a disposable EFI filesystem and UTC clock. It does not modify the delivered ZIP. Direct kernel boot and grub-script-check do not prove a GRUB/Apple boot-chain reboot. See docs/qualification.md for the precise boundary.
+Preparation records and hashes the source ZIP/root and exact fixture changes. The runner verifies these before boot. It uses file-backed snapshots and no network or host disk devices. The fixture adds virtio transport, remaps the console and supplies a disposable EFI filesystem and UTC clock. It does not modify the delivered ZIP. That initial test alone did not prove a GRUB reboot; the separate lifecycle test below now covers EDK2/GRUB, while the Apple boot chain remains untested. See docs/qualification.md for the precise boundary.
+
+## GRUB and second cold boot
+
+`evidence/grub-final/` records two successful cold boots through EDK2 and the artifact-derived GRUB EFI loader, with no direct kernel-loading arguments. Both phase reports include checked firmware banners/load messages and explicit clean shutdown records.
+
+The first boot performs setup and UUID changes. The second reuses the same persistent disposable overlays and private test password, keeps both filesystem UUIDs, credential checksum and persistence marker, and skips initial setup. Both report healthy userspace, zero failed units, valid mounts and successful package signature verification. Raw parents and the delivered ZIP remain unchanged.
+
+To reproduce from an attested fixture:
+
+```sh
+python3 tests/prepare_grub_fixture.py /private/tmp/arch-m3-vm-NEW /private/tmp/arch-m3-grub-NEW
+python3 tests/integration_reboot.py /private/tmp/arch-m3-grub-NEW evidence/grub-NEW
+```
+
+Both destination/report directories must be new. The prepared fixture uses the locally installed QEMU EDK2 firmware, cloned GRUB console configuration and VM-only initramfs. It is not a physical Mac install or Apple firmware test.
 
 ## Remaining boundary
 
