@@ -1,0 +1,20 @@
+{
+  "package": "upstream/packages/linux-asahi-7.2.12.asahi3-1-aarch64.pkg.tar.xz",
+  "dtb_member": "usr/lib/modules/7.2.12-3-1-ARCH/dtbs/t8122-j504.dtb",
+  "dtb_sha256": "622073860f2bd6e9db1a6eef2e9d20fe3e7e4670fda4333cda0468db8d64ef8e",
+  "scope": "Static signed-package inspection; not physical hardware verification",
+  "inspected_files_sha256": {
+    "evidence/hardware-static/t8122-j504.dtb": "622073860f2bd6e9db1a6eef2e9d20fe3e7e4670fda4333cda0468db8d64ef8e",
+    "evidence/hardware-static/t8122-j504.dts": "3f34e2b45ee668c6af73d41d44a3738be419e8e753c866123c14c493eee42566",
+    "evidence/hardware-static/relevant-module-paths.txt": "4d727680a0e1c895f583af68f7f2b49236e0bf542c76fb9215bd9d4801afec60",
+    "evidence/hardware-static/initramfs-relevant-paths.txt": "b3bf0d372110f99302996a7b44e36d632007c2665e57fc6c9a223efc525a292d",
+    "evidence/linux-asahi.config": "653ac121b5a3a34356f10cc0c4aa3286f4e9be4a5927a5267efec0f3f38c1f41",
+    "/private/tmp/arch-m3-vm-attested/initramfs-main": "becd57be9aaeb5276cb65396b6d4de8490b527ac37050216ff3cb115affd8d50"
+  },
+  "reproduction": [
+    "Extract usr/lib/modules/7.2.12-3-1-ARCH/dtbs/t8122-j504.dtb from the pinned linux-asahi package with Python tarfile (read only)",
+    "dtc -I dtb -O dts -o t8122-j504.dts t8122-j504.dtb",
+    "List package .ko members for apple, brcm, dockchannel and asahi; retain paths",
+    "bsdtar -tf /private/tmp/arch-m3-vm-attested/initramfs-main; select firmware/apple/dockchannel/nvme/brcm paths"
+  ]
+}

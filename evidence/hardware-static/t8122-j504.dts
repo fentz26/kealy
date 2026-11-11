@@ -1,0 +1,3428 @@
+/dts-v1/;
+
+/ {
+	compatible = "apple,j504", "apple,t8122", "apple,arm-platform";
+	#address-cells = <0x02>;
+	#size-cells = <0x02>;
+	model = "Apple MacBook Pro (14-inch, M3, 2023)";
+
+	aliases {
+		atcphy0 = "/soc/phy@703000000";
+		atcphy1 = "/soc/phy@b03000000";
+		bluetooth0 = "/soc/pcie@580000000/pci@0,0/bluetooth@0,1";
+		serial0 = "/soc/serial@2a1200000";
+		wifi0 = "/soc/pcie@580000000/pci@0,0/wifi@0,0";
+		usb4-0-acio = "/soc/cio@701ac0000";
+		usb4-0-nhi = "/soc/cio@701ac0000/nhi@f00000";
+		usb4-1-acio = "/soc/cio@b01ac0000";
+		usb4-1-nhi = "/soc/cio@b01ac0000/nhi@f00000";
+		usb4_0_rc = "/soc/cio@701ac0000";
+		usb4_0_nhi = "/soc/cio@701ac0000/nhi@f00000";
+		usb4_1_rc = "/soc/cio@b01ac0000";
+		usb4_1_nhi = "/soc/cio@b01ac0000/nhi@f00000";
+		nvram = "/soc/spi@2a1104000/flash@0/partitions/partition@700000";
+		isp = "/soc/isp@2a4000000";
+	};
+
+	cpus {
+		#address-cells = <0x02>;
+		#size-cells = <0x00>;
+
+		cpu-map {
+
+			cluster0 {
+
+				core0 {
+					cpu = <0x01>;
+				};
+
+				core1 {
+					cpu = <0x02>;
+				};
+
+				core2 {
+					cpu = <0x03>;
+				};
+
+				core3 {
+					cpu = <0x04>;
+				};
+			};
+
+			cluster1 {
+
+				core0 {
+					cpu = <0x05>;
+				};
+
+				core1 {
+					cpu = <0x06>;
+				};
+
+				core2 {
+					cpu = <0x07>;
+				};
+
+				core3 {
+					cpu = <0x08>;
+				};
+			};
+		};
+
+		cpu@0 {
+			compatible = "apple,sawtooth";
+			device_type = "cpu";
+			reg = <0x00 0x00>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x09>;
+			i-cache-size = <0x20000>;
+			d-cache-size = <0x10000>;
+			operating-points-v2 = <0x0a>;
+			capacity-dmips-mhz = <0x324>;
+			performance-domains = <0x0b>;
+			phandle = <0x01>;
+		};
+
+		cpu@1 {
+			compatible = "apple,sawtooth";
+			device_type = "cpu";
+			reg = <0x00 0x01>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x09>;
+			i-cache-size = <0x20000>;
+			d-cache-size = <0x10000>;
+			operating-points-v2 = <0x0a>;
+			capacity-dmips-mhz = <0x324>;
+			performance-domains = <0x0b>;
+			phandle = <0x02>;
+		};
+
+		cpu@2 {
+			compatible = "apple,sawtooth";
+			device_type = "cpu";
+			reg = <0x00 0x02>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x09>;
+			i-cache-size = <0x20000>;
+			d-cache-size = <0x10000>;
+			operating-points-v2 = <0x0a>;
+			capacity-dmips-mhz = <0x324>;
+			performance-domains = <0x0b>;
+			phandle = <0x03>;
+		};
+
+		cpu@3 {
+			compatible = "apple,sawtooth";
+			device_type = "cpu";
+			reg = <0x00 0x03>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x09>;
+			i-cache-size = <0x20000>;
+			d-cache-size = <0x10000>;
+			operating-points-v2 = <0x0a>;
+			capacity-dmips-mhz = <0x324>;
+			performance-domains = <0x0b>;
+			phandle = <0x04>;
+		};
+
+		cpu@10100 {
+			compatible = "apple,everest";
+			device_type = "cpu";
+			reg = <0x00 0x10100>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x0c>;
+			i-cache-size = <0x30000>;
+			d-cache-size = <0x20000>;
+			operating-points-v2 = <0x0d>;
+			capacity-dmips-mhz = <0x400>;
+			performance-domains = <0x0e>;
+			phandle = <0x05>;
+		};
+
+		cpu@10101 {
+			compatible = "apple,everest";
+			device_type = "cpu";
+			reg = <0x00 0x10101>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x0c>;
+			i-cache-size = <0x30000>;
+			d-cache-size = <0x20000>;
+			operating-points-v2 = <0x0d>;
+			capacity-dmips-mhz = <0x400>;
+			performance-domains = <0x0e>;
+			phandle = <0x06>;
+		};
+
+		cpu@10102 {
+			compatible = "apple,everest";
+			device_type = "cpu";
+			reg = <0x00 0x10102>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x0c>;
+			i-cache-size = <0x30000>;
+			d-cache-size = <0x20000>;
+			operating-points-v2 = <0x0d>;
+			capacity-dmips-mhz = <0x400>;
+			performance-domains = <0x0e>;
+			phandle = <0x07>;
+		};
+
+		cpu@10103 {
+			compatible = "apple,everest";
+			device_type = "cpu";
+			reg = <0x00 0x10103>;
+			enable-method = "spin-table";
+			cpu-release-addr = <0x00 0x00>;
+			next-level-cache = <0x0c>;
+			i-cache-size = <0x30000>;
+			d-cache-size = <0x20000>;
+			operating-points-v2 = <0x0d>;
+			capacity-dmips-mhz = <0x400>;
+			performance-domains = <0x0e>;
+			phandle = <0x08>;
+		};
+
+		l2-cache-0 {
+			compatible = "cache";
+			cache-level = <0x02>;
+			cache-unified;
+			cache-size = <0x400000>;
+			phandle = <0x09>;
+		};
+
+		l2-cache-1 {
+			compatible = "cache";
+			cache-level = <0x02>;
+			cache-unified;
+			cache-size = <0x1000000>;
+			phandle = <0x0c>;
+		};
+	};
+
+	opp-table-0 {
+		compatible = "operating-points-v2";
+		opp-shared;
+		phandle = <0x0a>;
+
+		opp01 {
+			opp-hz = <0x00 0x2c588a00>;
+			opp-level = <0x01>;
+			clock-latency-ns = <0x1e78>;
+		};
+
+		opp02 {
+			opp-hz = <0x00 0x3e3a2d00>;
+			opp-level = <0x02>;
+			clock-latency-ns = <0x4bc8>;
+		};
+
+		opp03 {
+			opp-hz = <0x00 0x57f9f900>;
+			opp-level = <0x03>;
+			clock-latency-ns = <0x60e0>;
+		};
+
+		opp04 {
+			opp-hz = <0x00 0x77729d00>;
+			opp-level = <0x04>;
+			clock-latency-ns = <0xaa50>;
+		};
+
+		opp05 {
+			opp-hz = <0x00 0x872eef00>;
+			opp-level = <0x05>;
+			clock-latency-ns = <0xc030>;
+		};
+
+		opp06 {
+			opp-hz = <0x00 0x98597700>;
+			opp-level = <0x06>;
+			clock-latency-ns = <0xd098>;
+		};
+
+		opp07 {
+			opp-hz = <0x00 0xa3cb2700>;
+			opp-level = <0x07>;
+			clock-latency-ns = <0xdde0>;
+		};
+	};
+
+	opp-table-1 {
+		compatible = "operating-points-v2";
+		opp-shared;
+		phandle = <0x0d>;
+
+		opp01 {
+			opp-hz = <0x00 0x297c1e00>;
+			opp-level = <0x01>;
+			clock-latency-ns = <0x24b8>;
+		};
+
+		opp02 {
+			opp-hz = <0x00 0x41169900>;
+			opp-level = <0x02>;
+			clock-latency-ns = <0x4d58>;
+		};
+
+		opp03 {
+			opp-hz = <0x00 0x50d2eb00>;
+			opp-level = <0x03>;
+			clock-latency-ns = <0x5c94>;
+		};
+
+		opp04 {
+			opp-hz = <0x00 0x5f210700>;
+			opp-level = <0x04>;
+			clock-latency-ns = <0x61a8>;
+		};
+
+		opp05 {
+			opp-hz = <0x00 0x704b8f00>;
+			opp-level = <0x05>;
+			clock-latency-ns = <0x6e28>;
+		};
+
+		opp06 {
+			opp-hz = <0x00 0x81761700>;
+			opp-level = <0x06>;
+			clock-latency-ns = <0x7e2c>;
+		};
+
+		opp07 {
+			opp-hz = <0x00 0x907b4e00>;
+			opp-level = <0x07>;
+			clock-latency-ns = <0x8b10>;
+		};
+
+		opp08 {
+			opp-hz = <0x00 0x9becfe00>;
+			opp-level = <0x08>;
+			clock-latency-ns = <0x9538>;
+		};
+
+		opp09 {
+			opp-hz = <0x00 0xa75eae00>;
+			opp-level = <0x09>;
+			clock-latency-ns = <0x9b14>;
+		};
+
+		opp10 {
+			opp-hz = <0x00 0xb2194300>;
+			opp-level = <0x0a>;
+			clock-latency-ns = <0xa2e4>;
+		};
+
+		opp11 {
+			opp-hz = <0x00 0xbb65a200>;
+			opp-level = <0x0b>;
+			clock-latency-ns = <0xaab4>;
+		};
+
+		opp12 {
+			opp-hz = <0x00 0xc3fae600>;
+			opp-level = <0x0c>;
+			clock-latency-ns = <0xafc8>;
+		};
+
+		opp13 {
+			opp-hz = <0x00 0xcbd90f00>;
+			opp-level = <0x0d>;
+			clock-latency-ns = <0xbe3c>;
+		};
+
+		opp14 {
+			opp-hz = <0x00 0xd3001d00>;
+			opp-level = <0x0e>;
+			clock-latency-ns = <0xd994>;
+		};
+
+		opp15 {
+			opp-hz = <0x00 0xd8b8f500>;
+			opp-level = <0x0f>;
+			clock-latency-ns = <0xda5c>;
+		};
+
+		opp16 {
+			opp-hz = <0x00 0xddbab200>;
+			opp-level = <0x10>;
+			clock-latency-ns = <0xda5c>;
+		};
+
+		opp17 {
+			opp-hz = <0x00 0xe14e3900>;
+			opp-level = <0x11>;
+			clock-latency-ns = <0xdac0>;
+		};
+
+		opp18 {
+			opp-hz = <0x00 0xe64ff600>;
+			opp-level = <0x12>;
+			clock-latency-ns = <0xdac0>;
+		};
+
+		opp19 {
+			opp-hz = <0x00 0xec08ce00>;
+			opp-level = <0x13>;
+			clock-latency-ns = <0xf168>;
+		};
+
+		opp20 {
+			opp-hz = <0x00 0xf1c1a600>;
+			opp-level = <0x14>;
+			clock-latency-ns = <0xf1cc>;
+		};
+	};
+
+	timer {
+		compatible = "arm,armv8-timer";
+		interrupt-parent = <0x0f>;
+		interrupt-names = "phys", "virt", "hyp-phys", "hyp-virt";
+		interrupts = <0x01 0x02 0x04 0x01 0x03 0x04 0x01 0x00 0x04 0x01 0x01 0x04>;
+	};
+
+	clock-ref {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <0x16e3600>;
+		clock-output-names = "clkref";
+		phandle = <0x10>;
+	};
+
+	clock-200m {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-frequency = <0xbebc200>;
+		clock-output-names = "clk_200m";
+		phandle = <0x27>;
+	};
+
+	clock-ref-nco {
+		compatible = "fixed-clock";
+		#clock-cells = <0x00>;
+		clock-output-names = "nco_ref";
+		clock-frequency = <0x35a4e900>;
+		phandle = <0x46>;
+	};
+
+	soc {
+		compatible = "simple-bus";
+		#address-cells = <0x02>;
+		#size-cells = <0x02>;
+		ranges;
+		nonposted-mmio;
+		dma-ranges = <0x00 0x00 0x00 0x00 0xffffffff 0xffffc000>;
+
+		cpufreq@210e20000 {
+			compatible = "apple,t8122-cluster-cpufreq", "apple,t8112-cluster-cpufreq";
+			reg = <0x02 0x10e20000 0x00 0x1000>;
+			#performance-domain-cells = <0x00>;
+			phandle = <0x0b>;
+		};
+
+		cpufreq@211e20000 {
+			compatible = "apple,t8122-cluster-cpufreq", "apple,t8112-cluster-cpufreq";
+			reg = <0x02 0x11e20000 0x00 0x1000>;
+			#performance-domain-cells = <0x00>;
+			phandle = <0x0e>;
+		};
+
+		i2c@2a1010000 {
+			compatible = "apple,t8122-i2c", "apple,t8103-i2c";
+			reg = <0x02 0xa1010000 0x00 0x4000>;
+			clocks = <0x10>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x30c 0x04>;
+			pinctrl-0 = <0x11>;
+			pinctrl-names = "default";
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			power-domains = <0x12>;
+			status = "okay";
+
+			usb-pd@38 {
+				compatible = "apple,cd321x";
+				reg = <0x38>;
+				interrupt-parent = <0x13>;
+				interrupts = <0x0b 0x08>;
+				interrupt-names = "irq";
+
+				connector {
+					compatible = "usb-c-connector";
+					power-role = "dual";
+					data-role = "dual";
+					label = "USB-C Left-back";
+
+					ports {
+						#address-cells = <0x01>;
+						#size-cells = <0x00>;
+
+						port@0 {
+							reg = <0x00>;
+
+							endpoint {
+								remote-endpoint = <0x14>;
+								phandle = <0x92>;
+							};
+						};
+
+						port@1 {
+							reg = <0x01>;
+
+							endpoint {
+								remote-endpoint = <0x15>;
+								phandle = <0x94>;
+							};
+						};
+
+						port@2 {
+							reg = <0x02>;
+
+							endpoint {
+								remote-endpoint = <0x16>;
+								phandle = <0x8d>;
+							};
+						};
+					};
+				};
+			};
+
+			usb-pd@3f {
+				compatible = "apple,cd321x";
+				reg = <0x3f>;
+				interrupt-parent = <0x13>;
+				interrupts = <0x0b 0x08>;
+				interrupt-names = "irq";
+
+				connector {
+					compatible = "usb-c-connector";
+					power-role = "dual";
+					data-role = "dual";
+					label = "USB-C Left-front";
+
+					ports {
+						#address-cells = <0x01>;
+						#size-cells = <0x00>;
+
+						port@0 {
+							reg = <0x00>;
+
+							endpoint {
+								remote-endpoint = <0x17>;
+								phandle = <0xa0>;
+							};
+						};
+
+						port@1 {
+							reg = <0x01>;
+
+							endpoint {
+								remote-endpoint = <0x18>;
+								phandle = <0xa2>;
+							};
+						};
+
+						port@2 {
+							reg = <0x02>;
+
+							endpoint {
+								remote-endpoint = <0x19>;
+								phandle = <0x9b>;
+							};
+						};
+					};
+				};
+			};
+		};
+
+		i2c@2a1014000 {
+			compatible = "apple,t8122-i2c", "apple,t8103-i2c";
+			reg = <0x02 0xa1014000 0x00 0x4000>;
+			clocks = <0x10>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x30d 0x04>;
+			pinctrl-0 = <0x1a>;
+			pinctrl-names = "default";
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			power-domains = <0x1b>;
+			status = "okay";
+
+			codec@3a {
+				compatible = "ti,sn012776", "ti,tas2764";
+				reg = <0x3a>;
+				shutdown-gpios = <0x13 0x0d 0x00>;
+				#sound-dai-cells = <0x00>;
+				sound-name-prefix = "Left Tweeter";
+				interrupts-extended = <0x13 0x0c 0x08>;
+				ti,imon-slot-no = <0x08>;
+				ti,vmon-slot-no = <0x0a>;
+				phandle = <0xa8>;
+			};
+
+			codec@38 {
+				compatible = "ti,sn012776", "ti,tas2764";
+				reg = <0x38>;
+				shutdown-gpios = <0x13 0x0d 0x00>;
+				#sound-dai-cells = <0x00>;
+				sound-name-prefix = "Left Woofer 1";
+				interrupts-extended = <0x13 0x0c 0x08>;
+				ti,imon-slot-no = <0x00>;
+				ti,vmon-slot-no = <0x02>;
+				phandle = <0xa7>;
+			};
+
+			codec@39 {
+				compatible = "ti,sn012776", "ti,tas2764";
+				reg = <0x39>;
+				shutdown-gpios = <0x13 0x0d 0x00>;
+				#sound-dai-cells = <0x00>;
+				sound-name-prefix = "Left Woofer 2";
+				interrupts-extended = <0x13 0x0c 0x08>;
+				ti,imon-slot-no = <0x10>;
+				ti,vmon-slot-no = <0x12>;
+				phandle = <0xa9>;
+			};
+
+			codec@4b {
+				compatible = "cirrus,cs42l84";
+				reg = <0x4b>;
+				reset-gpios = <0x1c 0x11 0x00>;
+				#sound-dai-cells = <0x00>;
+				interrupts-extended = <0x13 0xad 0x08>;
+				sound-name-prefix = "Jack";
+				phandle = <0xad>;
+			};
+		};
+
+		i2c@2a1018000 {
+			compatible = "apple,t8122-i2c", "apple,t8103-i2c";
+			reg = <0x02 0xa1018000 0x00 0x4000>;
+			clocks = <0x10>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x30e 0x04>;
+			pinctrl-0 = <0x1d>;
+			pinctrl-names = "default";
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			power-domains = <0x1e>;
+			status = "okay";
+		};
+
+		i2c@2a101c000 {
+			compatible = "apple,t8122-i2c", "apple,t8103-i2c";
+			reg = <0x02 0xa101c000 0x00 0x4000>;
+			clocks = <0x10>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x30f 0x04>;
+			pinctrl-0 = <0x1f>;
+			pinctrl-names = "default";
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			power-domains = <0x20>;
+			status = "okay";
+
+			codec@3d {
+				compatible = "ti,sn012776", "ti,tas2764";
+				reg = <0x3d>;
+				shutdown-gpios = <0x13 0x0d 0x00>;
+				#sound-dai-cells = <0x00>;
+				sound-name-prefix = "Right Tweeter";
+				interrupts-extended = <0x13 0x0c 0x08>;
+				ti,imon-slot-no = <0x0c>;
+				ti,vmon-slot-no = <0x0e>;
+				phandle = <0xab>;
+			};
+
+			codec@3b {
+				compatible = "ti,sn012776", "ti,tas2764";
+				reg = <0x3b>;
+				shutdown-gpios = <0x13 0x0d 0x00>;
+				#sound-dai-cells = <0x00>;
+				sound-name-prefix = "Right Woofer 1";
+				interrupts-extended = <0x13 0x0c 0x08>;
+				ti,imon-slot-no = <0x04>;
+				ti,vmon-slot-no = <0x06>;
+				phandle = <0xaa>;
+			};
+
+			codec@3c {
+				compatible = "ti,sn012776", "ti,tas2764";
+				reg = <0x3c>;
+				shutdown-gpios = <0x13 0x0d 0x00>;
+				#sound-dai-cells = <0x00>;
+				sound-name-prefix = "Right Woofer 2";
+				interrupts-extended = <0x13 0x0c 0x08>;
+				ti,imon-slot-no = <0x14>;
+				ti,vmon-slot-no = <0x16>;
+				phandle = <0xac>;
+			};
+		};
+
+		i2c@2a1020000 {
+			compatible = "apple,t8122-i2c", "apple,t8103-i2c";
+			reg = <0x02 0xa1020000 0x00 0x4000>;
+			clocks = <0x10>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x310 0x04>;
+			pinctrl-0 = <0x21>;
+			pinctrl-names = "default";
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			power-domains = <0x22>;
+			status = "disabled";
+		};
+
+		iommu@2a1004000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0xa1004000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x318 0x04>;
+			#iommu-cells = <0x01>;
+			power-domains = <0x23>;
+			phandle = <0x2b>;
+		};
+
+		avd@289080000 {
+			compatible = "apple,t8122-avd";
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x2a7 0x04 0x00 0x2a8 0x04>;
+			power-domains = <0x24>;
+			resets = <0x24>;
+			reg = <0x02 0x89080000 0x00 0x12000 0x02 0x89092000 0x00 0x12000 0x02 0x890a4000 0x00 0x4000 0x02 0x89100000 0x00 0x10000>;
+			reg-names = "code", "sram", "mbox", "ctrl";
+			iommus = <0x25 0x00>;
+		};
+
+		iommu@289010000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0x89010000 0x00 0x4000>;
+			#iommu-cells = <0x01>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x2ae 0x04>;
+			power-domains = <0x24>;
+			phandle = <0x25>;
+		};
+
+		pwm@2a1044000 {
+			compatible = "apple,t8122-fpwm", "apple,s5l-fpwm";
+			reg = <0x02 0xa1044000 0x00 0x4000>;
+			power-domains = <0x26>;
+			clocks = <0x10>;
+			#pwm-cells = <0x02>;
+			status = "okay";
+			phandle = <0xa5>;
+		};
+
+		spi@2a1104000 {
+			compatible = "apple,t8122-spi", "apple,t8103-spi";
+			reg = <0x02 0xa1104000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x2fe 0x04>;
+			clocks = <0x27>;
+			pinctrl-0 = <0x28>;
+			pinctrl-names = "default";
+			power-domains = <0x29>;
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+			status = "okay";
+
+			flash@0 {
+				compatible = "jedec,spi-nor";
+				reg = <0x00>;
+				spi-max-frequency = <0x17d7840>;
+
+				partitions {
+					compatible = "fixed-partitions";
+					#address-cells = <0x01>;
+					#size-cells = <0x01>;
+
+					partition@700000 {
+						label = "nvram";
+						reg = <0x00 0x00>;
+						status = "disabled";
+					};
+				};
+			};
+		};
+
+		serial@2a1200000 {
+			compatible = "apple,s5l-uart";
+			reg = <0x02 0xa1200000 0x00 0x1000>;
+			reg-io-width = <0x04>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x2f5 0x04>;
+			clocks = <0x10 0x10>;
+			clock-names = "uart", "clk_uart_baud0";
+			power-domains = <0x2a>;
+			status = "okay";
+		};
+
+		dma-controller@2a3200000 {
+			compatible = "apple,t8122-admac";
+			reg = <0x02 0xa3200000 0x00 0x34000>;
+			dma-channels = <0x18>;
+			interrupts-extended = <0x00 0x0f 0x00 0x30b 0x04 0x00 0x00>;
+			#dma-cells = <0x01>;
+			iommus = <0x2b 0x02>;
+			power-domains = <0x2c>;
+			resets = <0x2d>;
+			phandle = <0x33>;
+		};
+
+		i2s@2a3400000 {
+			compatible = "apple,t8122-mca", "apple,t8103-mca";
+			reg = <0x02 0xa3400000 0x00 0x18000 0x02 0xa3300000 0x00 0x30000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x304 0x04 0x00 0x305 0x04 0x00 0x306 0x04 0x00 0x307 0x04>;
+			resets = <0x2d>;
+			clocks = <0x2e 0x00 0x2e 0x01 0x2e 0x02 0x2e 0x03 0x2e 0x04 0x2e 0x04>;
+			power-domains = <0x2d 0x2f 0x30 0x31 0x32>;
+			dmas = <0x33 0x00 0x33 0x01 0x33 0x02 0x33 0x03 0x33 0x04 0x33 0x05 0x33 0x06 0x33 0x07 0x33 0x08 0x33 0x09 0x33 0x0a 0x33 0x0b 0x33 0x0c 0x33 0x0d 0x33 0x0e 0x33 0x0f>;
+			dma-names = "tx0a", "rx0a", "tx0b", "rx0b", "tx1a", "rx1a", "tx1b", "rx1b", "tx2a", "rx2a", "tx2b", "rx2b", "tx3a", "rx3a", "tx3b", "rx3b";
+			#sound-dai-cells = <0x01>;
+			phandle = <0xa6>;
+		};
+
+		isp@2a4000000 {
+			compatible = "apple,t8122-isp";
+			iommus = <0x34 0x00 0x100 0x00 0x01 0x00 0x35 0x00 0x100 0x00 0x01 0x00 0x36 0x00 0x100 0x00 0x01 0x00>;
+			reg-names = "coproc", "mbox", "gpio", "mbox2";
+			reg = <0x02 0xa4000000 0x00 0x2000000 0x02 0xa64c4000 0x00 0x100 0x02 0xa64c41d0 0x00 0x100 0x02 0xa64c4454 0x00 0x100>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x137 0x04>;
+			power-domains = <0x37 0x38 0x39 0x3a 0x3b 0x3c 0x3d 0x3e 0x3f 0x40 0x41 0x42 0x43 0x44>;
+			apple,dart-vm-size = <0x00 0xa0000000>;
+			status = "okay";
+			memory-region = <0x45>;
+			memory-region-names = "heap";
+			apple,temporal-filter = <0x00>;
+			apple,platform-id = <0x04>;
+
+			sensor-presets {
+
+				preset0 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x780 0x438>;
+					apple,crop = <0x00 0x1a4 0x780 0x438>;
+				};
+
+				preset1 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x438 0x780>;
+					apple,crop = <0x1a4 0x00 0x438 0x780>;
+				};
+
+				preset2 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x780 0x5a0>;
+					apple,crop = <0x00 0xf0 0x780 0x5a0>;
+				};
+
+				preset3 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x5a0 0x780>;
+					apple,crop = <0xf0 0x00 0x5a0 0x780>;
+				};
+
+				preset4 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x500 0x2d0>;
+					apple,crop = <0x00 0x1a4 0x780 0x438>;
+				};
+
+				preset5 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x2d0 0x500>;
+					apple,crop = <0x1a4 0x00 0x438 0x780>;
+				};
+
+				preset6 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x500 0x3c0>;
+					apple,crop = <0x00 0xf0 0x780 0x5a0>;
+				};
+
+				preset7 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x3c0 0x500>;
+					apple,crop = <0xf0 0x00 0x5a0 0x780>;
+				};
+
+				preset8 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x280 0x1e0>;
+					apple,crop = <0x00 0xf0 0x780 0x5a0>;
+				};
+
+				preset9 {
+					apple,config-index = <0x00>;
+					apple,input-size = <0x780 0x780>;
+					apple,output-size = <0x1e0 0x280>;
+					apple,crop = <0xf0 0x00 0x5a0 0x780>;
+				};
+			};
+		};
+
+		iommu@2a64a8000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0xa64a8000 0x00 0x4000>;
+			#iommu-cells = <0x05>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x13c 0x04>;
+			power-domains = <0x37>;
+			status = "okay";
+			phandle = <0x34>;
+		};
+
+		iommu@2a64b4000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0xa64b4000 0x00 0x4000>;
+			#iommu-cells = <0x05>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x13c 0x04>;
+			power-domains = <0x37>;
+			status = "okay";
+			phandle = <0x35>;
+		};
+
+		iommu@2a64bc000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0xa64bc000 0x00 0x4000>;
+			#iommu-cells = <0x05>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x13c 0x04>;
+			power-domains = <0x37>;
+			status = "okay";
+			phandle = <0x36>;
+		};
+
+		clock-controller@2d0044000 {
+			compatible = "apple,t8122-nco", "apple,t8103-nco";
+			reg = <0x02 0xd0044000 0x00 0x14000>;
+			clocks = <0x46>;
+			#clock-cells = <0x01>;
+			phandle = <0x2e>;
+		};
+
+		interrupt-controller@2d1000000 {
+			compatible = "apple,t8122-aic3";
+			#interrupt-cells = <0x03>;
+			interrupt-controller;
+			reg = <0x02 0xd1000000 0x00 0x184000 0x02 0xd1040000 0x00 0x04>;
+			reg-names = "core", "event";
+			power-domains = <0x47>;
+			phandle = <0x0f>;
+
+			affinities {
+
+				e-core-pmu-affinity {
+					apple,fiq-index = <0x04>;
+					cpus = <0x01 0x02 0x03 0x04>;
+				};
+
+				p-core-pmu-affinity {
+					apple,fiq-index = <0x05>;
+					cpus = <0x05 0x06 0x07 0x08>;
+				};
+			};
+		};
+
+		iommu@2d0300000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0xd0300000 0x00 0x4000>;
+			#iommu-cells = <0x01>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x271 0x04>;
+			power-domains = <0x48>;
+			phandle = <0x53>;
+		};
+
+		pmp_report@2d03c0000 {
+			compatible = "apple,t8122-pmp-v2-report";
+			reg = <0x02 0xd03c0000 0x00 0x20000>;
+			power-domains = <0x49>;
+			#address-cells = <0x01>;
+			#size-cells = <0x00>;
+
+			report@5 {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x05>;
+				label = "pmp-ane-sys";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x4a>;
+				status = "disabled";
+			};
+
+			report@6 {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x06>;
+				label = "pmp-isp-sys";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x37>;
+				status = "disabled";
+			};
+
+			report@7 {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x07>;
+				label = "pmp-disp";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x4b>;
+				apple,always-on;
+			};
+
+			report@8 {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x08>;
+				label = "pmp-dispext";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x4c>;
+			};
+
+			report@9 {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x09>;
+				label = "pmp-venc-sys";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x4d>;
+				status = "disabled";
+			};
+
+			report@a {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x0a>;
+				label = "pmp-avd-sys";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x24>;
+				status = "disabled";
+			};
+
+			report@b {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x0b>;
+				label = "pmp-msr";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x4e>;
+				status = "disabled";
+			};
+
+			report@c {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x0c>;
+				label = "pmp-jpg";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x4f>;
+				status = "disabled";
+			};
+
+			report@d {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x0d>;
+				label = "pmp-scodec";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x50>;
+				status = "disabled";
+			};
+
+			report@11 {
+				compatible = "apple,t8122-pmp-v2-report-entry", "apple,t6000-pmp-v2-report-entry";
+				reg = <0x11>;
+				label = "pmp-ans";
+				#power-domain-cells = <0x00>;
+				power-domains = <0x51>;
+			};
+		};
+
+		pmp@2d0500000 {
+			compatible = "apple,t8122-pmp-v2", "apple,t6000-pmp-v2";
+			reg = <0x02 0xd0500000 0x00 0x80000 0x02 0xd0c00000 0x00 0x4000>;
+			reg-names = "pmp", "asc";
+			mboxes = <0x52>;
+			mbox-names = "mbox";
+			iommus = <0x53 0x00>;
+			power-domains = <0x48>;
+			status = "disabled";
+		};
+
+		power-management@2d0700000 {
+			compatible = "apple,t8122-pmgr", "apple,t8103-pmgr", "syscon", "simple-mfd";
+			#address-cells = <0x01>;
+			#size-cells = <0x01>;
+			reg = <0x02 0xd0700000 0x00 0x14000>;
+
+			power-controller@100 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x100 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "sbr";
+				apple,always-on;
+			};
+
+			power-controller@108 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x108 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "msg";
+			};
+
+			power-controller@110 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x110 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "aic";
+				apple,always-on;
+				phandle = <0x47>;
+			};
+
+			power-controller@118 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x118 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dwi";
+			};
+
+			power-controller@120 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x120 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "gpio";
+				phandle = <0x64>;
+			};
+
+			power-controller@128 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x128 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_busif";
+				apple,always-on;
+			};
+
+			power-controller@130 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x130 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms";
+				apple,always-on;
+				phandle = <0x54>;
+			};
+
+			power-controller@138 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x138 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_fpwm0";
+				power-domains = <0x54>;
+			};
+
+			power-controller@140 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x140 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_fpwm1";
+				power-domains = <0x54>;
+			};
+
+			power-controller@148 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x148 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_fpwm2";
+				power-domains = <0x54>;
+			};
+
+			power-controller@150 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x150 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_fpwm3";
+				power-domains = <0x54>;
+			};
+
+			power-controller@158 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x158 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_fpwm4";
+				power-domains = <0x54>;
+			};
+
+			power-controller@160 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x160 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_c1ppt";
+			};
+
+			power-controller@168 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x168 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "soc_rc";
+			};
+
+			power-controller@170 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x170 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "soc_dpe";
+				apple,always-on;
+			};
+
+			power-controller@178 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x178 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pmgr_soc_ocla";
+				power-domains = <0x54>;
+			};
+
+			power-controller@180 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x180 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ispsens0";
+			};
+
+			power-controller@188 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x188 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ispsens1";
+			};
+
+			power-controller@190 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x190 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ispsens2";
+			};
+
+			power-controller@198 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x198 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ispsens3";
+			};
+
+			power-controller@1a8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x1a8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "aft0";
+				phandle = <0x59>;
+			};
+
+			power-controller@1b0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x1b0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ioa0";
+				apple,always-on;
+			};
+
+			power-controller@1b8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x1b8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ap_tmm";
+			};
+
+			power-controller@1d8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x1d8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "disp_sys";
+				apple,always-on;
+				phandle = <0x55>;
+			};
+
+			power-controller@1e0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x1e0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "gfx";
+			};
+
+			power-controller@1e8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x1e8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_sys";
+				status = "okay";
+				phandle = <0x37>;
+			};
+
+			power-controller@1f0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x1f0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "avd_sys";
+				phandle = <0x24>;
+			};
+
+			power-controller@200 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x200 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "jpg";
+				phandle = <0x4f>;
+			};
+
+			power-controller@208 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x208 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "disp_fe";
+				power-domains = <0x55>;
+				apple,always-on;
+				phandle = <0x63>;
+			};
+
+			power-controller@210 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x210 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "sio_cpu";
+				phandle = <0x23>;
+			};
+
+			power-controller@218 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x218 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "fpwm0";
+				phandle = <0x58>;
+			};
+
+			power-controller@220 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x220 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "fpwm1";
+				phandle = <0x26>;
+			};
+
+			power-controller@228 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x228 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "fpwm2";
+			};
+
+			power-controller@230 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x230 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c0";
+				phandle = <0x12>;
+			};
+
+			power-controller@238 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x238 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c1";
+				phandle = <0x1b>;
+			};
+
+			power-controller@240 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x240 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c2";
+				phandle = <0x1e>;
+			};
+
+			power-controller@248 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x248 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c3";
+				phandle = <0x20>;
+			};
+
+			power-controller@250 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x250 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c4";
+				phandle = <0x22>;
+			};
+
+			power-controller@258 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x258 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c5";
+			};
+
+			power-controller@260 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x260 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c6";
+			};
+
+			power-controller@268 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x268 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c7";
+			};
+
+			power-controller@270 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x270 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "i2c8";
+			};
+
+			power-controller@278 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x278 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "spi_p";
+				phandle = <0x56>;
+			};
+
+			power-controller@280 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x280 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart_p";
+				phandle = <0x57>;
+			};
+
+			power-controller@288 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x288 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "audio_p";
+				phandle = <0x2d>;
+			};
+
+			power-controller@290 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x290 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "aes";
+			};
+
+			power-controller@298 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x298 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "spi0";
+				power-domains = <0x56>;
+			};
+
+			power-controller@2a0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2a0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "spi1";
+				power-domains = <0x56>;
+				phandle = <0x29>;
+			};
+
+			power-controller@2a8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2a8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "spi2";
+				power-domains = <0x56>;
+			};
+
+			power-controller@2b0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2b0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "spi3";
+				power-domains = <0x56>;
+			};
+
+			power-controller@2b8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2b8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "spi4";
+				power-domains = <0x56>;
+			};
+
+			power-controller@2c0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2c0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "spi5";
+				power-domains = <0x56>;
+			};
+
+			power-controller@2c8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2c8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "qspi";
+				power-domains = <0x56>;
+			};
+
+			power-controller@2d0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2d0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart_n";
+				power-domains = <0x57>;
+			};
+
+			power-controller@2d8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2d8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart0";
+				power-domains = <0x57>;
+				phandle = <0x2a>;
+			};
+
+			power-controller@2e0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2e0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart1";
+				power-domains = <0x57>;
+			};
+
+			power-controller@2e8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2e8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart2";
+				power-domains = <0x57>;
+			};
+
+			power-controller@2f0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2f0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart3";
+				power-domains = <0x57>;
+			};
+
+			power-controller@2f8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x2f8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart4";
+				power-domains = <0x57>;
+			};
+
+			power-controller@300 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x300 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart5";
+				power-domains = <0x57>;
+			};
+
+			power-controller@308 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x308 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "uart6";
+				power-domains = <0x57>;
+			};
+
+			power-controller@310 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x310 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "sio_adma";
+				power-domains = <0x58>;
+				phandle = <0x2c>;
+			};
+
+			power-controller@318 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x318 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dpa0";
+				power-domains = <0x2d>;
+			};
+
+			power-controller@330 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x330 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs0";
+				apple,always-on;
+			};
+
+			power-controller@338 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x338 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs2";
+				apple,always-on;
+			};
+
+			power-controller@340 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x340 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs1";
+				apple,always-on;
+			};
+
+			power-controller@348 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x348 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs3";
+				apple,always-on;
+			};
+
+			power-controller@358 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x358 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs4";
+				apple,always-on;
+			};
+
+			power-controller@360 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x360 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs5";
+				apple,always-on;
+			};
+
+			power-controller@368 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x368 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs6";
+				apple,always-on;
+			};
+
+			power-controller@370 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x370 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dcs7";
+				apple,always-on;
+			};
+
+			power-controller@378 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x378 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dpa1";
+				power-domains = <0x2d>;
+			};
+
+			power-controller@380 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x380 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dpa2";
+				power-domains = <0x2d>;
+			};
+
+			power-controller@388 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x388 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dpa3";
+				power-domains = <0x2d>;
+			};
+
+			power-controller@390 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x390 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dpa4";
+				power-domains = <0x2d>;
+			};
+
+			power-controller@398 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x398 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "mca0";
+				power-domains = <0x2c 0x2d>;
+				apple,externally-clocked;
+				phandle = <0x2f>;
+			};
+
+			power-controller@3a0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x3a0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "mca1";
+				power-domains = <0x2c 0x2d>;
+				apple,externally-clocked;
+				phandle = <0x30>;
+			};
+
+			power-controller@3a8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x3a8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "mca2";
+				power-domains = <0x2c 0x2d>;
+				apple,externally-clocked;
+				phandle = <0x31>;
+			};
+
+			power-controller@3b0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x3b0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "trace_fab";
+			};
+
+			power-controller@3b8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x3b8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "mca3";
+				power-domains = <0x2c 0x2d>;
+				apple,externally-clocked;
+				phandle = <0x32>;
+			};
+
+			power-controller@3c0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x3c0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ioa1";
+				apple,always-on;
+			};
+
+			power-controller@3f0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x3f0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "apcie";
+				phandle = <0x5a>;
+			};
+
+			power-controller@3f8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x3f8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ans";
+				phandle = <0x51>;
+			};
+
+			power-controller@400 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x400 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc0_common";
+				phandle = <0x5b>;
+			};
+
+			power-controller@408 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x408 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc1_common";
+				phandle = <0x5c>;
+			};
+
+			power-controller@410 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x410 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dispext_sys";
+				phandle = <0x5d>;
+			};
+
+			power-controller@418 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x418 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "venc_sys";
+				phandle = <0x4d>;
+			};
+
+			power-controller@420 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x420 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "scodec";
+				phandle = <0x50>;
+			};
+
+			power-controller@428 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x428 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "msr";
+				power-domains = <0x59>;
+				phandle = <0x4e>;
+			};
+
+			power-controller@430 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x430 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dptx_ext_phy";
+				phandle = <0xa4>;
+			};
+
+			power-controller@438 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x438 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "ane_sys";
+				phandle = <0x4a>;
+			};
+
+			power-controller@440 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x440 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "apcie_gp";
+				power-domains = <0x5a>;
+				phandle = <0x81>;
+			};
+
+			power-controller@448 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x448 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "apcie_st";
+				power-domains = <0x51 0x5a>;
+				phandle = <0x7b>;
+			};
+
+			power-controller@450 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x450 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pmp";
+				apple,always-on;
+				phandle = <0x48>;
+			};
+
+			power-controller@458 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x458 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "pms_sram";
+				apple,always-on;
+				phandle = <0x49>;
+			};
+
+			power-controller@460 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x460 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc0_pcie";
+				power-domains = <0x5b>;
+			};
+
+			power-controller@468 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x468 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc0_cio";
+				power-domains = <0x5b>;
+				phandle = <0x5f>;
+			};
+
+			power-controller@470 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x470 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc1_pcie";
+				power-domains = <0x5c>;
+			};
+
+			power-controller@478 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x478 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc1_cio";
+				power-domains = <0x5c>;
+				phandle = <0x60>;
+			};
+
+			power-controller@480 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x480 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dispext_fe";
+				power-domains = <0x5d>;
+				phandle = <0x5e>;
+			};
+
+			power-controller@488 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x488 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "dispext_cpu";
+				power-domains = <0x5e>;
+				apple,min-state = <0x04>;
+				phandle = <0x4c>;
+			};
+
+			power-controller@490 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x490 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "scodec_stream";
+				power-domains = <0x50>;
+			};
+
+			power-controller@498 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x498 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "msr_ase_core";
+				power-domains = <0x4e>;
+			};
+
+			power-controller@4a0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4a0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "apcie_phy_sw";
+				apple,always-on;
+			};
+
+			power-controller@4a8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4a8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc0_cio_pcie";
+				power-domains = <0x5f>;
+				phandle = <0x89>;
+			};
+
+			power-controller@4b0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4b0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc0_cio_usb";
+				power-domains = <0x5f>;
+				phandle = <0x8a>;
+			};
+
+			power-controller@4b8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4b8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc1_cio_pcie";
+				power-domains = <0x60>;
+				phandle = <0x97>;
+			};
+
+			power-controller@4c0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4c0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc1_cio_usb";
+				power-domains = <0x60>;
+				phandle = <0x98>;
+			};
+
+			power-controller@c00 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0xc00 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "sep";
+				apple,always-on;
+			};
+
+			power-controller@4000 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4000 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set0";
+				apple,force-disable;
+				phandle = <0x38>;
+			};
+
+			power-controller@4008 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4008 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set1";
+				apple,force-disable;
+				apple,force-reset;
+				phandle = <0x39>;
+			};
+
+			power-controller@4010 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4010 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set2";
+				apple,force-disable;
+				apple,force-reset;
+				phandle = <0x3a>;
+			};
+
+			power-controller@4018 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4018 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_fe";
+				phandle = <0x3b>;
+			};
+
+			power-controller@4020 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4020 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set4";
+				phandle = <0x3c>;
+			};
+
+			power-controller@4028 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4028 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set9";
+				phandle = <0x41>;
+			};
+
+			power-controller@4030 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4030 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set5";
+				phandle = <0x3d>;
+			};
+
+			power-controller@4038 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4038 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set6";
+				phandle = <0x3e>;
+			};
+
+			power-controller@4040 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4040 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set7";
+				phandle = <0x3f>;
+			};
+
+			power-controller@4048 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4048 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set8";
+				phandle = <0x40>;
+			};
+
+			power-controller@4050 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4050 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set10";
+				phandle = <0x42>;
+			};
+
+			power-controller@4058 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4058 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set11";
+				phandle = <0x43>;
+			};
+
+			power-controller@4060 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x4060 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "isp_set12";
+				phandle = <0x44>;
+			};
+
+			power-controller@8000 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x8000 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "venc_dma";
+				power-domains = <0x4d>;
+				phandle = <0x61>;
+			};
+
+			power-controller@8008 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x8008 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "venc_pipe4";
+				power-domains = <0x61>;
+			};
+
+			power-controller@8010 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x8010 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "venc_pipe5";
+				power-domains = <0x61>;
+			};
+
+			power-controller@8018 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x8018 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "venc_me0";
+				power-domains = <0x61>;
+				phandle = <0x62>;
+			};
+
+			power-controller@8020 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x8020 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "venc_me1";
+				power-domains = <0x62>;
+			};
+
+			power-controller@10000 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x10000 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "disp_cpu";
+				power-domains = <0x63>;
+				apple,min-state = <0x04>;
+				phandle = <0x4b>;
+			};
+		};
+
+		mbox@2d0c08000 {
+			compatible = "apple,t8122-asc-mailbox", "apple,asc-mailbox-v4";
+			reg = <0x02 0xd0c08000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x26d 0x04 0x00 0x26e 0x04 0x00 0x26f 0x04 0x00 0x270 0x04>;
+			interrupt-names = "send-empty", "send-not-empty", "recv-empty", "recv-not-empty";
+			#mbox-cells = <0x00>;
+			power-domains = <0x48 0x49>;
+			phandle = <0x52>;
+		};
+
+		pinctrl@2c7100000 {
+			compatible = "apple,t8122-pinctrl", "apple,t8103-pinctrl";
+			reg = <0x02 0xc7100000 0x00 0x100000>;
+			power-domains = <0x64>;
+			gpio-controller;
+			#gpio-cells = <0x02>;
+			gpio-ranges = <0x13 0x00 0x00 0xe0>;
+			apple,npins = <0xe0>;
+			interrupt-controller;
+			#interrupt-cells = <0x02>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0xf1 0x04 0x00 0xf2 0x04 0x00 0xf3 0x04 0x00 0xf4 0x04 0x00 0xf5 0x04 0x00 0xf6 0x04 0x00 0xf7 0x04>;
+			phandle = <0x13>;
+
+			i2c0-pins {
+				pinmux = <0x10091 0x10090>;
+				phandle = <0x11>;
+			};
+
+			i2c1-pins {
+				pinmux = <0x10093 0x10092>;
+				phandle = <0x1a>;
+			};
+
+			i2c2-pins {
+				pinmux = <0x10038 0x10037>;
+				phandle = <0x1d>;
+			};
+
+			i2c3-pins {
+				pinmux = <0x10036 0x10035>;
+				phandle = <0x1f>;
+			};
+
+			i2c4-pins {
+				pinmux = <0x10095 0x10094>;
+				phandle = <0x21>;
+			};
+
+			spi1-pins {
+				pinmux = <0x1002e 0x1002f 0x10030 0x10031>;
+				phandle = <0x28>;
+			};
+
+			pcie-pins {
+				pinmux = <0x100b7 0x100b8 0x100b9 0x100ba>;
+				phandle = <0x82>;
+			};
+		};
+
+		power-management@2d0780000 {
+			compatible = "apple,t8122-pmgr", "apple,t8103-pmgr", "syscon", "simple-mfd";
+			#address-cells = <0x01>;
+			#size-cells = <0x01>;
+			reg = <0x02 0xd0780000 0x00 0x4000>;
+
+			reset-controller@8 {
+				compatible = "apple,t8122-cio-reset", "apple,t6000-cio-reset";
+				reg = <0x08 0x04>;
+				#reset-cells = <0x01>;
+				phandle = <0x88>;
+			};
+		};
+
+		pinctrl@2e41f0000 {
+			compatible = "apple,t8122-pinctrl", "apple,t8103-pinctrl";
+			reg = <0x02 0xe41f0000 0x00 0x4000>;
+			power-domains = <0x65>;
+			gpio-controller;
+			#gpio-cells = <0x02>;
+			gpio-ranges = <0x1c 0x00 0x00 0x20>;
+			apple,npins = <0x20>;
+			interrupt-controller;
+			#interrupt-cells = <0x02>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x1a8 0x04 0x00 0x1a9 0x04 0x00 0x1aa 0x04 0x00 0x1ab 0x04 0x00 0x1ac 0x04 0x00 0x1ad 0x04 0x00 0x1ae 0x04>;
+			phandle = <0x1c>;
+		};
+
+		power-management@2e4280000 {
+			compatible = "apple,t8122-pmgr", "apple,t8103-pmgr", "syscon", "simple-mfd";
+			#address-cells = <0x01>;
+			#size-cells = <0x01>;
+			reg = <0x02 0xe4280000 0x00 0x4000>;
+
+			power-controller@0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x00 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "debug_gated";
+				apple,always-on;
+			};
+
+			power-controller@58 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x58 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_spmi0";
+				apple,always-on;
+			};
+
+			power-controller@60 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x60 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_spmi1";
+				apple,always-on;
+			};
+
+			power-controller@68 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x68 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_spmi2";
+				apple,always-on;
+			};
+
+			power-controller@70 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x70 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_spmi_a0";
+				apple,always-on;
+				phandle = <0x68>;
+			};
+
+			power-controller@78 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x78 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_aon";
+				apple,always-on;
+			};
+
+			power-controller@80 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x80 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_spi0";
+				apple,always-on;
+			};
+
+			power-controller@88 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x88 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_ocla";
+				apple,always-on;
+			};
+
+			power-controller@90 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x90 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_gpio";
+				apple,always-on;
+				phandle = <0x65>;
+			};
+
+			power-controller@98 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0x98 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_fabric";
+				apple,always-on;
+			};
+
+			power-controller@a0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0xa0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "nub_sram";
+				apple,always-on;
+			};
+
+			power-controller@a8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0xa8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "debug_switch";
+				apple,always-on;
+			};
+
+			power-controller@b0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0xb0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc0_usb_aon";
+				phandle = <0x66>;
+			};
+
+			power-controller@b8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0xb8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc1_usb_aon";
+				phandle = <0x67>;
+			};
+
+			power-controller@c0 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0xc0 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc0_usb";
+				power-domains = <0x66 0x5b>;
+				phandle = <0x90>;
+			};
+
+			power-controller@c8 {
+				compatible = "apple,t8122-pmgr-pwrstate", "apple,t8103-pmgr-pwrstate";
+				reg = <0xc8 0x04>;
+				#power-domain-cells = <0x00>;
+				#reset-cells = <0x00>;
+				label = "atc1_usb";
+				power-domains = <0x67 0x5c>;
+				phandle = <0x9e>;
+			};
+		};
+
+		watchdog@2e42b0000 {
+			compatible = "apple,t8122-wdt", "apple,t8103-wdt";
+			reg = <0x02 0xe42b0000 0x00 0x4000>;
+			clocks = <0x10>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x1b0 0x04>;
+		};
+
+		spmi@2e4714000 {
+			compatible = "apple,t8122-spmi", "apple,t8103-spmi";
+			reg = <0x02 0xe4714000 0x00 0x100>;
+			#address-cells = <0x02>;
+			#size-cells = <0x00>;
+
+			pmic@e {
+				compatible = "apple,stowe-pmic", "apple,spmi-nvmem";
+				reg = <0x0e 0x00>;
+
+				nvmem-layout {
+					compatible = "fixed-layout";
+					#address-cells = <0x01>;
+					#size-cells = <0x01>;
+
+					fault-shadow@867b {
+						reg = <0x867b 0x10>;
+					};
+
+					socd@8b00 {
+						reg = <0x8b00 0x400>;
+					};
+
+					boot-stage@f701 {
+						reg = <0xf701 0x01>;
+						phandle = <0x6b>;
+					};
+
+					boot-error-count@f702,0 {
+						reg = <0xf702 0x01>;
+						bits = <0x00 0x04>;
+						phandle = <0x6c>;
+					};
+
+					panic-count@f702,4 {
+						reg = <0xf702 0x01>;
+						bits = <0x04 0x04>;
+						phandle = <0x6d>;
+					};
+
+					boot-error-stage@f703 {
+						reg = <0xf703 0x01>;
+					};
+
+					shutdown-flag@f70f,3 {
+						reg = <0xf70f 0x01>;
+						bits = <0x03 0x01>;
+						phandle = <0x6a>;
+					};
+
+					pm-setting@f801 {
+						reg = <0xf801 0x01>;
+					};
+
+					rtc-offset@f900 {
+						reg = <0xf900 0x06>;
+						phandle = <0x6e>;
+					};
+				};
+			};
+		};
+
+		spmi@2e4908000 {
+			compatible = "apple,t8122-spmi", "apple,t8103-spmi";
+			reg = <0x02 0xe4908000 0x00 0x100>;
+			#address-cells = <0x02>;
+			#size-cells = <0x00>;
+			#interrupt-cells = <0x02>;
+			interrupt-controller;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x1cd 0x04>;
+			power-domains = <0x68>;
+			status = "disabled";
+		};
+
+		mbox@2ec408000 {
+			compatible = "apple,t8122-asc-mailbox", "apple,asc-mailbox-v4";
+			reg = <0x02 0xec408000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x1f6 0x04 0x00 0x1f7 0x04 0x00 0x1f8 0x04 0x00 0x1f9 0x04>;
+			interrupt-names = "send-empty", "send-not-empty", "recv-empty", "recv-not-empty";
+			#mbox-cells = <0x00>;
+			phandle = <0x69>;
+		};
+
+		smc@2ec400000 {
+			compatible = "apple,t8122-smc", "apple,t8103-smc";
+			reg = <0x02 0xec400000 0x00 0x4000 0x02 0xede00000 0x00 0x100000>;
+			reg-names = "smc", "sram";
+			mboxes = <0x69>;
+
+			gpio {
+				compatible = "apple,smc-gpio";
+				gpio-controller;
+				#gpio-cells = <0x02>;
+				phandle = <0x78>;
+			};
+
+			hwmon {
+				compatible = "apple,smc-hwmon";
+
+				power-PSTR {
+					apple,key-id = "PSTR";
+					label = "Total System Power";
+				};
+
+				power-PDTR {
+					apple,key-id = "PDTR";
+					label = "AC Input Power";
+				};
+
+				power-PMVR {
+					apple,key-id = "PMVR";
+					label = "3.8 V Rail Power";
+				};
+
+				temperature-TH0x {
+					apple,key-id = "TH0x";
+					label = "NAND Flash Temperature";
+				};
+
+				voltage-VD0R {
+					apple,key-id = "VD0R";
+					label = "Charger Input Voltage";
+				};
+
+				current-ID0R {
+					apple,key-id = "ID0R";
+					label = "AC Input Current";
+				};
+
+				fan-F0Ac {
+					apple,key-id = "F0Ac";
+					label = "Fan 1";
+					apple,fan-minimum = "F0Mn";
+					apple,fan-maximum = "F0Mx";
+					apple,fan-target = "F0Tg";
+					apple,fan-mode = "F0Md";
+				};
+
+				fan-F1Ac {
+					apple,key-id = "F1Ac";
+					label = "Fan 2";
+					apple,fan-minimum = "F1Mn";
+					apple,fan-maximum = "F1Mx";
+					apple,fan-target = "F1Tg";
+					apple,fan-mode = "F1Md";
+				};
+
+				power-PHPC {
+					apple,key-id = "PHPC";
+					label = "Heatpipe Power";
+				};
+
+				temperature-TB0T {
+					apple,key-id = "TB0T";
+					label = "Battery Hotspot";
+				};
+
+				temperature-TCHP {
+					apple,key-id = "TCHP";
+					label = "Charge Regulator Temp";
+				};
+
+				temperature-TW0P {
+					apple,key-id = "TW0P";
+					label = "WiFi/BT Module Temp";
+				};
+
+				voltage-SBAV {
+					apple,key-id = "SBAV";
+					label = "Battery Voltage";
+				};
+			};
+
+			reboot {
+				compatible = "apple,smc-reboot";
+				nvmem-cells = <0x6a 0x6b 0x6c 0x6d>;
+				nvmem-cell-names = "shutdown_flag", "boot_stage", "boot_error_count", "panic_count";
+			};
+
+			rtc {
+				compatible = "apple,smc-rtc";
+				nvmem-cells = <0x6e>;
+				nvmem-cell-names = "rtc_offset";
+			};
+		};
+
+		pinctrl@2ec820000 {
+			compatible = "apple,t8122-pinctrl", "apple,t8103-pinctrl";
+			reg = <0x02 0xec820000 0x00 0x4000>;
+			gpio-controller;
+			#gpio-cells = <0x02>;
+			gpio-ranges = <0x6f 0x00 0x00 0x12>;
+			apple,npins = <0x12>;
+			interrupt-controller;
+			#interrupt-cells = <0x02>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x1ed 0x04 0x00 0x1ee 0x04 0x00 0x1ef 0x04 0x00 0x1f0 0x04 0x00 0x1f1 0x04 0x00 0x1f2 0x04 0x00 0x1f3 0x04>;
+			phandle = <0x6f>;
+		};
+
+		mbox@2f4408000 {
+			compatible = "apple,t8122-asc-mailbox", "apple,asc-mailbox-v4";
+			reg = <0x02 0xf4408000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x173 0x04 0x00 0x174 0x04 0x00 0x175 0x04 0x00 0x176 0x04>;
+			interrupt-names = "send-empty", "send-not-empty", "recv-empty", "recv-not-empty";
+			#mbox-cells = <0x00>;
+			status = "okay";
+			phandle = <0x71>;
+		};
+
+		iommu@2f4818000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0xf4818000 0x00 0x4000>;
+			#iommu-cells = <0x01>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x187 0x04>;
+			status = "okay";
+			phandle = <0x70>;
+		};
+
+		dma-controller@2f4980000 {
+			compatible = "apple,t8122-admac";
+			reg = <0x02 0xf4980000 0x00 0x34000>;
+			#dma-cells = <0x01>;
+			dma-channels = <0x10>;
+			interrupts-extended = <0x00 0x00 0x0f 0x00 0x19c 0x04 0x00>;
+			iommus = <0x70 0x0a>;
+			status = "okay";
+			phandle = <0x72>;
+		};
+
+		aop@2f4c00000 {
+			compatible = "apple,t8122-aop", "apple,t6020-aop";
+			reg = <0x02 0xf4c00000 0x00 0x1e0000 0x02 0xf4400000 0x00 0x6c000>;
+			mboxes = <0x71>;
+			mbox-names = "mbox";
+			iommus = <0x70 0x00>;
+			status = "okay";
+
+			audio {
+				compatible = "apple,t8122-aop-audio", "apple,t6030-aop-audio";
+				dmas = <0x72 0x01>;
+				dma-names = "dma";
+				apple,chassis-name = "J504";
+				apple,machine-kind = "MacBook Pro";
+			};
+
+			als {
+				compatible = "apple,t8122-aop-als", "apple,aop-als";
+			};
+
+			las {
+				compatible = "apple,t8122-aop-las", "apple,aop-las";
+			};
+		};
+
+		pinctrl@2f4824000 {
+			compatible = "apple,t8122-pinctrl", "apple,t8103-pinctrl";
+			reg = <0x02 0xf4824000 0x00 0x4000>;
+			gpio-controller;
+			#gpio-cells = <0x02>;
+			gpio-ranges = <0x73 0x00 0x00 0x36>;
+			apple,npins = <0x36>;
+			interrupt-controller;
+			#interrupt-cells = <0x02>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x15a 0x04 0x00 0x15b 0x04 0x00 0x15c 0x04 0x00 0x15d 0x04 0x00 0x15e 0x04 0x00 0x15f 0x04 0x00 0x160 0x04>;
+			phandle = <0x73>;
+
+			acio0-pins {
+				pinmux = <0x1001b>;
+				phandle = <0x8b>;
+			};
+
+			acio1-pins {
+				pinmux = <0x1001d>;
+				phandle = <0x99>;
+			};
+		};
+
+		mtp@2fa400000 {
+			compatible = "apple,t8122-mtp", "apple,t8122-rtk-helper-asc4", "apple,mtp", "apple,rtk-helper-asc4";
+			reg = <0x02 0xfa400000 0x00 0x4000 0x02 0xfac00000 0x00 0x100000>;
+			reg-names = "asc", "sram";
+			mboxes = <0x74>;
+			iommus = <0x75 0x01>;
+			#helper-cells = <0x00>;
+			status = "okay";
+			phandle = <0x77>;
+		};
+
+		mbox@2fa408000 {
+			compatible = "apple,t8122-asc-mailbox", "apple,asc-mailbox-v4";
+			reg = <0x02 0xfa408000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x346 0x04 0x00 0x347 0x04 0x00 0x348 0x04 0x00 0x349 0x04>;
+			interrupt-names = "send-empty", "send-not-empty", "recv-empty", "recv-not-empty";
+			#mbox-cells = <0x00>;
+			status = "okay";
+			phandle = <0x74>;
+		};
+
+		iommu@2fa808000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x02 0xfa808000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x336 0x04>;
+			#iommu-cells = <0x01>;
+			status = "okay";
+			phandle = <0x75>;
+		};
+
+		fifo@2fab14000 {
+			compatible = "apple,t8122-dockchannel", "apple,dockchannel";
+			reg = <0x02 0xfab14000 0x00 0x4000>;
+			reg-names = "irq";
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x338 0x04>;
+			ranges = <0x00 0x02 0xfab28000 0x20000>;
+			nonposted-mmio;
+			#address-cells = <0x01>;
+			#size-cells = <0x01>;
+			interrupt-controller;
+			#interrupt-cells = <0x02>;
+			status = "okay";
+			phandle = <0x76>;
+
+			input@0 {
+				compatible = "apple,dockchannel-hid";
+				reg = <0x00 0x1000 0x4000 0x1000 0x8000 0x1000 0xc000 0x1000>;
+				reg-names = "rmt-config", "rmt-data", "config", "data";
+				iommus = <0x75 0x01>;
+				interrupt-parent = <0x76>;
+				interrupts = <0x02 0x04 0x03 0x04>;
+				interrupt-names = "tx", "rx";
+				apple,fifo-size = <0x800>;
+				apple,helper-cpu = <0x77>;
+				apple,afe-reset-gpios = <0x78 0x08 0x01>;
+				apple,stm-reset-gpios = <0x78 0x18 0x01>;
+
+				multi-touch {
+					firmware-name = "apple/tpmtfw-j504.bin";
+				};
+
+				keyboard {
+					hid-country-code = <0x00>;
+					apple,keyboard-layout-id = <0x00>;
+				};
+
+				stm {
+				};
+
+				actuator {
+				};
+
+				tp_accel {
+				};
+			};
+		};
+
+		mbox@309408000 {
+			compatible = "apple,t8122-asc-mailbox", "apple,asc-mailbox-v4";
+			reg = <0x03 0x9408000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x2da 0x04 0x00 0x2db 0x04 0x00 0x2dc 0x04 0x00 0x2dd 0x04>;
+			interrupt-names = "send-empty", "send-not-empty", "recv-empty", "recv-not-empty";
+			#mbox-cells = <0x00>;
+			power-domains = <0x51>;
+			phandle = <0x79>;
+		};
+
+		sart@30dc50000 {
+			compatible = "apple,t8122-sart", "apple,t6000-sart";
+			reg = <0x03 0xdc50000 0x00 0x10000>;
+			power-domains = <0x51>;
+			phandle = <0x7a>;
+		};
+
+		nvme@30dcc0000 {
+			compatible = "apple,t8122-nvme-ans2", "apple,t8103-nvme-ans2";
+			reg = <0x03 0xdcc0000 0x00 0x60000 0x03 0x9400000 0x00 0x4000>;
+			reg-names = "nvme", "ans";
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x2e6 0x04>;
+			mboxes = <0x79>;
+			apple,sart = <0x7a>;
+			power-domains = <0x51 0x7b>;
+			power-domain-names = "ans", "apcie0";
+			resets = <0x51>;
+		};
+
+		pcie@580000000 {
+			compatible = "apple,t8122-pcie", "apple,t6020-pcie";
+			device_type = "pci";
+			reg = <0x05 0x80000000 0x00 0x1000000 0x05 0x91000000 0x00 0x4000 0x05 0x94008000 0x00 0x4000 0x05 0x95008000 0x00 0x4000 0x05 0x96008000 0x00 0x4000 0x05 0x97008000 0x00 0x4000 0x05 0x9e00c000 0x00 0x4000 0x05 0x9e010000 0x00 0x4000 0x05 0x9e014000 0x00 0x4000 0x05 0x9e018000 0x00 0x4000>;
+			reg-names = "config", "rc", "port0", "port1", "port2", "port3", "phy0", "phy1", "phy2", "phy3";
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x39b 0x04 0x00 0x3a4 0x04 0x00 0x3ad 0x04 0x00 0x3b6 0x04>;
+			msi-controller;
+			msi-parent = <0x7c>;
+			msi-ranges = <0x0f 0x00 0x433 0x01 0x20>;
+			iommu-map = <0x100 0x7d 0x01 0x01 0x200 0x7e 0x01 0x01 0x300 0x7f 0x01 0x01 0x400 0x80 0x01 0x01>;
+			iommu-map-mask = <0xff00>;
+			bus-range = <0x00 0x04>;
+			#address-cells = <0x03>;
+			#size-cells = <0x02>;
+			ranges = <0x43000000 0x05 0xa0000000 0x05 0xa0000000 0x00 0x20000000 0x2000000 0x00 0xc0000000 0x05 0xc0000000 0x00 0x40000000>;
+			power-domains = <0x81>;
+			pinctrl-0 = <0x82>;
+			pinctrl-names = "default";
+			phandle = <0x7c>;
+
+			pci@0,0 {
+				device_type = "pci";
+				reg = <0x00 0x00 0x00 0x00 0x00>;
+				reset-gpios = <0x13 0xbb 0x01>;
+				#address-cells = <0x03>;
+				#size-cells = <0x02>;
+				ranges;
+				interrupt-controller;
+				#interrupt-cells = <0x01>;
+				interrupt-map-mask = <0x00 0x00 0x00 0x07>;
+				interrupt-map = <0x00 0x00 0x00 0x01 0x83 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x02 0x83 0x00 0x00 0x00 0x01 0x00 0x00 0x00 0x03 0x83 0x00 0x00 0x00 0x02 0x00 0x00 0x00 0x04 0x83 0x00 0x00 0x00 0x03>;
+				bus-range = <0x01 0x01>;
+				pwren-gpios = <0x78 0x0d 0x00>;
+				phandle = <0x83>;
+
+				wifi@0,0 {
+					compatible = "pci14e4,4434";
+					reg = <0x10000 0x00 0x00 0x00 0x00>;
+					local-mac-address = [00 00 00 00 00 00];
+					apple,antenna-sku = "XX";
+					brcm,board-type = "apple,tresco";
+				};
+
+				bluetooth@0,1 {
+					compatible = "pci14e4,5f72";
+					reg = <0x10100 0x00 0x00 0x00 0x00>;
+					local-bd-address = [00 00 00 00 00 00];
+					brcm,board-type = "apple,tresco";
+				};
+			};
+
+			pci@1,0 {
+				device_type = "pci";
+				reg = <0x800 0x00 0x00 0x00 0x00>;
+				reset-gpios = <0x13 0xbc 0x01>;
+				#address-cells = <0x03>;
+				#size-cells = <0x02>;
+				ranges;
+				interrupt-controller;
+				#interrupt-cells = <0x01>;
+				interrupt-map-mask = <0x00 0x00 0x00 0x07>;
+				interrupt-map = <0x00 0x00 0x00 0x01 0x84 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x02 0x84 0x00 0x00 0x00 0x01 0x00 0x00 0x00 0x03 0x84 0x00 0x00 0x00 0x02 0x00 0x00 0x00 0x04 0x84 0x00 0x00 0x00 0x03>;
+				status = "okay";
+				bus-range = <0x02 0x02>;
+				pwren-gpios = <0x78 0x17 0x00>;
+				phandle = <0x84>;
+
+				mmc@0,0 {
+					compatible = "pci17a0,9755";
+					reg = <0x20000 0x00 0x00 0x00 0x00>;
+					cd-inverted;
+					wp-inverted;
+				};
+			};
+
+			pci@2,0 {
+				device_type = "pci";
+				reg = <0x1000 0x00 0x00 0x00 0x00>;
+				reset-gpios = <0x13 0xbd 0x01>;
+				#address-cells = <0x03>;
+				#size-cells = <0x02>;
+				ranges;
+				interrupt-controller;
+				#interrupt-cells = <0x01>;
+				interrupt-map-mask = <0x00 0x00 0x00 0x07>;
+				interrupt-map = <0x00 0x00 0x00 0x01 0x85 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x02 0x85 0x00 0x00 0x00 0x01 0x00 0x00 0x00 0x03 0x85 0x00 0x00 0x00 0x02 0x00 0x00 0x00 0x04 0x85 0x00 0x00 0x00 0x03>;
+				status = "disabled";
+				phandle = <0x85>;
+			};
+
+			pci@3,0 {
+				device_type = "pci";
+				reg = <0x1800 0x00 0x00 0x00 0x00>;
+				reset-gpios = <0x13 0xbe 0x01>;
+				#address-cells = <0x03>;
+				#size-cells = <0x02>;
+				ranges;
+				interrupt-controller;
+				#interrupt-cells = <0x01>;
+				interrupt-map-mask = <0x00 0x00 0x00 0x07>;
+				interrupt-map = <0x00 0x00 0x00 0x01 0x86 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x02 0x86 0x00 0x00 0x00 0x01 0x00 0x00 0x00 0x03 0x86 0x00 0x00 0x00 0x02 0x00 0x00 0x00 0x04 0x86 0x00 0x00 0x00 0x03>;
+				status = "disabled";
+				phandle = <0x86>;
+			};
+		};
+
+		iommu@594000000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x05 0x94000000 0x00 0x4000>;
+			#iommu-cells = <0x01>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x39c 0x04>;
+			power-domains = <0x81>;
+			phandle = <0x7d>;
+		};
+
+		iommu@595000000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x05 0x95000000 0x00 0x4000>;
+			#iommu-cells = <0x01>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x3a5 0x04>;
+			power-domains = <0x81>;
+			status = "okay";
+			phandle = <0x7e>;
+		};
+
+		iommu@596000000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x05 0x96000000 0x00 0x4000>;
+			#iommu-cells = <0x01>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x3ae 0x04>;
+			power-domains = <0x81>;
+			status = "disabled";
+			phandle = <0x7f>;
+		};
+
+		iommu@597000000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x05 0x97000000 0x00 0x4000>;
+			#iommu-cells = <0x01>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x3b7 0x04>;
+			power-domains = <0x81>;
+			status = "disabled";
+			phandle = <0x80>;
+		};
+
+		mailbox@701108000 {
+			compatible = "apple,t8122-asc-mailbox", "apple,asc-mailbox-v4";
+			reg = <0x07 0x1108000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x3f5 0x04 0x00 0x3f6 0x04 0x00 0x3f7 0x04 0x00 0x3f8 0x04>;
+			interrupt-names = "send-empty", "send-not-empty", "recv-empty", "recv-not-empty";
+			#mbox-cells = <0x00>;
+			phandle = <0x87>;
+		};
+
+		cio@701ac0000 {
+			compatible = "apple,t8122-usb4-acio", "apple,t8103-usb4-acio";
+			reg = <0x07 0x1ac0000 0x00 0xc000 0x07 0x1080000 0x00 0x20000>;
+			reg-names = "rc", "sram";
+			mboxes = <0x87>;
+			resets = <0x88 0x00>;
+			power-domains = <0x5f 0x89 0x8a>;
+			thunderbolt-switch;
+			pinctrl-0 = <0x8b>;
+			pinctrl-names = "default";
+			#address-cells = <0x01>;
+			#size-cells = <0x01>;
+			ranges = <0x00 0x07 0x1000000 0x1000000>;
+			nonposted-mmio;
+
+			iommu@a80000 {
+				compatible = "apple,t8122-dart", "apple,t8110-dart";
+				reg = <0xa80000 0x4000>;
+				interrupt-parent = <0x0f>;
+				interrupts = <0x00 0x3f3 0x04>;
+				#iommu-cells = <0x05>;
+				phandle = <0x8c>;
+			};
+
+			nhi@f00000 {
+				reg = <0xf00000 0x100000 0xdb0000 0x30004>;
+				reg-names = "nhi", "pdf";
+				compatible = "apple,t8122-usb4-nhi", "apple,t8103-usb4-nhi";
+				interrupt-parent = <0x0f>;
+				interrupts = <0x00 0x3d8 0x04 0x00 0x3d9 0x04 0x00 0x3da 0x04 0x00 0x3db 0x04 0x00 0x3dc 0x04 0x00 0x3dd 0x04 0x00 0x3de 0x04 0x00 0x3df 0x04 0x00 0x3e0 0x04 0x00 0x3e1 0x04 0x00 0x3e2 0x04 0x00 0x3e3 0x04 0x00 0x3e4 0x04 0x00 0x3e5 0x04 0x00 0x3e6 0x04 0x00 0x3e7 0x04 0x00 0x3e8 0x04 0x00 0x3e9 0x04 0x00 0x3ea 0x04 0x00 0x3eb 0x04 0x00 0x3ec 0x04 0x00 0x3ed 0x04 0x00 0x3ee 0x04 0x00 0x3ef 0x04>;
+				interrupt-names = "txring0", "txring1", "txring2", "txring3", "txring4", "txring5", "txring6", "txring7", "txring8", "txring9", "txring10", "txring11", "rxring0", "rxring1", "rxring2", "rxring3", "rxring4", "rxring5", "rxring6", "rxring7", "rxring8", "rxring9", "rxring10", "rxring11";
+				iommus = <0x8c 0x00 0x100 0x00 0x10 0x00 0x8c 0x01 0x100 0x00 0x10 0x00 0x8c 0x02 0x100 0x00 0x10 0x00 0x8c 0x03 0x100 0x00 0x10 0x00 0x8c 0x04 0x100 0x00 0x10 0x00 0x8c 0x05 0x100 0x00 0x10 0x00 0x8c 0x06 0x100 0x00 0x10 0x00 0x8c 0x07 0x100 0x00 0x10 0x00 0x8c 0x08 0x100 0x00 0x10 0x00 0x8c 0x09 0x100 0x00 0x10 0x00 0x8c 0x0a 0x100 0x00 0x10 0x00 0x8c 0x0b 0x100 0x00 0x10 0x00 0x8c 0x10 0x100 0x00 0x10 0x00 0x8c 0x11 0x100 0x00 0x10 0x00 0x8c 0x12 0x100 0x00 0x10 0x00 0x8c 0x13 0x100 0x00 0x10 0x00 0x8c 0x14 0x100 0x00 0x10 0x00 0x8c 0x15 0x100 0x00 0x10 0x00 0x8c 0x16 0x100 0x00 0x10 0x00 0x8c 0x17 0x100 0x00 0x10 0x00 0x8c 0x18 0x100 0x00 0x10 0x00 0x8c 0x19 0x100 0x00 0x10 0x00 0x8c 0x1a 0x100 0x00 0x10 0x00 0x8c 0x1b 0x100 0x00 0x10 0x00>;
+				apple,thunderbolt-drom = [00];
+			};
+
+			ports {
+				#address-cells = <0x01>;
+				#size-cells = <0x00>;
+
+				port@1 {
+					reg = <0x01>;
+
+					endpoint {
+						remote-endpoint = <0x8d>;
+						phandle = <0x16>;
+					};
+				};
+			};
+		};
+
+		usb@702280000 {
+			compatible = "apple,t8122-dwc3", "apple,t8103-dwc3";
+			reg = <0x07 0x2280000 0x00 0xcd00 0x07 0x228cd00 0x00 0x3200>;
+			reg-names = "dwc3-core", "dwc3-apple";
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x3cc 0x04>;
+			dr_mode = "otg";
+			usb-role-switch;
+			role-switch-default-mode = "host";
+			iommus = <0x8e 0x00 0x8f 0x01>;
+			power-domains = <0x90>;
+			resets = <0x91>;
+			phys = <0x91 0x03 0x91 0x04>;
+			phy-names = "usb2-phy", "usb3-phy";
+
+			ports {
+				#address-cells = <0x01>;
+				#size-cells = <0x00>;
+
+				port@0 {
+					reg = <0x00>;
+
+					endpoint {
+						remote-endpoint = <0x92>;
+						phandle = <0x14>;
+					};
+				};
+
+				port@1 {
+					reg = <0x01>;
+
+					endpoint {
+						remote-endpoint = <0x93>;
+						phandle = <0x95>;
+					};
+				};
+			};
+		};
+
+		iommu@702f00000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x07 0x2f00000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x3d0 0x04>;
+			power-domains = <0x90>;
+			#iommu-cells = <0x01>;
+			phandle = <0x8e>;
+		};
+
+		iommu@702f80000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x07 0x2f80000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x3d0 0x04>;
+			power-domains = <0x90>;
+			#iommu-cells = <0x01>;
+			phandle = <0x8f>;
+		};
+
+		phy@703000000 {
+			compatible = "apple,t8122-atcphy";
+			reg = <0x07 0x3000000 0x00 0x4c000 0x07 0x3050000 0x00 0x8000 0x07 0x00 0x00 0x8000 0x07 0x2a90000 0x00 0x4000 0x07 0x2a84000 0x00 0x4000>;
+			reg-names = "core", "lpdptx", "axi2af", "usb2phy", "pipehandler";
+			#phy-cells = <0x01>;
+			#reset-cells = <0x00>;
+			orientation-switch;
+			mode-switch;
+			power-domains = <0x90>;
+			phandle = <0x91>;
+
+			ports {
+				#address-cells = <0x01>;
+				#size-cells = <0x00>;
+
+				port@0 {
+					reg = <0x00>;
+
+					endpoint {
+						remote-endpoint = <0x94>;
+						phandle = <0x15>;
+					};
+				};
+
+				port@1 {
+					reg = <0x01>;
+
+					endpoint {
+						remote-endpoint = <0x95>;
+						phandle = <0x93>;
+					};
+				};
+			};
+		};
+
+		mailbox@b01108000 {
+			compatible = "apple,t8122-asc-mailbox", "apple,asc-mailbox-v4";
+			reg = <0x0b 0x1108000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x42f 0x04 0x00 0x430 0x04 0x00 0x431 0x04 0x00 0x432 0x04>;
+			interrupt-names = "send-empty", "send-not-empty", "recv-empty", "recv-not-empty";
+			#mbox-cells = <0x00>;
+			phandle = <0x96>;
+		};
+
+		cio@b01ac0000 {
+			compatible = "apple,t8122-usb4-acio", "apple,t8103-usb4-acio";
+			reg = <0x0b 0x1ac0000 0x00 0xc000 0x0b 0x1080000 0x00 0x20000>;
+			reg-names = "rc", "sram";
+			mboxes = <0x96>;
+			resets = <0x88 0x01>;
+			power-domains = <0x60 0x97 0x98>;
+			thunderbolt-switch;
+			pinctrl-0 = <0x99>;
+			pinctrl-names = "default";
+			#address-cells = <0x01>;
+			#size-cells = <0x01>;
+			ranges = <0x00 0x0b 0x1000000 0x1000000>;
+			nonposted-mmio;
+
+			iommu@a80000 {
+				compatible = "apple,t8122-dart", "apple,t8110-dart";
+				reg = <0xa80000 0x4000>;
+				interrupt-parent = <0x0f>;
+				interrupts = <0x00 0x42d 0x04>;
+				#iommu-cells = <0x05>;
+				phandle = <0x9a>;
+			};
+
+			nhi@f00000 {
+				reg = <0xf00000 0x100000 0xdb0000 0x30004>;
+				reg-names = "nhi", "pdf";
+				compatible = "apple,t8122-usb4-nhi", "apple,t8103-usb4-nhi";
+				interrupt-parent = <0x0f>;
+				interrupts = <0x00 0x412 0x04 0x00 0x413 0x04 0x00 0x414 0x04 0x00 0x415 0x04 0x00 0x416 0x04 0x00 0x417 0x04 0x00 0x418 0x04 0x00 0x419 0x04 0x00 0x41a 0x04 0x00 0x41b 0x04 0x00 0x41c 0x04 0x00 0x41d 0x04 0x00 0x41e 0x04 0x00 0x41f 0x04 0x00 0x420 0x04 0x00 0x421 0x04 0x00 0x422 0x04 0x00 0x423 0x04 0x00 0x424 0x04 0x00 0x425 0x04 0x00 0x426 0x04 0x00 0x427 0x04 0x00 0x428 0x04 0x00 0x429 0x04>;
+				interrupt-names = "txring0", "txring1", "txring2", "txring3", "txring4", "txring5", "txring6", "txring7", "txring8", "txring9", "txring10", "txring11", "rxring0", "rxring1", "rxring2", "rxring3", "rxring4", "rxring5", "rxring6", "rxring7", "rxring8", "rxring9", "rxring10", "rxring11";
+				iommus = <0x9a 0x00 0x100 0x00 0x10 0x00 0x9a 0x01 0x100 0x00 0x10 0x00 0x9a 0x02 0x100 0x00 0x10 0x00 0x9a 0x03 0x100 0x00 0x10 0x00 0x9a 0x04 0x100 0x00 0x10 0x00 0x9a 0x05 0x100 0x00 0x10 0x00 0x9a 0x06 0x100 0x00 0x10 0x00 0x9a 0x07 0x100 0x00 0x10 0x00 0x9a 0x08 0x100 0x00 0x10 0x00 0x9a 0x09 0x100 0x00 0x10 0x00 0x9a 0x0a 0x100 0x00 0x10 0x00 0x9a 0x0b 0x100 0x00 0x10 0x00 0x9a 0x10 0x100 0x00 0x10 0x00 0x9a 0x11 0x100 0x00 0x10 0x00 0x9a 0x12 0x100 0x00 0x10 0x00 0x9a 0x13 0x100 0x00 0x10 0x00 0x9a 0x14 0x100 0x00 0x10 0x00 0x9a 0x15 0x100 0x00 0x10 0x00 0x9a 0x16 0x100 0x00 0x10 0x00 0x9a 0x17 0x100 0x00 0x10 0x00 0x9a 0x18 0x100 0x00 0x10 0x00 0x9a 0x19 0x100 0x00 0x10 0x00 0x9a 0x1a 0x100 0x00 0x10 0x00 0x9a 0x1b 0x100 0x00 0x10 0x00>;
+				apple,thunderbolt-drom = [00];
+			};
+
+			ports {
+				#address-cells = <0x01>;
+				#size-cells = <0x00>;
+
+				port@1 {
+					reg = <0x01>;
+
+					endpoint {
+						remote-endpoint = <0x9b>;
+						phandle = <0x19>;
+					};
+				};
+			};
+		};
+
+		usb@b02280000 {
+			compatible = "apple,t8122-dwc3", "apple,t8103-dwc3";
+			reg = <0x0b 0x2280000 0x00 0xcd00 0x0b 0x228cd00 0x00 0x3200>;
+			reg-names = "dwc3-core", "dwc3-apple";
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x406 0x04>;
+			dr_mode = "otg";
+			usb-role-switch;
+			role-switch-default-mode = "host";
+			iommus = <0x9c 0x00 0x9d 0x01>;
+			power-domains = <0x9e>;
+			resets = <0x9f>;
+			phys = <0x9f 0x03 0x9f 0x04>;
+			phy-names = "usb2-phy", "usb3-phy";
+
+			ports {
+				#address-cells = <0x01>;
+				#size-cells = <0x00>;
+
+				port@0 {
+					reg = <0x00>;
+
+					endpoint {
+						remote-endpoint = <0xa0>;
+						phandle = <0x17>;
+					};
+				};
+
+				port@1 {
+					reg = <0x01>;
+
+					endpoint {
+						remote-endpoint = <0xa1>;
+						phandle = <0xa3>;
+					};
+				};
+			};
+		};
+
+		iommu@b02f00000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x0b 0x2f00000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x40a 0x04>;
+			power-domains = <0x9e>;
+			#iommu-cells = <0x01>;
+			phandle = <0x9c>;
+		};
+
+		iommu@b02f80000 {
+			compatible = "apple,t8122-dart", "apple,t8110-dart";
+			reg = <0x0b 0x2f80000 0x00 0x4000>;
+			interrupt-parent = <0x0f>;
+			interrupts = <0x00 0x40a 0x04>;
+			power-domains = <0x9e>;
+			#iommu-cells = <0x01>;
+			phandle = <0x9d>;
+		};
+
+		phy@b03000000 {
+			compatible = "apple,t8122-atcphy";
+			reg = <0x0b 0x3000000 0x00 0x4c000 0x0b 0x3050000 0x00 0x8000 0x0b 0x00 0x00 0x8000 0x0b 0x2a90000 0x00 0x4000 0x0b 0x2a84000 0x00 0x4000>;
+			reg-names = "core", "lpdptx", "axi2af", "usb2phy", "pipehandler";
+			#phy-cells = <0x01>;
+			#reset-cells = <0x00>;
+			orientation-switch;
+			mode-switch;
+			power-domains = <0x9e>;
+			phandle = <0x9f>;
+
+			ports {
+				#address-cells = <0x01>;
+				#size-cells = <0x00>;
+
+				port@0 {
+					reg = <0x00>;
+
+					endpoint {
+						remote-endpoint = <0xa2>;
+						phandle = <0x18>;
+					};
+				};
+
+				port@1 {
+					reg = <0x01>;
+
+					endpoint {
+						remote-endpoint = <0xa3>;
+						phandle = <0xa1>;
+					};
+				};
+			};
+		};
+	};
+
+	chosen {
+		#address-cells = <0x02>;
+		#size-cells = <0x02>;
+		ranges;
+		stdout-path = "serial0";
+
+		framebuffer@0 {
+			compatible = "apple,simple-framebuffer", "simple-framebuffer";
+			reg = <0x00 0x00 0x00 0x00>;
+			power-domains = <0x4b 0xa4>;
+			status = "disabled";
+		};
+	};
+
+	reserved-memory {
+		#address-cells = <0x02>;
+		#size-cells = <0x02>;
+		ranges;
+
+		isp-heap@0 {
+			compatible = "apple,asc-mem";
+			reg = <0x00 0x00 0x00 0x00>;
+			no-map;
+			phandle = <0x45>;
+		};
+	};
+
+	memory@800000000 {
+		device_type = "memory";
+		reg = <0x08 0x00 0x02 0x00>;
+	};
+
+	led-controller {
+		compatible = "pwm-leds";
+
+		led-0 {
+			pwms = <0xa5 0x00 0x9c40>;
+			label = "kbd_backlight";
+			function = "kbd_backlight";
+			color = <0x00>;
+			max-brightness = <0xff>;
+			default-state = "keep";
+		};
+	};
+
+	sound {
+		compatible = "apple,j314-macaudio", "apple,j504-macaudio", "apple,macaudio";
+		model = "MacBook Pro J504";
+
+		dai-link@0 {
+			link-name = "Speakers";
+			dai-tdm-idle-mode-0 = "zero";
+			dai-tdm-idle-mode-3 = "zero";
+			dai-tdm-slot-tx-idle-mask-0 = <0xf0f0f>;
+			dai-tdm-slot-tx-idle-mask-3 = <0xf0f0f0>;
+
+			cpu {
+				sound-dai = <0xa6 0x00 0xa6 0x01>;
+			};
+
+			codec {
+				sound-dai = <0xa7 0xa8 0xa9 0xaa 0xab 0xac>;
+			};
+		};
+
+		dai-link@1 {
+			link-name = "Headphone Jack";
+
+			cpu {
+				sound-dai = <0xa6 0x02>;
+			};
+
+			codec {
+				sound-dai = <0xad>;
+			};
+		};
+	};
+};

@@ -18,7 +18,7 @@ def sha(path):
         return hashlib.file_digest(source, 'sha256').hexdigest()
 
 
-def boot_once(base, report, firmware, password, first_boot, proof):
+def boot_once(base, report, firmware, password, first_boot, proof, extra_commands=""):
     report.mkdir()
     console = base / 'console.sock'
     if console.exists():
@@ -92,7 +92,7 @@ def boot_once(base, report, firmware, password, first_boot, proof):
                                "printf 'M3_BOOT_ID='; cat /proc/sys/kernel/random/boot_id; "
                                "printf 'M3_SHADOW_SHA='; sha256sum /etc/shadow | cut -d' ' -f1; "
                                "printf 'M3_PERSIST='; cat /root/arch-m3-lifecycle-proof; "
-                               f"printf '%s\\n' '{done}'; systemctl poweroff\r")
+                               + extra_commands + f"printf '%s\\n' '{done}'; systemctl poweroff\r")
                     client.sendall(command.encode())
                     sent.add('commands')
                 if re.search(rb'(?:^|\n)' + done.encode() + rb'\r?\n', clean):

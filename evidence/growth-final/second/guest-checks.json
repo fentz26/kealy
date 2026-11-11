@@ -1,0 +1,27 @@
+{
+  "markers": {
+    "KERNEL": "7.2.12-3-1-ARCH",
+    "MULTI": "active",
+    "FIRSTBOOT": "inactive",
+    "SYSTEM": "running",
+    "FAILED_COUNT": "0",
+    "PACMAN_RC": "0",
+    "SIGNATURE_RC": "0",
+    "ROOT_UUID": "fba57531-95fc-45cf-ba71-d30d21d68876",
+    "EFI_UUID": "7F1F-E6C2",
+    "FSTAB_RC": "0",
+    "GRUB_RC": "0",
+    "UEFI": "1",
+    "BOOT_ID": "87dc8206-dd3f-4077-b235-e18fd7d0d961",
+    "SHADOW_SHA": "1b2b453e7c34d03dc55beea19a65318a8c622dce3bb19207edaa018715bfbc1d",
+    "PERSIST": "5c57b26c867fd2c389ffa8aecd50958e35f5280dcaf275a8",
+    "WRITE_RC": "0",
+    "DISK_BYTES": "12884901888",
+    "FS_BYTES": "12599418880",
+    "EXTENT_BYTES": "1073745920",
+    "DATA_SHA": "ceb4727c0286ae8d3ae30456db0aa45c4595100f978a69dbd940f36c945f3aa4",
+    "setup_prompt_seen": false,
+    "firmware_grub_verified": true
+  },
+  "failures": []
+}

@@ -46,7 +46,7 @@ Earlier failed VM experiments were not a valid basis for judging image boot read
 
 A fixture omitting EFI caused the upstream first-boot script to fail at findmnt, as expected from its source. Adding EFI completed that path. Attaching a second disk exposed /dev/vda ordering assumptions; the test now uses the real root UUID as GRUB does. Result parsing now rejects echoed/generic status words, missing/invalid/duplicate UUID markers and stale success from failed reruns.
 
-50 portable tests pass. Historical failure logs are retained; the fresh attested run supersedes them.
+53 portable tests pass. Historical failure logs are retained; the fresh attested run supersedes them.
 
 ## Firmware/GRUB and repeat cold-boot verification
 
@@ -67,3 +67,30 @@ Raw backing files and the delivered ZIP were rehashed and unchanged. The isolate
 - Virtual console adaptation does not prove the Mac's physical display, keyboard, touchpad, Wi-Fi, audio, suspend or upgrade/recovery behavior.
 - Accelerated Hyprland/Mesa on M3 remains unverified. Stock Asahi was retained; no Aurora stack was substituted.
 - The model-guarded preflight and staged runtime do not authorize installation. A concrete disk/backup/encryption plan and separate authorization are still required before disk or boot-policy changes.
+
+## Automatic root growth (disposable VM)
+
+`evidence/growth-final/growth-result.json` records two clean EDK2 → GRUB boots of a fresh fixture whose root qcow2 alone was enlarged to 12 GiB before first boot. No guest resize command was issued. The filesystem automatically exposed 12,599,418,880 bytes on the 12,884,901,888-byte virtual disk, consistent with the existing `x-systemd.growfs` configuration. A 1 GiB extent allocation and 8 MiB random-data write succeeded; capacity, allocated blocks and SHA256 persisted across the second cold boot. Both boots reached a healthy multi-user system with zero failed units, valid package signatures and unchanged UUID/password state after initialization. Qcow2 checks and clean QEMU exits passed; raw parents and delivered ZIP stayed unchanged.
+
+Reproduce using new directories (existing overlays deliberately fail the pristine-state guard):
+
+```sh
+python3 tests/prepare_grub_fixture.py /private/tmp/arch-m3-vm-attested /private/tmp/arch-m3-growth-new
+python3 tests/integration_growth.py /private/tmp/arch-m3-growth-new evidence/growth-new
+```
+
+This tests filesystem expansion inside virtual hardware. It does not test partition allocation or resizing on the Mac. Systemd documents automatic growth via the [`x-systemd.growfs` fstab option](https://github.com/systemd/systemd/blob/main/docs/BUILDING_IMAGES.md).
+
+## J504 static hardware inspection
+
+The signed kernel package's DTB decodes to `apple,j504`, `apple,t8122`, model `Apple MacBook Pro (14-inch, M3, 2023)`. Its SHA256 remains `622073860f2bd6e9db1a6eef2e9d20fe3e7e4670fda4333cda0468db8d64ef8e`. Evidence is under `evidence/hardware-static/`; the config is `evidence/linux-asahi.config`.
+
+| Path | Observed static evidence | Remaining qualification |
+| --- | --- | --- |
+| Internal storage | DTB Apple ANS2 NVMe node; `CONFIG_NVME_APPLE=y`, SART/RTKit built in | Physical controller initialization and I/O |
+| Internal input | MTP/helper and dockchannel nodes enabled; `CONFIG_HID_DOCKCHANNEL=m`; `dockchannel-hid.ko` shipped in both package and original initramfs | Trackpad requires `apple/tpmtfw-j504.bin`; actual firmware loading/input untested |
+| Wi-Fi | DTB Broadcom `pci14e4,4434`, board `apple,tresco`; `CONFIG_BRCMFMAC=m`, PCIe enabled, modules shipped | Board-specific firmware/calibration, actual network association |
+| Display | `CONFIG_DRM_SIMPLEDRM=y`; DTB simple framebuffer placeholder has `status="disabled"`; Apple DRM module shipped | Boot-time framebuffer fixups and actual physical console output |
+| GPU | `CONFIG_DRM_ASAHI=y`, but no GPU node in this static J504 DTB | No M3 acceleration or Hyprland qualification inferred from kernel config |
+
+The original initramfs includes `/usr/lib/firmware/vendor -> /vendorfw`; it does not carry the named J504 trackpad firmware itself. Firmware supplied by the Asahi installer and boot-time device-tree fixups remain essential. Disabled static framebuffer placeholders do not establish that the boot-time framebuffer will fail. Conversely, package/module presence does not establish that these devices work. No proprietary firmware extraction or physical hardware test was performed in this phase.

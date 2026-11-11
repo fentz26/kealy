@@ -1,0 +1,6 @@
+evidence/hardware-static/t8122-j504.dts: Warning (unit_address_vs_reg): /sound/dai-link@0: node has a unit name, but no reg or ranges property
+evidence/hardware-static/t8122-j504.dts: Warning (unit_address_vs_reg): /sound/dai-link@1: node has a unit name, but no reg or ranges property
+evidence/hardware-static/t8122-j504.dts: Warning (alias_paths): /aliases: aliases property name must include only lowercase and '-'
+evidence/hardware-static/t8122-j504.dts: Warning (alias_paths): /aliases: aliases property name must include only lowercase and '-'
+evidence/hardware-static/t8122-j504.dts: Warning (alias_paths): /aliases: aliases property name must include only lowercase and '-'
+evidence/hardware-static/t8122-j504.dts: Warning (alias_paths): /aliases: aliases property name must include only lowercase and '-'

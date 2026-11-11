@@ -1,0 +1,5 @@
+{
+  "qemu_exit_code": 0,
+  "guest_completion_marker_observed": true,
+  "clean_process_shutdown": true
+}

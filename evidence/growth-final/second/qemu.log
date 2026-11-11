@@ -1,0 +1,1 @@
+qemu-system-aarch64: -chardev socket,id=console,path=/private/tmp/arch-m3-growth-final/console.sock,server=on,wait=on: info: QEMU waiting for connection on: disconnected:unix:/private/tmp/arch-m3-growth-final/console.sock,server=on

@@ -56,3 +56,9 @@ Initial lifecycle test PASS through actual artifact-derived GRUB on both cold bo
 Final immutable-fixture qualification: evidence/grub-final/lifecycle-result.json PASS. Both phases report firmware route verified and QEMU exit0; new boot IDs; stable root/EFI UUIDs, credential checksum and a first-boot-only persistence marker; same test password authenticates twice with no second setup prompt. Both system states running, failed unit count0, package DB/signature, mount and GRUB checks pass. Raw backing image and delivered ZIP hashes unchanged. No source kernel, delivered image, Mac partition or boot-policy changes.
 
 Ruling: QEMU EDK2 substitutes for Apple firmware only in the test. These results cover GRUB loading and repeat cold boot, not physical m1n1/U-Boot/Recovery, proprietary firmware extraction, peripherals or accelerated graphics. Test-only state remains in private disposable overlays; no publication or installation performed.
+
+## Root growth and hardware-path continuation
+
+User requested further work. Scope: automatic filesystem growth in a new disposable VM overlay plus offline J504 DTB/driver audit. Plan: docs/superpowers/plans/2026-11-11-growth-hardware-audit.md. No installation or real disk/boot mutation authorized.
+
+Root growth passed: 12 GiB disposable disk, 12,599,418,880-byte filesystem, 1 GiB allocated extent and 8 MiB checksum-preserved data across two firmware/GRUB cold boots. Both healthy, clean exits, qcow checks passed; original parents/ZIP unchanged. Static J504 DTB/config/module/initramfs audit recorded in qualification; firmware and physical-device qualification remain outstanding. Unit suite: 53 passing. Review found a symlink-input ordering issue in the growth harness; fixed with pre-resize regular-file validation and a failing-then-passing regression test.

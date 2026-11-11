@@ -1,0 +1,8 @@
+usr/lib/firmware/
+usr/lib/firmware/vendor
+usr/lib/modules/7.2.12-3-1-ARCH/kernel/drivers/hid/dockchannel-hid/
+usr/lib/modules/7.2.12-3-1-ARCH/kernel/drivers/hid/dockchannel-hid/dockchannel-hid.ko
+usr/lib/modules/7.2.12-3-1-ARCH/kernel/drivers/phy/apple/
+usr/lib/modules/7.2.12-3-1-ARCH/kernel/drivers/phy/apple/phy-apple-atc.ko
+usr/lib/modules/7.2.12-3-1-ARCH/kernel/drivers/soc/apple/
+usr/lib/modules/7.2.12-3-1-ARCH/kernel/drivers/soc/apple/apple-tunable.ko
