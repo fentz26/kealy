@@ -7,13 +7,15 @@
     "alarm-builder": "58cc158c7fda3ef6aeae36606f84a63b4b0867e7",
     "alarm-installer": "3cfef52bc372a7b84b59823027c75327e129d6ec",
     "omarchy-installer": "c07e54c2134a8ec1415e7e2b917589ae1d3d7dc9",
-    "omarchy-packages": "7046eaf2f528828c35b85e26f155662f9040618b"
+    "omarchy-packages": "7046eaf2f528828c35b85e26f155662f9040618b",
+    "asahi-alarm-pkgbuilds": "45cbc5719d8487026813b1877cb4e6ae420245f3"
   },
   "upstream_payload": {
     "url": "https://asahi-alarm.org/asahi-base.zip",
     "sha256": "61153885581ca93bf7fbc05147146503b0b2de15355f207f0c04e56a78f03954",
     "bytes": 1355729315,
-    "signature": "No independent upstream payload signature verified"
+    "signature": "No independent upstream payload signature verified",
+    "mirror": "https://github.com/fentz26/kealy/releases/download/upstream-base-61153885/asahi-base.zip"
   },
   "published_installer": {
     "url": "https://asahi-alarm.org/installer-v0.9.2.tar.gz",
@@ -29,5 +31,52 @@
     "status": "evaluation artifact; not hardware boot qualified",
     "encrypted": false,
     "desktop_preinstalled": false
-  }
+  },
+  "kealy_kernel": {
+    "repository": "https://github.com/fentz26/kealy-linux",
+    "branch": "kealy",
+    "commit": "bfe8e1e5d59668b7238bbe99683ff0bf99fec80f",
+    "base": {
+      "repository": "https://github.com/AsahiLinux/linux",
+      "branch": "asahi-wip",
+      "commit": "414e55da7a0afaca2a97b29603be88ce0a6fd6de",
+      "version": "7.2.14"
+    },
+    "upstream_pull_requests": {
+      "AsahiLinux/linux#662": [
+        "a9b7aedf4a",
+        "76787b6781",
+        "7c396d2af2",
+        "db468ac9c9"
+      ],
+      "AsahiLinux/linux#659": [
+        "ce57aeedbd00",
+        "61b2308e60d3",
+        "9fe288e43224",
+        "f0731ceced37"
+      ],
+      "AsahiLinux/linux#660": [
+        "c72cc70c6bd1",
+        "7e8685768b7c"
+      ],
+      "AsahiLinux/linux#661": [
+        "34c7a0eea5b9",
+        "d65379372621",
+        "0c0c5a43a0f5",
+        "2bdd8c2dcc47",
+        "c35c05bc20e0",
+        "aa5ca7ff50e7"
+      ]
+    },
+    "local_changes": [
+      "arm64: dts: apple: Enable J504 USB-C display output (hardware-untested)"
+    ],
+    "status": "open, unreviewed upstream pull requests plus a local device-tree change; not hardware verified"
+  },
+  "kealy_m1n1": {
+    "repository": "https://github.com/AsahiLinux/m1n1",
+    "commit": "cf37927d6bf47c502136e7d2c9e61f946b0b8745",
+    "reason": "includes m1n1 pull request #746 (M3 display-controller setup), which is newer than v2.0.0"
+  },
+  "build_container": "josdehaes/asahi-alarm-pkgbuild@sha256:d111e69977f32cd804149ad8d198064cce75831c433e1591de6c6b3b9e5de23f"
 }

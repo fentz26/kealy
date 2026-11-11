@@ -109,7 +109,7 @@ def make_overlay_commands(overlay, shadow):
     return commands
 
 
-def build(source, metadata, overlay, output, expected_sha256):
+def build(source, metadata, overlay, output, expected_sha256, boot_chain='unchanged from source'):
     source, output = Path(source).resolve(), Path(output)
     if output.exists() or output.is_symlink():
         raise ValueError('Output must be a new directory')
@@ -180,7 +180,7 @@ def build(source, metadata, overlay, output, expected_sha256):
         corrected_path = output / 'installer_data.json'
         corrected_path.write_text(json.dumps(corrected, indent=2) + '\n')
         provenance = {'source_sha256': report['sha256'], 'output_sha256': digest(target),
-                      'root_bytes': report['root_bytes'], 'boot_chain': 'unchanged from source',
+                      'root_bytes': report['root_bytes'], 'boot_chain': boot_chain,
                       'status': 'evaluation artifact; not hardware boot qualified',
                       'encrypted': False, 'desktop_preinstalled': False}
         (output / 'build.json').write_text(json.dumps(provenance, indent=2) + '\n')
@@ -194,8 +194,11 @@ def main():
     p.add_argument('--overlay', type=Path, default=Path('overlay'))
     p.add_argument('--output', type=Path, required=True)
     p.add_argument('--sha256', required=True)
+    p.add_argument('--boot-chain', default='unchanged from source',
+                   help='Provenance note for the kernel/m1n1/U-Boot in the source ZIP')
     args = p.parse_args()
-    print(json.dumps(build(args.source, args.metadata, args.overlay, args.output, args.sha256), indent=2))
+    print(json.dumps(build(args.source, args.metadata, args.overlay, args.output, args.sha256,
+                           args.boot_chain), indent=2))
 
 
 if __name__ == '__main__':

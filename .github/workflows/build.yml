@@ -1,0 +1,193 @@
+name: build
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      release_tag:
+        description: Publish the image as a GitHub release with this tag (for example v0.1.0). Leave empty to only build.
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # josdehaes/asahi-alarm-pkgbuild:latest as of 2026-11-09, the image Asahi Alarm
+  # uses to build its own packages.
+  PKGBUILD_IMAGE: josdehaes/asahi-alarm-pkgbuild@sha256:d111e69977f32cd804149ad8d198064cce75831c433e1591de6c6b3b9e5de23f
+
+jobs:
+  tests:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v6
+      - name: Portable tests
+        run: python3 -m unittest discover -s tests -v
+      - name: Shell syntax
+        run: |
+          bash -n tools/upgrade-image.sh
+          sh -n install.sh
+
+  kernel:
+    name: linux-asahi package
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 330
+    steps:
+      - uses: actions/checkout@v6
+      - name: Restore built package
+        id: cache
+        uses: actions/cache@v5
+        with:
+          path: packages/linux-asahi/out
+          key: linux-asahi-${{ hashFiles('packages/linux-asahi/PKGBUILD', 'packages/linux-asahi/config', 'packages/linux-asahi/*.patch', 'packages/linux-asahi/rust-toolchain.toml') }}-${{ env.PKGBUILD_IMAGE }}
+      - name: Free disk space
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/hostedtoolcache /usr/local/.ghcup || true
+          df -h /
+      - name: Build
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" \
+            -v "$PWD/packages/linux-asahi:/home/user/build" -w /home/user/build \
+            "$PKGBUILD_IMAGE" bash -euxc '
+              sudo pacman -Syu --noconfirm
+              makepkg -s --noconfirm
+              mkdir -p out
+              mv -- *.pkg.tar.* out/
+              rm -rf src pkg
+              ls -l out
+              # The Apple display and USB-C pieces this build exists for.
+              pkg=$(ls out/linux-asahi-[0-9]*.pkg.tar.* | head -1)
+              tar tf "$pkg" > /tmp/files
+              grep -E "phy-apple-atc|mux-apple-display-crossbar|apple/aop|dtbs/t8122-j504.dtb" /tmp/files
+              for f in phy-apple-atc mux-apple-display-crossbar dtbs/t8122-j504.dtb; do
+                grep -q "$f" /tmp/files
+              done
+            '
+      - uses: actions/upload-artifact@v7
+        with:
+          name: linux-asahi
+          path: packages/linux-asahi/out/*.pkg.tar.*
+          compression-level: 0
+          retention-days: 30
+
+  m1n1:
+    name: m1n1 package
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v6
+      - name: Build
+        run: |
+          docker run --rm --user "$(id -u):$(id -g)" \
+            -v "$PWD/packages/m1n1:/home/user/build" -w /home/user/build \
+            "$PKGBUILD_IMAGE" bash -euxc '
+              sudo pacman -Syu --noconfirm
+              makepkg -s --noconfirm
+              mkdir -p out
+              mv -- *.pkg.tar.* out/
+              ls -l out
+            '
+      - uses: actions/upload-artifact@v7
+        with:
+          name: m1n1
+          path: packages/m1n1/out/*.pkg.tar.*
+          compression-level: 0
+          retention-days: 30
+
+  image:
+    name: Kealy image
+    needs: [tests, kernel, m1n1]
+    runs-on: ubuntu-24.04-arm
+    timeout-minutes: 90
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v6
+      - name: Free disk space
+        run: |
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/hostedtoolcache /usr/local/.ghcup || true
+          df -h /
+      - name: Tools
+        run: |
+          sudo apt-get update -q
+          sudo apt-get install -y -q e2fsprogs zip unzip device-tree-compiler
+      - uses: actions/download-artifact@v8
+        with:
+          path: pkgs
+          merge-multiple: true
+      - name: Fetch the pinned upstream image
+        run: |
+          set -eux
+          sha=$(python3 -c "import json; print(json.load(open('upstream.lock.json'))['upstream_payload']['sha256'])")
+          mirror="https://github.com/${GITHUB_REPOSITORY}/releases/download/upstream-base-${sha:0:8}/asahi-base.zip"
+          upstream=$(python3 -c "import json; print(json.load(open('upstream.lock.json'))['upstream_payload']['url'])")
+          curl -fL --retry 3 --no-progress-meter -o asahi-base.zip "$mirror" \
+            || curl -fL --retry 3 --no-progress-meter -o asahi-base.zip "$upstream"
+          echo "$sha  asahi-base.zip" | sha256sum -c -
+      - name: Install the Kealy kernel and m1n1 into a copy of the image
+        run: |
+          ls -l pkgs
+          mkdir -p work
+          sudo tools/upgrade-image.sh asahi-base.zip pkgs "$PWD/work/upgraded.zip" "$PWD/work/upgrade.json"
+          sudo chown -R "$(id -u):$(id -g)" work
+          rm asahi-base.zip
+      - name: Build the Kealy image
+        run: |
+          set -eux
+          sha=$(sha256sum work/upgraded.zip | cut -d' ' -f1)
+          python3 -m arch_m3.build work/upgraded.zip \
+            --metadata evidence/asahi-alarm-installer-data.json \
+            --output dist --sha256 "$sha" \
+            --boot-chain "linux-asahi and m1n1 rebuilt by Kealy CI (see upgrade.json); U-Boot unchanged from source"
+          rm work/upgraded.zip
+          cp work/upgrade.json dist/
+      - name: Audit
+        run: |
+          set -eux
+          zip=dist/os/arch-m3-minimal.zip
+          python3 -m arch_m3.audit "$zip" --system --derivative > dist/audit.json
+          python3 -c "import json; r=json.load(open('dist/audit.json'))['system']; print(json.dumps({k: r[k] for k in ('kernel_versions','failures','warnings','board_dtb_in_boot_bundle')}, indent=2)); print({k: v for k, v in r['packages'].items() if k in ('linux-asahi','m1n1','uboot-asahi')})"
+          python3 -m arch_m3.display "$zip" | tee dist/display.json
+          (cd dist && sha256sum os/arch-m3-minimal.zip installer_data.json > SHA256SUMS && cat SHA256SUMS)
+          cat dist/installer_data.json dist/build.json
+      - uses: actions/upload-artifact@v7
+        with:
+          name: kealy-image
+          path: dist
+          compression-level: 0
+          retention-days: 14
+      - name: Publish release
+        if: github.event_name == 'workflow_dispatch' && inputs.release_tag != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.release_tag }}
+        run: |
+          set -eux
+          cd dist
+          cp os/arch-m3-minimal.zip arch-m3-minimal.zip
+          sed 's#os/arch-m3-minimal.zip#arch-m3-minimal.zip#' SHA256SUMS > SHA256SUMS.release
+          mv SHA256SUMS.release SHA256SUMS
+          sha256sum -c SHA256SUMS
+          cat > notes.md <<EOF
+          Kealy image for the base M3 MacBook Pro (Mac15,3 / J504AP), built by CI from commit ${GITHUB_SHA}.
+
+          **Experimental and not yet booted on real hardware.** The kernel carries unreviewed upstream
+          pull requests and a local, untested device-tree change for USB-C DisplayPort output.
+
+          Install from macOS on the target Mac:
+
+          \`\`\`sh
+          curl -fsSL https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/${GITHUB_SHA}/install.sh | KEALY_TAG=${TAG} sh
+          \`\`\`
+          EOF
+          gh release create "$TAG" --target "$GITHUB_SHA" --title "Kealy $TAG" --notes-file notes.md --prerelease \
+            arch-m3-minimal.zip installer_data.json SHA256SUMS build.json upgrade.json audit.json display.json

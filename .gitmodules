@@ -1,0 +1,4 @@
+[submodule "kernel/linux"]
+	path = kernel/linux
+	url = https://github.com/fentz26/kealy-linux.git
+	branch = kealy
