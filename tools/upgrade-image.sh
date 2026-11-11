@@ -48,6 +48,14 @@ old_boot_sha=$(sha256sum "$esp/m1n1/boot.bin" | cut -d' ' -f1)
 
 e2fsck -fy "$img" || [ "$?" -le 1 ]
 
+# The upstream image has under 500 MiB free. Give the transaction and the
+# larger host-independent initramfs room; the installed system grows to the
+# partition size on first boot anyway.
+echo "== Growing the root image by 512 MiB"
+truncate -s +536870912 "$img"
+resize2fs "$img"
+[ $(( $(stat -c %s "$img") % 4096 )) -eq 0 ] || { echo "root image is not a 4 KiB multiple" >&2; exit 1; }
+
 echo "== Mounting private copies"
 mount -o loop "$img" "$mnt"; mounted+=("$mnt")
 mkdir -p "$mnt/boot/efi"
@@ -60,7 +68,7 @@ mount -t tmpfs tmpfs "$mnt/tmp"; mounted+=("$mnt/tmp")
 
 free_kb=$(df -k --output=avail "$mnt" | tail -1)
 echo "Free space in root image: $((free_kb / 1024)) MiB"
-[ "$free_kb" -ge 716800 ] || { echo "less than 700 MiB free in the root image" >&2; exit 1; }
+[ "$free_kb" -ge 819200 ] || { echo "less than 800 MiB free in the root image" >&2; exit 1; }
 
 in_root() { chroot "$mnt" /usr/bin/env -i PATH=/usr/bin:/usr/sbin HOME=/root LC_ALL=C "$@"; }
 
@@ -71,11 +79,16 @@ echo "== Installing packages"
 stage="$mnt/var/cache/kealy-packages"
 mkdir -p "$stage"
 cp "${kernel[0]}" "${m1n1[0]}" "$stage/"
+# The package hook would try to find and mount the real EFI partition; switch
+# it off for the transaction and rebuild the bundle explicitly below.
+[ ! -e "$mnt/etc/default/update-m1n1" ] || { echo "unexpected /etc/default/update-m1n1" >&2; exit 1; }
+echo 'M1N1_UPDATE_DISABLED=1' > "$mnt/etc/default/update-m1n1"
 # Local files only: no repository sync, no network use inside the image.
 in_root pacman -U --noconfirm \
     "/var/cache/kealy-packages/$(basename "${m1n1[0]}")" \
     "/var/cache/kealy-packages/$(basename "${kernel[0]}")"
 rm -rf "$stage"
+rm "$mnt/etc/default/update-m1n1"
 
 echo "== Regenerating initramfs"
 echo "mkinitcpio HOOKS: $(grep -E '^HOOKS=' "$mnt/etc/mkinitcpio.conf" || true)"
@@ -88,7 +101,6 @@ fi
 in_root mkinitcpio -P "${skip[@]}"
 
 echo "== Rebuilding the m1n1 boot bundle"
-[ -e "$mnt/etc/default/update-m1n1" ] && cat "$mnt/etc/default/update-m1n1"
 in_root update-m1n1 /boot/efi/m1n1/boot.bin
 rm -f "$esp/m1n1/boot.bin.old"
 new_boot_sha=$(sha256sum "$esp/m1n1/boot.bin" | cut -d' ' -f1)
