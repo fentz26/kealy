@@ -1,0 +1,3 @@
+# Preserve raw console/source transcripts, including CR sequences and whitespace.
+evidence/*.log -whitespace
+evidence/**/*.log -whitespace
