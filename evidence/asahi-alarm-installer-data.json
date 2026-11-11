@@ -1,0 +1,143 @@
+{
+  "os_list": [
+    {
+      "name": "Asahi Alarm Minimal",
+      "default_os_name": "Asahi Alarm Minimal",
+      "boot_object": "m1n1.bin",
+      "next_object": "m1n1/boot.bin",
+      "package": "https://asahi-alarm.org/asahi-base.zip",
+      "supported_fw": ["12.3", "12.3.1", "13.5", "14.8.3"],
+      "extras": {},
+      "partitions": [
+        {
+          "name": "EFI",
+          "type": "EFI",
+          "size": "524288000B",
+          "format": "fat",
+          "volume_id": "0x2abf9f91",
+          "copy_firmware": true,
+          "copy_installer_data": true,
+          "source": "esp"
+        },
+        {
+          "name": "Root",
+          "type": "Linux",
+          "size": "2209614225B",
+          "expand": true,
+          "image": "root.img"
+        }
+      ]
+    },
+    {
+      "name": "Asahi Alarm Minimal (BTRFS)",
+      "default_os_name": "Asahi Alarm Minimal (BTRFS)",
+      "boot_object": "m1n1.bin",
+      "next_object": "m1n1/boot.bin",
+      "package": "https://asahi-alarm.org/asahi-base-btrfs.zip",
+      "supported_fw": ["12.3", "12.3.1", "13.5", "14.8.3"],
+      "extras": {},
+      "partitions": [
+        {
+          "name": "EFI",
+          "type": "EFI",
+          "size": "524288000B",
+          "format": "fat",
+          "volume_id": "0x2abf9f91",
+          "copy_firmware": true,
+          "copy_installer_data": true,
+          "source": "esp"
+        },
+        {
+          "name": "Root",
+          "type": "Linux",
+          "size": "2209614225B",
+          "expand": true,
+          "image": "root.img"
+        }
+      ]
+    },
+    {
+      "name": "Asahi Alarm Desktop",
+      "default_os_name": "Asahi Alarm Desktop",
+      "boot_object": "m1n1.bin",
+      "next_object": "m1n1/boot.bin",
+      "package": "https://asahi-alarm.org/asahi-desktop.zip",
+      "supported_fw": ["12.3", "12.3.1", "13.5", "14.8.3"],
+      "extras": {},
+      "partitions": [
+        {
+          "name": "EFI",
+          "type": "EFI",
+          "size": "524288000B",
+          "format": "fat",
+          "volume_id": "0x2abf9f91",
+          "copy_firmware": true,
+          "copy_installer_data": true,
+          "source": "esp"
+        },
+        {
+          "name": "Root",
+          "type": "Linux",
+          "size": "12731025809B",
+          "expand": true,
+          "image": "root.img"
+        }
+      ]
+    },
+    {
+      "name": "Asahi Alarm Desktop (BTRFS)",
+      "default_os_name": "Asahi Alarm Desktop (BTRFS)",
+      "boot_object": "m1n1.bin",
+      "next_object": "m1n1/boot.bin",
+      "package": "https://asahi-alarm.org/asahi-desktop-btrfs.zip",
+      "supported_fw": ["12.3", "12.3.1", "13.5", "14.8.3"],
+      "extras": {},
+      "partitions": [
+        {
+          "name": "EFI",
+          "type": "EFI",
+          "size": "524288000B",
+          "format": "fat",
+          "volume_id": "0x2abf9f91",
+          "copy_firmware": true,
+          "copy_installer_data": true,
+          "source": "esp"
+        },
+        {
+          "name": "Root",
+          "type": "Linux",
+          "size": "12731025809B",
+          "expand": true,
+          "image": "root.img"
+        }
+      ]
+    },
+    {
+      "name": "UEFI environment only (m1n1 + U-Boot + ESP)",
+      "default_os_name": "UEFI boot",
+      "boot_object": "m1n1.bin",
+      "next_object": "m1n1/boot.bin",
+      "package": "https://asahi-alarm.org/uefi-only.zip",
+      "supported_fw": ["12.3", "12.3.1", "13.5", "14.8.3"],
+      "partitions": [
+        {
+          "name": "EFI",
+          "type": "EFI",
+          "size": "500MB",
+          "format": "fat",
+          "copy_firmware": true,
+          "copy_installer_data": true,
+          "source": "esp"
+        }
+      ]
+    },
+    {
+      "name": "Tethered boot (m1n1, for development)",
+      "default_os_name": "m1n1 proxy",
+      "expert": true,
+      "boot_object": "m1n1.bin",
+      "external_boot": true,
+      "partitions": []
+    }
+  ]
+}
