@@ -2,11 +2,46 @@
 
 Minimal Arch Linux ARM for a base M3 MacBook Pro, built on Asahi Linux and Asahi Alarm. "Kealy" is the name of this build only: upstream package, kernel and file names (`linux-asahi`, `m1n1`, `uboot-asahi`, `arch-m3-minimal.zip`) are kept as they are, because the boot chain, pacman and the installer depend on them, and upstream licence and copyright notices stay intact.
 
-A console-only evaluation image for **Mac15,3 / J504AP / T8122**. It preserves the stock Asahi Alarm kernel and Apple boot stack. You install your own user tools, desktop and rice later with pacman.
+A console-only image for **Mac15,3 / J504AP / T8122**. You install your own user tools, desktop and rice later with pacman. There is no Omarchy frontend.
 
-**Static, userspace, adapted VM startup and two EDK2/GRUB cold-boot checks pass. Physical Mac boot remains unverified; no installation has been performed.**
+**Nothing here has been booted on the physical Mac yet.** The image passes static checks and virtual-machine boots; the Apple boot chain, built-in screen, input, Wi-Fi and the external display are unverified until a real install.
 
-## What was built
+## Repositories
+
+| Part | Where |
+| --- | --- |
+| Image builder, audits, CI, installer script | this repository |
+| Kernel source (`kealy` branch) | [fentz26/kealy-linux](https://github.com/fentz26/kealy-linux), also linked as the `kernel/linux` submodule |
+| Package recipes for the kernel and m1n1 | `packages/` |
+
+## Kealy kernel and external display
+
+The released image replaces the stock `linux-asahi 7.2.12` with a kernel built from Asahi's `asahi-wip` branch (7.2.14, which has the M3 display controller) plus:
+
+- the open, unreviewed upstream pull requests for M3 USB-C DisplayPort ([#659](https://github.com/AsahiLinux/linux/pull/659), [#660](https://github.com/AsahiLinux/linux/pull/660), [#661](https://github.com/AsahiLinux/linux/pull/661), [#662](https://github.com/AsahiLinux/linux/pull/662)), and
+- one local device-tree change that wires the J504's external display controller to the **left-back USB-C port**. Upstream only wires the M3 Pro. The values come from this Mac's own Apple device tree, but the change is untested on hardware.
+
+m1n1 is built from a pinned upstream commit that includes M3 display-controller setup. U-Boot is unchanged. `pacman` holds `linux-asahi` back (`IgnorePkg`) so a system upgrade does not swap this kernel for the stock one; `/etc/kealy-release` in the image explains how to return to stock. HDMI is not wired, and there is no GPU acceleration on the M3 yet, so any desktop renders on the CPU. Details are in [the external display plan](docs/external-display-plan.md).
+
+The local device-tree change was written with AI assistance and must not be submitted to Asahi Linux, whose policy does not accept such code.
+
+## Build
+
+GitHub Actions builds everything on native arm64 runners (`.github/workflows/build.yml`): the kernel and m1n1 packages, then the image. `tools/upgrade-image.sh` installs the two packages into a private copy of the pinned Asahi Alarm image, the builder below applies the Kealy changes, and the audits run on the result. Running the workflow by hand with a release tag publishes the image as a GitHub release.
+
+## Install
+
+On the target Mac, from macOS:
+
+```sh
+curl -fsSL https://raw.githubusercontent.com/fentz26/kealy/main/install.sh | sh
+```
+
+The script refuses any other model, downloads a release and the pinned Asahi Alarm installer, verifies their hashes and, after you type `install`, starts the interactive Asahi installer. That installer shrinks macOS to make room, asks how much space to give Linux and confirms before it changes the disk. Set `KEALY_DOWNLOAD_ONLY=1` to download and verify without starting it. Back up first.
+
+## What the image builder does
+
+The sections below describe the first evaluation image, built locally from the stock Asahi Alarm image. CI uses the same builder on top of the kernel upgrade.
 
 `artifacts/minimal-evaluation-r2/` contains:
 

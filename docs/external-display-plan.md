@@ -43,3 +43,24 @@ Nothing has been installed on the Mac. Do not install, repartition or change boo
 - #662 and its dependencies are unreviewed and may change or be rejected.
 - Built-in display should be unaffected (merged and tested on J504), but this kernel is a development branch, not a release.
 - Asahi does not accept AI-written code. Keep the J504 patch local; do not submit it upstream.
+
+## Status update (2026-11-11, later the same day)
+
+Steps 1 to 6 are implemented; step 7 (physical test) is still open.
+
+- Kernel source: `fentz26/kealy-linux`, branch `kealy`, commit `bfe8e1e5d596`. It is `asahi-wip` at `414e55da7a0a` (7.2.14, the base the pull requests were written against) plus the 16 commits of #659 to #662 and one local commit for J504.
+- m1n1: upstream main at `cf37927d6bf4`. The v2.0.0 tag predates #746.
+- CI (`.github/workflows/build.yml`) builds both packages and the image on arm64 runners; `arch_m3/display.py` is the static device-tree check.
+
+What the J504 commit does, and where each value came from:
+
+| Item | Value | Source |
+| --- | --- | --- |
+| Per-port display crossbar | `mux@70304c000` (ATC0), `mux@b0304c000` (ATC1), t6020-style | This Mac's Apple device tree: `atc0-dpxbar@304C000`, `atc1-dpxbar@304C000`, compatible `atc-dpxbar,t602x` |
+| Crossbar input (`mux-index`) | 1 | Apple device tree: `dcp` is `dp-switch-ufp-endpoint` 0, `dcpext` is 1. J514s uses 2 for its third controller, consistent with this numbering |
+| DP PHY target (`apple,dptx-phy`) | 0 | Apple device tree: `atc0-dpphy` is `dp-switch-dfp-endpoint` 0 |
+| IOMMU apertures for `dcpext` and `dispext0` | base `0x100_0000_0000`, same as the internal display | Apple device tree `vm-base`/`vm-size` of `dart-dcpext` and `dart-dispext0`. The previous placeholder values in `t8122.dtsi` did not match |
+| `dcpext` alias | added | m1n1 only reserves the controller firmware for aliased nodes |
+| Port | left-back USB-C (`typec0`, ATC0) | J514s wiring; the base M3 has one external controller, so only one port is wired |
+
+Open risks specific to this wiring: nobody has run `dcpext` on a J504 under Linux, so the interrupt numbers and register ranges already in `t8122.dtsi` for it are unexercised; the HDMI port shares the same controller and stays unwired.
