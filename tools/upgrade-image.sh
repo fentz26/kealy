@@ -151,7 +151,8 @@ after=$(in_root pacman -Q linux-asahi m1n1 uboot-asahi asahi-scripts)
 echo "== After"; echo "$after"
 
 echo "== Cleaning up"
-rm -f "$mnt"/var/cache/pacman/pkg/* "$mnt/var/log/pacman.log"
+rm -rf "$mnt"/var/cache/pacman/pkg/*
+rm -f "$mnt/var/log/pacman.log"
 rm -rf "$mnt"/root/.cache "$mnt"/root/.gnupg
 sync
 fstrim "$mnt" || true
