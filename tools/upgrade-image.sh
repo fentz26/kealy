@@ -26,7 +26,7 @@ mapfile -t m1n1 < <(find "$pkgdir" -maxdepth 1 -name 'm1n1-[0-9]*.pkg.tar.*' ! -
 [ "${#kernel[@]}" -eq 1 ] || { echo "expected exactly one linux-asahi package" >&2; exit 1; }
 [ "${#m1n1[@]}" -eq 1 ] || { echo "expected exactly one m1n1 package" >&2; exit 1; }
 
-work=$(mktemp -d /var/tmp/kealy-upgrade.XXXXXX)
+work=$(mktemp -d "${TMPDIR:-/var/tmp}/kealy-upgrade.XXXXXX")
 mnt="$work/mnt"
 mounted=()
 cleanup() {
@@ -51,8 +51,8 @@ e2fsck -fy "$img" || [ "$?" -le 1 ]
 # The upstream image has under 500 MiB free. Give the transaction and the
 # larger host-independent initramfs room; the installed system grows to the
 # partition size on first boot anyway.
-echo "== Growing the root image by 512 MiB"
-truncate -s +536870912 "$img"
+echo "== Growing the root image by 1 GiB"
+truncate -s +1073741824 "$img"
 resize2fs "$img"
 [ $(( $(stat -c %s "$img") % 4096 )) -eq 0 ] || { echo "root image is not a 4 KiB multiple" >&2; exit 1; }
 
