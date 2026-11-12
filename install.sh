@@ -80,7 +80,11 @@ main() {
     [ "$free_kb" -ge 3145728 ] || die "need at least 3 GB free in $stage for the download."
 
     runtime="$stage/runtime"
-    rm -rf "$runtime"
+    # A previous run as root can leave root-owned files behind.
+    if [ -e "$runtime" ] && ! rm -rf "$runtime" 2>/dev/null; then
+        say "Removing files left by a previous run (needs your password)..."
+        sudo rm -rf "$runtime" </dev/tty || die "could not remove $runtime."
+    fi
     mkdir -p "$runtime/os"
     cd "$stage"
 
@@ -125,7 +129,10 @@ Before you continue:
   * Kealy is experimental and has not been booted on real hardware yet.
     The built-in screen, keyboard, trackpad and Wi-Fi may not work on first boot.
   * The installer will shrink your macOS volume to make room for Linux.
-    It asks how much space to use and confirms before changing the disk.
+    It asks for the NEW SIZE OF macOS, not the size of Linux: Linux gets
+    whatever is left. It keeps at least 38 GB free inside macOS, so Linux
+    can get at most (macOS free space - 38 GB). Type "min" for the maximum.
+    It confirms before changing the disk.
   * Have a current backup of this Mac. macOS stays installed and bootable.
   * The image is not encrypted. USB-C display output is on the left-back port.
   * There is no graphics acceleration on the M3 yet.
@@ -139,6 +146,8 @@ EOF
     # Local payload only; no usage report is sent for this unofficial build.
     unset REPORT REPORT_TAG INSTALLER_DATA INSTALLER_BASE VERSION_FLAG
     export REPO_BASE="$runtime"
+    # Keep the staging area free of root-owned bytecode files.
+    export PYTHONDONTWRITEBYTECODE=1
     if [ "$(id -u)" -ne 0 ]; then
         say "The installer needs to run as root. Enter your password if asked."
         exec caffeinate -dis sudo -E ./install.sh "$@"
